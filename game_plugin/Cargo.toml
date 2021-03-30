@@ -1,0 +1,22 @@
+[package]
+name = "game_plugin"
+version = "0.4.0"
+authors = ["Niklas Eicker <git@nikl.me>"] # ToDo: you are the author ;)
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+default = [
+    "bevy/bevy_gltf",
+    "bevy/bevy_winit",
+    "bevy/render",
+    "bevy/png",
+    "bevy/bevy_wgpu",
+    "bevy_kira_audio/ogg"
+]
+
+[dependencies]
+bevy = { git = "https://github.com/bevyengine/bevy/", rev = "7a511394ac6c4f90b5398ab6333f1bd4fd665613", default-features = false }
+bevy_kira_audio = { git="https://github.com/NiklasEi/bevy_kira_audio.git", branch = "bevy_master" }
+rand = "0.8.3"

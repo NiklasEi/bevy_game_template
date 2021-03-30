@@ -1,0 +1,104 @@
+name: release-flow
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+*"
+
+# ToDo: adapt names
+env:
+  GAME_EXECUTABLE_NAME: bevy_game
+  GAME_OSX_APP_NAME: BevyGame
+
+jobs:
+  build-macOS:
+    runs-on: macOS-latest
+
+    steps:
+      - name: Get tag
+        id: tag
+        uses: dawidd6/action-get-tag@v1
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - name: Build release
+        run: |
+          cargo build --release
+          mkdir -p build/macos/Game.app/Contents/MacOS/assets
+          cp -r assets/ build/macos/Game.app/Contents/MacOS/assets
+          cp target/release/Game build/macos/Game.app/Contents/MacOS/
+          strip build/macos/Game.app/Contents/MacOS/${{ env.GAME_EXECUTABLE_NAME }}
+          mv build/macos/Game.app build/macos/${{ env.GAME_OSX_APP_NAME }}.app
+          hdiutil create -fs HFS+ -volname "${{ env.GAME_OSX_APP_NAME }}" -srcfolder build/macos ${{ env.GAME_EXECUTABLE_NAME }}.dmg
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.GAME_EXECUTABLE_NAME }}.dmg
+          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_macOS_${{ steps.tag.outputs.tag }}.dmg
+          tag: ${{ github.ref }}
+          overwrite: true
+
+  build-linux:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Get tag
+        id: tag
+        uses: dawidd6/action-get-tag@v1
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - name: Install Dependencies
+        run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev
+      - name: Build and release
+        run: |
+          cargo build --release
+      - name: Prepare build
+        run: |
+          strip target/release/${{ env.GAME_EXECUTABLE_NAME }}
+          chmod +x target/release/${{ env.GAME_EXECUTABLE_NAME }}
+      - uses: papeloto/action-zip@v1
+        with:
+          files: assets/ target/release/${{ env.GAME_EXECUTABLE_NAME }}
+          dest: ${{ env.GAME_EXECUTABLE_NAME }}_linux.zip
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.GAME_EXECUTABLE_NAME }}_linux.zip
+          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_linux_${{ steps.tag.outputs.tag }}.zip
+          tag: ${{ github.ref }}
+          overwrite: true
+
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Get tag
+        id: tag
+        uses: dawidd6/action-get-tag@v1
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - name: Build and release
+        run: |
+          cargo build --release
+      - uses: papeloto/action-zip@v1
+        with:
+          files: assets/ target/release/${{ env.GAME_EXECUTABLE_NAME }}.exe
+          dest: ${{ env.GAME_EXECUTABLE_NAME }}_windows.zip
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.GAME_EXECUTABLE_NAME }}_windows.zip
+          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_windows_${{ steps.tag.outputs.tag }}.zip
+          tag: ${{ github.ref }}
+          overwrite: true

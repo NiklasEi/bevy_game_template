@@ -1,0 +1,25 @@
+[package]
+name = "bevy_game" # ToDo
+version = "0.4.0"
+authors = ["Niklas Eicker <git@nikl.me>"] # ToDo: you are the author ;)
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+default = [
+    "bevy/bevy_gltf",
+    "bevy/bevy_winit",
+    "bevy/render",
+    "bevy/png",
+    "bevy/bevy_wgpu",
+    "game_plugin/default"
+]
+
+[dependencies]
+bevy = { git = "https://github.com/bevyengine/bevy/", rev = "7a511394ac6c4f90b5398ab6333f1bd4fd665613", default-features = false }
+game_plugin = {path = "game_plugin"}
+winit = "0.24.0"
+
+[build-dependencies]
+embed-resource = "1.4"
