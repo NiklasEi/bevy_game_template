@@ -26,12 +26,12 @@ jobs:
       - name: Build release
         run: |
           cargo build --release
-          mkdir -p build/macos/Game.app/Contents/MacOS/assets
-          cp -r assets/ build/macos/Game.app/Contents/MacOS/assets
-          cp target/release/Game build/macos/Game.app/Contents/MacOS/
-          strip build/macos/Game.app/Contents/MacOS/${{ env.GAME_EXECUTABLE_NAME }}
-          mv build/macos/Game.app build/macos/${{ env.GAME_OSX_APP_NAME }}.app
-          hdiutil create -fs HFS+ -volname "${{ env.GAME_OSX_APP_NAME }}" -srcfolder build/macos ${{ env.GAME_EXECUTABLE_NAME }}.dmg
+          mkdir -p build/macos/src/Game.app/Contents/MacOS/assets
+          cp -r assets/ build/macos/src/Game.app/Contents/MacOS/assets
+          cp target/release/${{ env.GAME_EXECUTABLE_NAME }} build/macos/src/Game.app/Contents/MacOS/
+          strip build/macos/src/Game.app/Contents/MacOS/${{ env.GAME_EXECUTABLE_NAME }}
+          mv build/macos/src/Game.app build/macos/src/${{ env.GAME_OSX_APP_NAME }}.app
+          hdiutil create -fs HFS+ -volname "${{ env.GAME_OSX_APP_NAME }}" -srcfolder build/macos/src ${{ env.GAME_EXECUTABLE_NAME }}.dmg
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
