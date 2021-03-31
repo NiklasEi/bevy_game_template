@@ -5,9 +5,9 @@
         <key>CFBundleDevelopmentRegion</key>
         <string>en</string>
         <key>CFBundleDisplayName</key>
-        <string>BevyGame</string> <!-- ToDo -->
+        <string>BevyGame</string> <!-- ToDo: this should be the same as your OSX app name in the release flow -->
         <key>CFBundleExecutable</key>
-        <string>bevy_game</string> <!-- ToDo -->
+        <string>bevy_game</string> <!-- ToDo: this should be the same as your executable name in the release flow -->
         <key>CFBundleIconFile</key>
         <string>AppIcon.icns</string>
         <key>CFBundleIdentifier</key>
