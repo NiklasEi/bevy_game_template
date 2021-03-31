@@ -338,7 +338,7 @@ dependencies = [
 
 [[package]]
 name = "bevy_game"
-version = "0.4.0"
+version = "0.1.0"
 dependencies = [
  "bevy",
  "embed-resource",
@@ -1389,7 +1389,7 @@ dependencies = [
 
 [[package]]
 name = "game_plugin"
-version = "0.4.0"
+version = "0.1.0"
 dependencies = [
  "bevy",
  "bevy_kira_audio",
