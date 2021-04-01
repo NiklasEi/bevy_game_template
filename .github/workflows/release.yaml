@@ -18,21 +18,27 @@ jobs:
       - name: Get tag
         id: tag
         uses: dawidd6/action-get-tag@v1
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install rust toolchain
+        uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           override: true
+      - name: Setup cache for rust toolchain
+        uses: Swatinem/rust-cache@v1
       - name: Build release
         run: |
           cargo build --release
+      - name: Prepare release
+        run: |
           mkdir -p build/macos/src/Game.app/Contents/MacOS/assets
           cp -r assets/ build/macos/src/Game.app/Contents/MacOS/assets
           cp target/release/${{ env.GAME_EXECUTABLE_NAME }} build/macos/src/Game.app/Contents/MacOS/
           strip build/macos/src/Game.app/Contents/MacOS/${{ env.GAME_EXECUTABLE_NAME }}
           mv build/macos/src/Game.app build/macos/src/${{ env.GAME_OSX_APP_NAME }}.app
           hdiutil create -fs HFS+ -volname "${{ env.GAME_OSX_APP_NAME }}" -srcfolder build/macos/src ${{ env.GAME_EXECUTABLE_NAME }}.dmg
-      - name: Upload binaries to release
+      - name: Upload release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -48,25 +54,30 @@ jobs:
       - name: Get tag
         id: tag
         uses: dawidd6/action-get-tag@v1
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install rust toolchain
+        uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           override: true
+      - name: Setup cache for rust toolchain
+        uses: Swatinem/rust-cache@v1
       - name: Install Dependencies
         run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev
-      - name: Build and release
+      - name: Build release
         run: |
           cargo build --release
-      - name: Prepare build
+      - name: Prepare release
         run: |
           strip target/release/${{ env.GAME_EXECUTABLE_NAME }}
           chmod +x target/release/${{ env.GAME_EXECUTABLE_NAME }}
-      - uses: papeloto/action-zip@v1
+      - name: Zip release
+        uses: papeloto/action-zip@v1
         with:
           files: assets/ target/release/${{ env.GAME_EXECUTABLE_NAME }}
           dest: ${{ env.GAME_EXECUTABLE_NAME }}_linux.zip
-      - name: Upload binaries to release
+      - name: Upload release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -82,19 +93,24 @@ jobs:
       - name: Get tag
         id: tag
         uses: dawidd6/action-get-tag@v1
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install rust toolchain
+        uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           override: true
-      - name: Build and release
+      - name: Setup cache for rust toolchain
+        uses: Swatinem/rust-cache@v1
+      - name: Build release
         run: |
           cargo build --release
-      - uses: papeloto/action-zip@v1
+      - name: Zip release
+        uses: papeloto/action-zip@v1
         with:
           files: assets/ target/release/${{ env.GAME_EXECUTABLE_NAME }}.exe
           dest: ${{ env.GAME_EXECUTABLE_NAME }}_windows.zip
-      - name: Upload binaries to release
+      - name: Upload release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
