@@ -23,13 +23,13 @@ jobs:
       - name: Install rust toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: nightly
+          toolchain: stable
           override: true
       - name: Setup cache for rust toolchain
         uses: Swatinem/rust-cache@v1
       - name: Build release
         run: |
-          cargo build --release -Ztimings
+          cargo build --release
       - name: Prepare release
         run: |
           mkdir -p build/macos/src/Game.app/Contents/MacOS/assets
@@ -59,7 +59,7 @@ jobs:
       - name: Install rust toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: nightly
+          toolchain: stable
           override: true
       - name: Setup cache for rust toolchain
         uses: Swatinem/rust-cache@v1
@@ -67,7 +67,7 @@ jobs:
         run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev
       - name: Build release
         run: |
-          cargo build --release -Ztimings
+          cargo build --release
       - name: Prepare release
         run: |
           strip target/release/${{ env.GAME_EXECUTABLE_NAME }}
@@ -98,13 +98,13 @@ jobs:
       - name: Install rust toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: nightly
+          toolchain: stable
           override: true
       - name: Setup cache for rust toolchain
         uses: Swatinem/rust-cache@v1
       - name: Build release
         run: |
-          cargo build --release -Ztimings
+          cargo build --release
       - name: Zip release
         uses: papeloto/action-zip@v1
         with:
