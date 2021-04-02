@@ -1,7 +1,7 @@
 // disable console opening on windows
 #![windows_subsystem = "windows"]
 
-use bevy::prelude::{App, Msaa, WindowDescriptor, ClearColor, Color};
+use bevy::prelude::{App, ClearColor, Color, WindowDescriptor};
 use bevy::DefaultPlugins;
 use game_plugin::GamePlugin;
 

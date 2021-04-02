@@ -57,8 +57,7 @@ fn setup_menu(
                         style: TextStyle {
                             font: asset_server.get_handle("fonts/FiraSans-Bold.ttf"),
                             font_size: 40.0,
-                            color: Color::rgb(0.9, 0.9, 0.9),
-                            ..Default::default()
+                            color: Color::rgb(0.9, 0.9, 0.9)
                         },
                     }],
                     alignment: Default::default(),
@@ -68,12 +67,14 @@ fn setup_menu(
         });
 }
 
+type ButtonInteraction<'a> = (Entity, &'a Interaction, &'a mut Handle<ColorMaterial>, &'a Children);
+
 fn click_play_button(
     mut commands: Commands,
     button_materials: Res<ButtonMaterials>,
     mut state: ResMut<State<GameState>>,
     mut interaction_query: Query<
-        (Entity, &Interaction, &mut Handle<ColorMaterial>, &Children),
+        ButtonInteraction,
         (Changed<Interaction>, With<Button>),
     >,
     text_query: Query<Entity, With<Text>>,
