@@ -1,8 +1,6 @@
 # A Bevy game template
 
 Template for a Game using the awesome [Bevy engine][Bevy] featuring (almost) out of the box builds for Windows, Linux and MacOS.
-
-*This template currently uses the master branch of Bevy*
  
 # What does this template give you?
 * basic setup with an executable crate on the root level and your game as a Bevy plugin in a library

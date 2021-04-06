@@ -16,10 +16,7 @@ pub struct Actions {
     pub player_movement: Option<Vec2>,
 }
 
-fn set_movement_actions(
-    mut actions: ResMut<Actions>,
-    keyboard_input: Res<Input<KeyCode>>,
-) {
+fn set_movement_actions(mut actions: ResMut<Actions>, keyboard_input: Res<Input<KeyCode>>) {
     if keyboard_input.just_released(KeyCode::W)
         || keyboard_input.pressed(KeyCode::W)
         || keyboard_input.just_released(KeyCode::A)

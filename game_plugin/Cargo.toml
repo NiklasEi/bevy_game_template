@@ -17,6 +17,6 @@ default = [
 ]
 
 [dependencies]
-bevy = { git = "https://github.com/bevyengine/bevy/", rev = "7a511394ac6c4f90b5398ab6333f1bd4fd665613", default-features = false }
-bevy_kira_audio = { git="https://github.com/NiklasEi/bevy_kira_audio.git", branch = "bevy_master" }
+bevy = { version = "0.5.0", default-features = false }
+bevy_kira_audio = { version = "0.4.0" }
 rand = "0.8.3"
