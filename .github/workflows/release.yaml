@@ -72,10 +72,11 @@ jobs:
         run: |
           strip target/release/${{ env.GAME_EXECUTABLE_NAME }}
           chmod +x target/release/${{ env.GAME_EXECUTABLE_NAME }}
+          mkdir target/release/assets && cp -r assets target/release/assets
       - name: Zip release
         uses: papeloto/action-zip@v1
         with:
-          files: assets/ target/release/${{ env.GAME_EXECUTABLE_NAME }}
+          files: target/release/assets/ target/release/${{ env.GAME_EXECUTABLE_NAME }}
           dest: ${{ env.GAME_EXECUTABLE_NAME }}_linux.zip
       - name: Upload release
         uses: svenstaro/upload-release-action@v2
@@ -105,10 +106,13 @@ jobs:
       - name: Build release
         run: |
           cargo build --release
+      - name: Prepare release
+        run: |
+          mkdir target/release/assets && cp -r assets target/release/assets
       - name: Zip release
         uses: papeloto/action-zip@v1
         with:
-          files: assets/ target/release/${{ env.GAME_EXECUTABLE_NAME }}.exe
+          files: target/release/assets/ target/release/${{ env.GAME_EXECUTABLE_NAME }}.exe
           dest: ${{ env.GAME_EXECUTABLE_NAME }}_windows.zip
       - name: Upload release
         uses: svenstaro/upload-release-action@v2
