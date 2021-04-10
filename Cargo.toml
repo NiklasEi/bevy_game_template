@@ -1,6 +1,6 @@
 [package]
 name = "bevy_game" # ToDo
-version = "0.1.3"
+version = "0.1.0"
 authors = ["Niklas Eicker <git@nikl.me>"] # ToDo: you are the author ;)
 edition = "2018"
 
