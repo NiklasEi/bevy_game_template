@@ -25,6 +25,9 @@ jobs:
         with:
           toolchain: stable
           override: true
+      - name: Remove build script
+        run: |
+          rm build.rs
       - name: Build release
         run: |
           cargo build --release
