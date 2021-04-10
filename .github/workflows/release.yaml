@@ -30,7 +30,7 @@ jobs:
           rm build.rs
       - name: Build release
         run: |
-          cargo build --release
+          cargo build --release --features native
       - name: Prepare release
         run: |
           mkdir -p build/macos/src/Game.app/Contents/MacOS/assets
@@ -66,7 +66,7 @@ jobs:
         run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev
       - name: Build release
         run: |
-          cargo build --release
+          cargo build --release --features native
       - name: Prepare release
         run: |
           strip target/release/${{ env.GAME_EXECUTABLE_NAME }}
@@ -102,7 +102,7 @@ jobs:
           override: true
       - name: Build release
         run: |
-          cargo build --release
+          cargo build --release --features native
       - name: Prepare release
         run: |
           mkdir target/release/assets && cp -r assets target/release/assets
@@ -119,3 +119,43 @@ jobs:
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_windows_${{ steps.tag.outputs.tag }}.zip
           tag: ${{ github.ref }}
           overwrite: true
+
+  build-web:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get tag
+        id: tag
+        uses: dawidd6/action-get-tag@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - name: Install Dependencies
+        run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev
+      - name: Install cargo-make
+        run: |
+          cargo install cargo-make
+      - name: Add wasm target
+        run: |
+          rustup target add wasm32-unknown-unknown
+      - name: Build Release
+        run: |
+          cargo make release
+      - name: Zip release
+        uses: papeloto/action-zip@v1
+        with:
+          files: build/web/
+          dest: ${{ env.GAME_EXECUTABLE_NAME }}_web.zip
+      - name: Upload release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.GAME_EXECUTABLE_NAME }}_web.zip
+          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_web_${{ steps.tag.outputs.tag }}.zip
+          tag: ${{ github.ref }}
+          overwrite: true
+

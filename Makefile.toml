@@ -1,0 +1,61 @@
+# This make file contains tasks for the web build of the game
+#   Serve the web version locally by running `cargo make serve`
+#   Build a web release by running `cargo make release` (release is the `build/web` directory)
+
+[env]
+TARGET_DIR = "target/wasm32-unknown-unknown/release/"
+
+[tasks.release]
+dependencies = ["bind-wasm", "wasm-bindgen-cli", "copy-files-for-release"]
+
+[tasks.serve]
+command = "basic-http-server"
+args = ["-x"]
+dependencies = ["bind-wasm", "basic-http-server"]
+
+[tasks.bind-wasm]
+args = ["--out-dir", "${TARGET_DIR}", "--out-name", "wasm", "--target", "web", "--no-typescript", "${TARGET_DIR}${CARGO_MAKE_CRATE_NAME}.wasm"]
+command = "wasm-bindgen"
+dependencies = ["cargo-build-web", "wasm-bindgen-cli"]
+
+[tasks.cargo-build-web]
+args = ["build", "--target", "wasm32-unknown-unknown", "--features", "web", "--release"]
+command = "cargo"
+
+[tasks.wasm-bindgen-cli]
+install_crate = {crate_name = "wasm-bindgen-cli", binary = "wasm-bindgen", test_arg="--help"}
+
+[tasks.basic-http-server]
+install_crate = {crate_name = "basic-http-server", binary = "basic-http-server", test_arg="--help"}
+
+[tasks.copy-files-for-release]
+dependencies = ["copy-wasm-to-build-dir", "copy-wasm-js-to-build-dir", "copy-wasm_bg-to-build-dir", "copy-index-to-build-dir", "copy-assets-to-build-dir"]
+
+[tasks.copy-wasm-to-build-dir]
+args = ["${TARGET_DIR}${CARGO_MAKE_CRATE_NAME}.wasm", "build/web/target/"]
+command = "cp"
+dependencies = ["create-build-dir", "bind-wasm"]
+
+[tasks.copy-wasm-js-to-build-dir]
+args = ["${TARGET_DIR}wasm.js", "build/web/target/"]
+command = "cp"
+dependencies = ["create-build-dir", "bind-wasm"]
+
+[tasks.copy-wasm_bg-to-build-dir]
+args = ["${TARGET_DIR}wasm_bg.wasm", "build/web/target/"]
+command = "cp"
+dependencies = ["create-build-dir", "bind-wasm"]
+
+[tasks.copy-assets-to-build-dir]
+args = ["-r", "assets", "build/web/"]
+command = "cp"
+dependencies = ["create-build-dir"]
+
+[tasks.copy-index-to-build-dir]
+args = ["index.html", "build/web/"]
+command = "cp"
+dependencies = ["create-build-dir"]
+
+[tasks.create-build-dir]
+args = ["-p", "build/web/target"]
+command = "mkdir"

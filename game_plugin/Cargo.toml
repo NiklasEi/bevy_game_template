@@ -12,8 +12,11 @@ default = [
     "bevy/bevy_winit",
     "bevy/render",
     "bevy/png",
-    "bevy/bevy_wgpu",
     "bevy_kira_audio/ogg"
+]
+
+native = [
+    "bevy/bevy_wgpu",
 ]
 
 [dependencies]

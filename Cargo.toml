@@ -12,14 +12,24 @@ default = [
     "bevy/bevy_winit",
     "bevy/render",
     "bevy/png",
-    "bevy/bevy_wgpu",
     "game_plugin/default"
+]
+
+native = [
+    "bevy/bevy_wgpu",
+    "game_plugin/native"
+]
+
+web = [
+    "bevy_webgl2",
 ]
 
 [dependencies]
 bevy = { version = "0.5.0", default-features = false }
 game_plugin = {path = "game_plugin"}
 winit = "0.24.0"
+
+bevy_webgl2 = {version = "0.5.0", optional = true}
 
 [build-dependencies]
 embed-resource = "1.4"
