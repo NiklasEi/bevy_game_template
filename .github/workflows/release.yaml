@@ -31,7 +31,7 @@ jobs:
       - name: Build release
         run: |
           cargo build --release --features native
-      - name: Prepare release
+      - name: Create release
         run: |
           mkdir -p build/macos/src/Game.app/Contents/MacOS/assets
           cp -r assets/ build/macos/src/Game.app/Contents/MacOS/assets
@@ -72,13 +72,10 @@ jobs:
         run: |
           strip target/release/${{ env.GAME_EXECUTABLE_NAME }}
           chmod +x target/release/${{ env.GAME_EXECUTABLE_NAME }}
-          mkdir target/release/assets && cp -r assets target/release/assets
-          mkdir target/release/credits && cp -r credits target/release/credits
-      - name: Zip release
-        uses: papeloto/action-zip@v1
-        with:
-          files: target/release/assets/ target/release/${{ env.GAME_EXECUTABLE_NAME }}
-          dest: ${{ env.GAME_EXECUTABLE_NAME }}_linux.zip
+          mv target/release/bevy_game .
+      - name: Bundle release
+        run: |
+          tar -czf ${{ env.GAME_EXECUTABLE_NAME }}_linux.tar.gz bevy_game assets credits
       - name: Upload release
         uses: svenstaro/upload-release-action@v2
         with:
@@ -161,4 +158,3 @@ jobs:
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_web_${{ steps.tag.outputs.tag }}.zip
           tag: ${{ github.ref }}
           overwrite: true
-
