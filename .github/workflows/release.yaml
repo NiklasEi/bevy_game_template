@@ -45,7 +45,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ env.GAME_EXECUTABLE_NAME }}.dmg
-          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_macOS_${{ steps.tag.outputs.tag }}.dmg
+          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ steps.tag.outputs.tag }}_macOS.dmg
           tag: ${{ github.ref }}
           overwrite: true
 
@@ -80,8 +80,8 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ env.GAME_EXECUTABLE_NAME }}_linux.zip
-          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_linux_${{ steps.tag.outputs.tag }}.zip
+          file: ${{ env.GAME_EXECUTABLE_NAME }}_linux.tar.gz
+          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ steps.tag.outputs.tag }}_linux.tar.gz
           tag: ${{ github.ref }}
           overwrite: true
 
@@ -116,7 +116,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ env.GAME_EXECUTABLE_NAME }}_windows.zip
-          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_windows_${{ steps.tag.outputs.tag }}.zip
+          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ steps.tag.outputs.tag }}_windows.zip
           tag: ${{ github.ref }}
           overwrite: true
 
@@ -155,6 +155,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ env.GAME_EXECUTABLE_NAME }}_web.zip
-          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_web_${{ steps.tag.outputs.tag }}.zip
+          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ steps.tag.outputs.tag }}_web.zip
           tag: ${{ github.ref }}
           overwrite: true
