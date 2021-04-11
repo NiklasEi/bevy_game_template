@@ -6,14 +6,14 @@
 TARGET_DIR = "target/wasm32-unknown-unknown/release/"
 
 [tasks.release]
-dependencies = ["bind-wasm", "wasm-bindgen-cli", "copy-files-for-release"]
+dependencies = ["build-and-bind-wasm", "copy-files-for-release"]
 
 [tasks.serve]
 command = "basic-http-server"
-args = ["-x"]
-dependencies = ["bind-wasm", "basic-http-server"]
+args = ["-x", "build/web/"]
+dependencies = ["build-and-bind-wasm", "copy-files-for-release", "basic-http-server"]
 
-[tasks.bind-wasm]
+[tasks.build-and-bind-wasm]
 args = ["--out-dir", "${TARGET_DIR}", "--out-name", "wasm", "--target", "web", "--no-typescript", "${TARGET_DIR}${CARGO_MAKE_CRATE_NAME}.wasm"]
 command = "wasm-bindgen"
 dependencies = ["cargo-build-web", "wasm-bindgen-cli"]
@@ -37,17 +37,17 @@ dependencies = ["copy-wasm-to-build-dir", "copy-wasm-js-to-build-dir", "copy-was
 [tasks.copy-wasm-to-build-dir]
 args = ["${TARGET_DIR}${CARGO_MAKE_CRATE_NAME}.wasm", "build/web/target/"]
 command = "cp"
-dependencies = ["create-build-dir", "bind-wasm"]
+dependencies = ["create-build-dir", "build-and-bind-wasm"]
 
 [tasks.copy-wasm-js-to-build-dir]
 args = ["${TARGET_DIR}wasm.js", "build/web/target/"]
 command = "cp"
-dependencies = ["create-build-dir", "bind-wasm"]
+dependencies = ["create-build-dir", "build-and-bind-wasm"]
 
 [tasks.copy-wasm_bg-to-build-dir]
 args = ["${TARGET_DIR}wasm_bg.wasm", "build/web/target/"]
 command = "cp"
-dependencies = ["create-build-dir", "bind-wasm"]
+dependencies = ["create-build-dir", "build-and-bind-wasm"]
 
 [tasks.copy-assets-to-build-dir]
 args = ["-r", "assets", "build/web/"]
@@ -56,6 +56,16 @@ dependencies = ["create-build-dir"]
 
 [tasks.copy-index-to-build-dir]
 args = ["index.html", "build/web/"]
+command = "cp"
+dependencies = ["create-build-dir", "prepare-favicon"]
+
+[tasks.prepare-favicon]
+args = ["build/web/icon.ico", "build/web/favicon.ico"]
+command = "mv"
+dependencies = ["create-build-dir", "copy-favicon-to-build-dir"]
+
+[tasks.copy-favicon-to-build-dir]
+args = ["build/windows/icon.ico", "build/web/"]
 command = "cp"
 dependencies = ["create-build-dir"]
 
