@@ -1,6 +1,6 @@
 # A Bevy game template
 
-Template for a Game using the awesome [Bevy engine][Bevy] featuring out of the box builds for Windows, Linux, MacOS and Web (WASM).
+Template for a Game using the awesome [Bevy engine][bevy] featuring out of the box builds for Windows, Linux, MacOS and Web (WASM).
  
 # What does this template give you?
 * basic setup with an executable crate on the root level and your game as a Bevy plugin in a library
@@ -20,12 +20,10 @@ Template for a Game using the awesome [Bevy engine][Bevy] featuring out of the b
 ### Updating the icons
  1. Replace `build/windows/icon.ico` (icon used for windows executable and as favicon for the web-builds)
  2. Replace `build/macos/icon_1024x1024.png` with a `1024` times `1024` pixel png icon and run `create_icns.sh` (make sure to run the script inside the `macos` directory) - _Warning: sadly this seems to require a mac..._
- 
-Currently, the icon of the 
 
 # Getting started with Bevy
 
-You should checkout the [bevy website][Bevy] for [links to resources][Bevy-learn]. I can also recommend the [official Discord server][Bevy-discord] as a place to keep up to date with the development and get feedback + help from other Bevy users. 
+You should checkout the [bevy website][bevy] for [links to resources][bevy-learn]. I can also recommend the [official Discord server][bevy-discord] as a place to keep up to date with the development and get feedback + help from other Bevy users. 
 
 # Known issues
 
@@ -33,9 +31,9 @@ You should checkout the [bevy website][Bevy] for [links to resources][Bevy-learn
 
 # License
 
-This project is licensed under [CC0 1.0 Universal](LICENSE) except the content of `assets` and the Bevy icons in the `build` directory. Go crazy and feel free to show me whatever you build with this ([@nikl_me][Nikl-twitter]).
+This project is licensed under [CC0 1.0 Universal](LICENSE) except some content of `assets` and the Bevy icons in the `build` directory (see [Credits](credits/CREDITS.md)). Go crazy and feel free to show me whatever you build with this ([@nikl_me][nikl-twitter]).
 
-[Bevy]: https://bevyengine.org/
-[Bevy-learn]: https://bevyengine.org/learn/
-[Bevy-discord]: https://discord.gg/bevy
-[Nikl-twitter]: https://twitter.com/nikl_me
+[bevy]: https://bevyengine.org/
+[bevy-learn]: https://bevyengine.org/learn/
+[bevy-discord]: https://discord.gg/bevy
+[nikl-twitter]: https://twitter.com/nikl_me

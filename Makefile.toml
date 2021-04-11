@@ -32,7 +32,7 @@ args = ["install", "wasm-bindgen-cli", "--force", "--version", "0.2.69"]
 install_crate = {crate_name = "basic-http-server", binary = "basic-http-server", test_arg="--help"}
 
 [tasks.copy-files-for-release]
-dependencies = ["copy-wasm-to-build-dir", "copy-wasm-js-to-build-dir", "copy-wasm_bg-to-build-dir", "copy-index-to-build-dir", "copy-assets-to-build-dir"]
+dependencies = ["copy-wasm-to-build-dir", "copy-wasm-js-to-build-dir", "copy-wasm_bg-to-build-dir", "copy-index-to-build-dir", "copy-assets-to-build-dir", "copy-credits-to-build-dir"]
 
 [tasks.copy-wasm-to-build-dir]
 args = ["${TARGET_DIR}${CARGO_MAKE_CRATE_NAME}.wasm", "build/web/target/"]
@@ -51,6 +51,11 @@ dependencies = ["create-build-dir", "build-and-bind-wasm"]
 
 [tasks.copy-assets-to-build-dir]
 args = ["-r", "assets", "build/web/"]
+command = "cp"
+dependencies = ["create-build-dir"]
+
+[tasks.copy-credits-to-build-dir]
+args = ["-r", "credits", "build/web/"]
 command = "cp"
 dependencies = ["create-build-dir"]
 
