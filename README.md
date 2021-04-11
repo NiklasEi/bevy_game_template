@@ -18,7 +18,7 @@ Template for a Game using the awesome [Bevy engine][Bevy] featuring out of the b
    
  
 ### Updating the icons
- 1. Replace `build/windows/icon.ico` (icon used for windows executable)
+ 1. Replace `build/windows/icon.ico` (icon used for windows executable and as favicon for the web-builds)
  2. Replace `build/macos/icon_1024x1024.png` with a `1024` times `1024` pixel png icon and run `create_icns.sh` (make sure to run the script inside the `macos` directory) - _Warning: sadly this seems to require a mac..._
  
 Currently, the icon of the 
@@ -26,6 +26,10 @@ Currently, the icon of the
 # Getting started with Bevy
 
 You should checkout the [bevy website][Bevy] for [links to resources][Bevy-learn]. I can also recommend the [official Discord server][Bevy-discord] as a place to keep up to date with the development and get feedback + help from other Bevy users. 
+
+# Known issues
+
+* Audio in web-builds currently comes with some issues. In some browsers it might not work or sound bad.
 
 # License
 
