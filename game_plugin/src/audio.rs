@@ -14,8 +14,7 @@ impl Plugin for InternalAudioPlugin {
         .add_plugin(AudioPlugin)
         .add_system_set(SystemSet::on_enter(GameState::Playing).with_system(start_audio.system()))
         .add_system_set(
-            SystemSet::on_update(GameState::Playing)
-                .with_system(play_flying_and_digging_sounds.system()),
+            SystemSet::on_update(GameState::Playing).with_system(control_flying_sound.system()),
         )
         .add_system_set(SystemSet::on_exit(GameState::Playing).with_system(stop_audio.system()));
     }
@@ -35,11 +34,7 @@ fn stop_audio(audio: Res<Audio>, channels: Res<AudioChannels>) {
     audio.stop_channel(&channels.flying);
 }
 
-fn play_flying_and_digging_sounds(
-    actions: Res<Actions>,
-    audio: Res<Audio>,
-    channels: Res<AudioChannels>,
-) {
+fn control_flying_sound(actions: Res<Actions>, audio: Res<Audio>, channels: Res<AudioChannels>) {
     if actions.player_movement.is_some() {
         audio.resume_channel(&channels.flying);
     } else {
