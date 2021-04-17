@@ -13,10 +13,10 @@ Template for a Game using the awesome [Bevy engine][bevy] featuring out of the b
  2. Look for `ToDo` to use your own game name everywhere
  3. [Update the icons as described below](#updating-the-icons)
  4. Start coding :tada:
-    * Start the native app: `cargo run --features native` 
+    * Start the native app: `cargo run --features native`
     * Start the web build: `cargo make serve` (requires `cargo-make`; to install run `cargo install cargo-make`)
 
-You should keep the `credits` directory up to date. The release workflow automatically includes the directory.
+You should keep the `credits` directory up to date. The release workflow automatically includes the directory in every build.
  
 ### Updating the icons
  1. Replace `build/windows/icon.ico` (icon used for windows executable and as favicon for the web-builds)
@@ -28,7 +28,7 @@ You should checkout the [bevy website][bevy] for [links to resources][bevy-learn
 
 # Known issues
 
-* Audio in web-builds currently comes with some issues. In some browsers it might not work or sound bad.
+*  Audio in web-builds might sound bad in some browsers. See [bevy_kira_audio/#9][firefox-sound-issue] for more information.
 
 # License
 
@@ -38,3 +38,4 @@ This project is licensed under [CC0 1.0 Universal](LICENSE) except some content 
 [bevy-learn]: https://bevyengine.org/learn/
 [bevy-discord]: https://discord.gg/bevy
 [nikl-twitter]: https://twitter.com/nikl_me
+[firefox-sound-issue]: https://github.com/NiklasEi/bevy_kira_audio/issues/9
