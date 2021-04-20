@@ -21,6 +21,6 @@ native = [
 ]
 
 [dependencies]
-bevy = { version = "0.5.0", default-features = false }
-bevy_kira_audio = { version = "0.4.0" }
+bevy = { git = "https://github.com/bevyengine/bevy", rev = "4a477e762dbe881430385559456b4140881b6f92", default-features = false }
+bevy_kira_audio = { git = "https://github.com/NiklasEi/bevy_kira_audio", rev = "5b3b9433cf47dc2b818b912b882197eb19eee4dd" }
 rand = "0.8.3"
