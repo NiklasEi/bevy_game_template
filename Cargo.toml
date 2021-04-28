@@ -26,6 +26,11 @@ web = [
     "bevy_webgl2",
 ]
 
+dev = [
+    "bevy/dynamic",
+    "native",
+]
+
 [dependencies]
 bevy = { version = "0.5.0", default-features = false }
 game_plugin = {path = "game_plugin"}
