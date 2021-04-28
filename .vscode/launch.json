@@ -1,0 +1,68 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        // this config bypasses waiting for debugger attachment, increasing speed
+        {
+            "name": "Quick Launch",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "cargo run --features dev",
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=bevy_game",
+                    "--package=bevy_game",
+                    "--features",
+                    "dev"
+                ],
+                "filter": {
+                    "name": "bevy_game",
+                    "kind": "bin"
+                },
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "CARGO_MANIFEST_DIR": "${workspaceFolder}",
+            },
+            "linux": {
+                "env": {
+                    "LD_LIBRARY_PATH": "${env:LD_LIBRARY_PATH}:${workspaceFolder}/target/debug:${env:HOME}/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib:${env:HOME}/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib"
+                }
+            }
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=bevy_game",
+                    "--package=bevy_game",
+                    "--features",
+                    "dev"
+                ],
+                "filter": {
+                    "name": "bevy_game",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "CARGO_MANIFEST_DIR": "${workspaceFolder}",
+                "LD_LIBRARY_PATH": "${env:LD_LIBRARY_PATH}:${workspaceFolder}/target/debug:${env:HOME}/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib:${env:HOME}/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib"
+            }
+        }
+    ]
+}
