@@ -75,5 +75,9 @@ command = "cp"
 dependencies = ["create-build-dir"]
 
 [tasks.create-build-dir]
-args = ["-p", "build/web/target"]
-command = "mkdir"
+script_runner = "@duckscript"
+script = [
+    '''
+    p = canonicalize "build/web/target"
+    mkdir ${p}
+    ''']
