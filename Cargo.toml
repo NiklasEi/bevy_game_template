@@ -4,6 +4,7 @@ version = "0.1.0"
 publish = false
 authors = ["Niklas Eicker <git@nikl.me>"] # ToDo: you are the author ;)
 edition = "2018"
+resolver = "2"
 
 [profile.dev]
 opt-level = 1
@@ -33,10 +34,10 @@ dev = [
 
 [dependencies]
 bevy = { git = "https://github.com/bevyengine/bevy", rev = "4a477e762dbe881430385559456b4140881b6f92", default-features = false }
-game_plugin = {path = "game_plugin"}
+game_plugin = { path = "game_plugin" }
 winit = "0.24.0"
 
-bevy_webgl2 = {version = "0.5.0", optional = true}
+bevy_webgl2 = { version = "0.5.2", optional = true }
 
 [build-dependencies]
 embed-resource = "1.4"
