@@ -23,4 +23,5 @@ native = [
 [dependencies]
 bevy = { version = "0.5.0", default-features = false }
 bevy_kira_audio = { version = "0.4.0" }
+bevy_asset_loader = "0.2.1"
 rand = "0.8.3"
