@@ -14,8 +14,7 @@ impl Plugin for PlayerPlugin {
                 .with_system(spawn_player.system())
                 .with_system(spawn_camera.system()),
         )
-        .add_system_set(SystemSet::on_update(GameState::Playing).with_system(move_player.system()))
-        .add_system_set(SystemSet::on_exit(GameState::Playing).with_system(remove_player.system()));
+        .add_system_set(SystemSet::on_update(GameState::Playing).with_system(move_player.system()));
     }
 }
 
@@ -53,11 +52,5 @@ fn move_player(
     );
     for mut player_transform in player_query.iter_mut() {
         player_transform.translation += movement;
-    }
-}
-
-fn remove_player(mut commands: Commands, player_query: Query<Entity, With<Player>>) {
-    for player in player_query.iter() {
-        commands.entity(player).despawn();
     }
 }

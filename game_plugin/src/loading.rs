@@ -1,7 +1,7 @@
 use crate::GameState;
 use bevy::prelude::*;
+use bevy_asset_loader::{AssetCollection, AssetLoader};
 use bevy_kira_audio::AudioSource;
-use bevy_asset_loader::{AssetLoader, AssetCollection};
 
 pub struct LoadingPlugin;
 

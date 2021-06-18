@@ -27,8 +27,8 @@ impl Plugin for GamePlugin {
     fn build(&self, app: &mut AppBuilder) {
         app.add_state(GameState::Loading)
             .add_plugin(LoadingPlugin)
-            .add_plugin(ActionsPlugin)
             .add_plugin(MenuPlugin)
+            .add_plugin(ActionsPlugin)
             .add_plugin(InternalAudioPlugin)
             .add_plugin(PlayerPlugin)
             // .add_plugin(FrameTimeDiagnosticsPlugin::default())
