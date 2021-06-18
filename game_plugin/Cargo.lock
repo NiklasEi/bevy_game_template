@@ -421,15 +421,14 @@ dependencies = [
 
 [[package]]
 name = "bevy_kira_audio"
-version = "0.4.0"
+version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "951bf582ef28c2d50f830837ac7ce35d2f0872fe5ef07a71ede5f068b259a7c9"
+checksum = "204c447c7fdec25474195c1c5f271181064fc39bd2cda35eecb10f72bfcffaf9"
 dependencies = [
  "anyhow",
  "bevy",
  "bevy_reflect",
  "kira",
- "lewton",
  "parking_lot",
 ]
 
@@ -913,9 +912,9 @@ checksum = "3d7b894f5411737b7867f4827955924d7c254fc9f4d91a6aad6b097804b1018b"
 
 [[package]]
 name = "combine"
-version = "4.5.2"
+version = "4.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cc4369b5e4c0cddf64ad8981c0111e7df4f7078f4d6ba98fb31f2e17c4c57b7e"
+checksum = "a2d47c1b11006b87e492b53b313bb699ce60e16613c4dddaa91f8f7c220ab2fa"
 dependencies = [
  "bytes",
  "memchr",
@@ -1199,9 +1198,9 @@ dependencies = [
 
 [[package]]
 name = "erased-serde"
-version = "0.3.15"
+version = "0.3.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e5b36e6f2295f393f44894c6031f67df4d185b984cd54d08f768ce678007efcd"
+checksum = "3de9ad4541d99dc22b59134e7ff8dc3d6c988c89ecd7324bf10a8362b07a2afa"
 dependencies = [
  "serde",
 ]
@@ -1814,6 +1813,7 @@ dependencies = [
  "getrandom",
  "indexmap",
  "instant",
+ "lewton",
  "rand",
  "ringbuf",
  "thiserror",
@@ -2453,9 +2453,9 @@ checksum = "831eb2fcb5b72b09c72a3f2d24c09a28d79886512827cd4674d9bac10557f16a"
 
 [[package]]
 name = "redox_syscall"
-version = "0.2.8"
+version = "0.2.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "742739e41cd49414de871ea5e549afb7e2a3ac77b589bcbebe8c82fab37147fc"
+checksum = "5ab49abadf3f9e1c4bc499e8845e152ad87d2ad2d30371841171169e9d75feee"
 dependencies = [
  "bitflags",
 ]
