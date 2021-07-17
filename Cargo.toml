@@ -33,10 +33,10 @@ dev = [
 
 [dependencies]
 bevy = { version = "0.5.0", default-features = false }
-game_plugin = {path = "game_plugin"}
+game_plugin = { path = "game_plugin" }
 winit = "0.24.0"
 
-bevy_webgl2 = {version = "0.5.0", optional = true}
+bevy_webgl2 = { version = "0.5.0", optional = true }
 
 [build-dependencies]
 embed-resource = "1.4"
