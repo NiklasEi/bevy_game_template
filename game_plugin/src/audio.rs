@@ -7,7 +7,7 @@ use bevy_kira_audio::{Audio, AudioChannel, AudioPlugin};
 pub struct InternalAudioPlugin;
 
 impl Plugin for InternalAudioPlugin {
-    fn build(&self, app: &mut AppBuilder) {
+    fn build(&self, app: &mut App) {
         app.insert_resource(AudioChannels {
             flying: AudioChannel::new("flying".to_owned()),
         })

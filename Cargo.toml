@@ -33,11 +33,15 @@ dev = [
 ]
 
 [dependencies]
-bevy = { git = "https://github.com/bevyengine/bevy", rev = "4a477e762dbe881430385559456b4140881b6f92", default-features = false }
+bevy = { git = "https://github.com/bevyengine/bevy", rev = "f6b42b86691bdea92613df3e1e754dbc9455dbc2", default-features = false }
 game_plugin = { path = "game_plugin" }
-winit = "0.24.0"
+winit = { version = "0.25.0" }
 
-bevy_webgl2 = { version = "0.5.2", optional = true }
+bevy_webgl2 = { git = "https://github.com/mrk-its/bevy_webgl2", rev = "1b2e3ddb58e2608b9f72dd9a74e7e1979bb72e4b", optional = true }
+
+[patch.'https://github.com/bevyengine/bevy']
+# identical fork; I just need to point to a different URL to pin bevy_webgl2 and this template to the same version
+bevy = { git = "https://github.com/NiklasEi/bevy", rev = "f6b42b86691bdea92613df3e1e754dbc9455dbc2" }
 
 [build-dependencies]
 embed-resource = "1.4"

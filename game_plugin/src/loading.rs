@@ -9,7 +9,7 @@ use bevy_kira_audio::AudioSource;
 pub struct LoadingPlugin;
 
 impl Plugin for LoadingPlugin {
-    fn build(&self, app: &mut AppBuilder) {
+    fn build(&self, app: &mut App) {
         app.add_system_set(
             SystemSet::on_enter(GameState::Loading).with_system(start_loading.system()),
         )

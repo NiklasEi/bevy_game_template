@@ -26,7 +26,7 @@ command = "cargo"
 [tasks.wasm-bindgen-cli]
 #install_crate = {crate_name = "wasm-bindgen-cli", binary = "wasm-bindgen", test_arg="--help"}
 command = "cargo"
-args = ["install", "wasm-bindgen-cli", "--force", "--version", "0.2.69"]
+args = ["install", "wasm-bindgen-cli", "--force", "--version", "0.2.76"]
 
 [tasks.basic-http-server]
 install_crate = {crate_name = "basic-http-server", binary = "basic-http-server", test_arg="--help"}
