@@ -262,6 +262,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "bevy_asset_loader"
+version = "0.6.0"
+source = "git+https://github.com/NiklasEi/bevy_asset_loader?rev=6175cbb5629e18d15162983004e4f7592c31f552#6175cbb5629e18d15162983004e4f7592c31f552"
+dependencies = [
+ "bevy",
+ "bevy_asset_loader_derive",
+]
+
+[[package]]
+name = "bevy_asset_loader_derive"
+version = "0.6.0"
+source = "git+https://github.com/NiklasEi/bevy_asset_loader?rev=6175cbb5629e18d15162983004e4f7592c31f552#6175cbb5629e18d15162983004e4f7592c31f552"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "bevy_core"
 version = "0.5.0"
 source = "git+https://github.com/NiklasEi/bevy?rev=f6b42b86691bdea92613df3e1e754dbc9455dbc2#f6b42b86691bdea92613df3e1e754dbc9455dbc2"
@@ -1529,6 +1548,7 @@ name = "game_plugin"
 version = "0.1.0"
 dependencies = [
  "bevy",
+ "bevy_asset_loader",
  "bevy_kira_audio",
  "rand",
 ]

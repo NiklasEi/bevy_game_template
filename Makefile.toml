@@ -42,8 +42,7 @@ windows = set "./build/windows"
 rm -r ${web}
 mkdir ${target}
 
-cp ${windows}/icon.ico ${web}/icon.ico
-mv ${web}/icon.ico ${web}/favicon.ico
+cp ${windows}/icon.ico ${web}/favicon.ico
 
 cp ${TARGET_DIR}${CARGO_MAKE_CRATE_NAME}.wasm ${target}/${CARGO_MAKE_CRATE_NAME}.wasm
 cp ${TARGET_DIR}wasm.js ${target}/wasm.js
