@@ -261,9 +261,9 @@ dependencies = [
 
 [[package]]
 name = "bevy_asset_loader"
-version = "0.5.0"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a401aaa852066d5681e83e47b1b922299fdee1e2b31aa67b5f1d264e97a425b4"
+checksum = "75e475fefb7c0d3128d6889bf994b045b3a5e2ab60d4789a13bfe3f15ac492c1"
 dependencies = [
  "bevy",
  "bevy_asset_loader_derive",
@@ -271,9 +271,9 @@ dependencies = [
 
 [[package]]
 name = "bevy_asset_loader_derive"
-version = "0.5.0"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "44c64d946bc481b8dcb786c0a774051050ca5a5393fbfca49a02fd9115b65eeb"
+checksum = "41e19c990a6391cc43d0c6a916d01f639cb97d876f3105185c0c0be5c1640062"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -423,13 +423,14 @@ dependencies = [
 
 [[package]]
 name = "bevy_kira_audio"
-version = "0.5.1"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "204c447c7fdec25474195c1c5f271181064fc39bd2cda35eecb10f72bfcffaf9"
+checksum = "4d050dc30118141e38a978ce9b6e3c2f905a04d4ede89efe9612a1fb15d0cb7c"
 dependencies = [
  "anyhow",
  "bevy",
  "bevy_reflect",
+ "bevy_utils",
  "kira",
  "parking_lot",
 ]
