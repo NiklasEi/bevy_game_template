@@ -31,6 +31,7 @@ impl FromWorld for ButtonMaterials {
     }
 }
 
+#[derive(Component)]
 struct PlayButton;
 
 fn setup_menu(

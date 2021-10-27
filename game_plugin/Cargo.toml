@@ -21,7 +21,7 @@ native = [
 ]
 
 [dependencies]
-bevy = { git = "https://github.com/bevyengine/bevy", rev = "f6b42b86691bdea92613df3e1e754dbc9455dbc2", default-features = false }
-bevy_kira_audio = { git = "https://github.com/NiklasEi/bevy_kira_audio", rev = "b0a8659c7e43c2625695409152cce7b1b339be2a" }
-bevy_asset_loader = { git = "https://github.com/NiklasEi/bevy_asset_loader", rev = "6175cbb5629e18d15162983004e4f7592c31f552" }
+bevy = { git = "https://github.com/bevyengine/bevy", rev = "6a8a8c9d21f32e0e46623db9438813b009f9e014", default-features = false }
+bevy_kira_audio = { git = "https://github.com/NiklasEi/bevy_kira_audio", rev = "1c6f7a23713abcb942fde047c78c35c3a70eae6b" }
+bevy_asset_loader = { git = "https://github.com/NiklasEi/bevy_asset_loader", rev = "b1916e76d81aeb5097dadf7c0458488e670deb47" }
 rand = "0.8.3"
