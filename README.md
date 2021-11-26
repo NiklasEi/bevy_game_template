@@ -26,7 +26,7 @@ You should keep the `credits` directory up to date. The release workflow automat
 
 # Getting started with Bevy
 
-You should checkout the [bevy website][bevy] for [links to resources][bevy-learn]. I can also recommend the [official Discord server][bevy-discord] as a place to keep up to date with the development and get feedback + help from other Bevy users. 
+You should check out the Bevy website for [links to resources][bevy-learn] and the [Bevy Cheat Book] for a bunch of helpful documentation and guides. I can also recommend the [official Discord server][bevy-discord] as a place to keep up to date with the development and get feedback + help from other Bevy users. 
 
 # Known issues
 
@@ -41,3 +41,4 @@ This project is licensed under [CC0 1.0 Universal](LICENSE) except some content 
 [bevy-discord]: https://discord.gg/bevy
 [nikl-twitter]: https://twitter.com/nikl_me
 [firefox-sound-issue]: https://github.com/NiklasEi/bevy_kira_audio/issues/9
+[Bevy Cheat Book]: https://bevy-cheatbook.github.io/introduction.html
