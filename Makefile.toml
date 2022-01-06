@@ -19,7 +19,7 @@ command = "wasm-bindgen"
 dependencies = ["cargo-build-web", "wasm-bindgen-cli"]
 
 [tasks.cargo-build-web]
-args = ["build", "--target", "wasm32-unknown-unknown", "--features", "web", "--release"]
+args = ["build", "--target", "wasm32-unknown-unknown", "--release"]
 command = "cargo"
 
 [tasks.wasm-bindgen-cli]

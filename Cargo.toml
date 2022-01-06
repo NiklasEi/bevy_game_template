@@ -18,37 +18,20 @@ codegen-units = 1
 
 [features]
 default = [
-    "bevy/bevy_gltf",
-    "bevy/bevy_winit",
     "bevy/render",
-    "bevy/png",
     "game_plugin/default"
-]
-
-native = [
-    "bevy/bevy_wgpu",
-    "game_plugin/native"
-]
-
-web = [
-    "bevy_webgl2",
 ]
 
 dev = [
     "bevy/dynamic",
-    "native",
 ]
 
 [dependencies]
-bevy = { git = "https://github.com/bevyengine/bevy", rev = "6a8a8c9d21f32e0e46623db9438813b009f9e014", default-features = false }
+bevy = { git = "https://github.com/bevyengine/bevy", rev = "507441d96f83355cdab578d85f804f4bf8d835c9", default-features = false }
 game_plugin = { path = "game_plugin" }
-winit = { version = "0.25.0" }
 
-bevy_webgl2 = { git = "https://github.com/mrk-its/bevy_webgl2", rev = "3c42f2cad2f6fabb54511db9221aa1ac1292a55c", optional = true }
-
-[patch.'https://github.com/bevyengine/bevy']
-# identical fork; I just need to point to a different URL to pin bevy_webgl2 and this template to the same version
-bevy = { git = "https://github.com/NiklasEi/bevy", rev = "6a8a8c9d21f32e0e46623db9438813b009f9e014" }
+[target.'cfg(target_os = "linux")'.dependencies]
+winit = { version = "0.25", features=["x11"]}
 
 [build-dependencies]
 embed-resource = "1.4"

@@ -10,10 +10,11 @@ pub struct LoadingPlugin;
 /// If interested, take a look at https://bevy-cheatbook.github.io/features/assets.html
 impl Plugin for LoadingPlugin {
     fn build(&self, app: &mut App) {
-        AssetLoader::new(GameState::Loading, GameState::Menu)
+        AssetLoader::new(GameState::Loading)
             .with_collection::<FontAssets>()
             .with_collection::<AudioAssets>()
             .with_collection::<TextureAssets>()
+            .continue_to_state(GameState::Menu)
             .build(app);
     }
 }
@@ -36,5 +37,5 @@ pub struct AudioAssets {
 #[derive(AssetCollection)]
 pub struct TextureAssets {
     #[asset(path = "textures/bevy.png")]
-    pub texture_bevy: Handle<Texture>,
+    pub texture_bevy: Handle<Image>,
 }
