@@ -3,8 +3,7 @@ name = "bevy_game" # ToDo
 version = "0.1.0"
 publish = false
 authors = ["Niklas Eicker <git@nikl.me>"] # ToDo: you are the author ;)
-edition = "2018"
-resolver = "2"
+edition = "2021"
 
 [profile.dev.package."*"]
 opt-level = 3
@@ -18,8 +17,11 @@ codegen-units = 1
 
 [features]
 default = [
+    "bevy/bevy_winit",
     "bevy/render",
-    "game_plugin/default"
+    "bevy/png",
+    "bevy/x11",
+    "bevy_kira_audio/ogg"
 ]
 
 dev = [
@@ -28,7 +30,9 @@ dev = [
 
 [dependencies]
 bevy = { git = "https://github.com/bevyengine/bevy", rev = "507441d96f83355cdab578d85f804f4bf8d835c9", default-features = false }
-game_plugin = { path = "game_plugin" }
+bevy_kira_audio = { git = "https://github.com/NiklasEi/bevy_kira_audio", rev = "9b74131d5fb657db7ffee5b25d5597cd84bcd2b1" }
+bevy_asset_loader = { git = "https://github.com/NiklasEi/bevy_asset_loader", rev = "8e435c58c53ae3812e2dbc8cb4a0e13b488f0f05" }
+rand = "0.8.3"
 
 [target.'cfg(target_os = "linux")'.dependencies]
 winit = { version = "0.25", features=["x11"]}

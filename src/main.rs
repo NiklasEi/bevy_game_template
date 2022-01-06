@@ -3,7 +3,7 @@
 
 use bevy::prelude::{App, ClearColor, Color, WindowDescriptor};
 use bevy::DefaultPlugins;
-use game_plugin::GamePlugin;
+use bevy_game::GamePlugin;
 
 fn main() {
     App::new()
