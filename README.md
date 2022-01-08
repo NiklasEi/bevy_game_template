@@ -15,8 +15,10 @@ _Since Bevy is in heavy development, there regularly are unpublished new feature
  2. Look for `ToDo` to use your own game name everywhere
  3. [Update the icons as described below](#updating-the-icons)
  4. Start coding :tada:
-    * Start the native app: `cargo run --features native`
-    * Start the web build: `cargo make serve` (requires `cargo-make`; to install run `cargo install cargo-make`)
+    * Start the native app: `cargo run`
+    * Start the web build: `cargo run --target wasm32-unknown-unknown`
+       * requires [`wasm-server-runner`](https://github.com/jakobhellermann/wasm-server-runner): `cargo install wasm-server-runner`
+       * requires `wasm32-unknown-unknown` target: `rustup target add wasm32-unknown-unknown`
 
 You should keep the `credits` directory up to date. The release workflow automatically includes the directory in every build.
  

@@ -1,6 +1,5 @@
 target/
 .idea/
-.cargo/
 .DS_Store
 
 build/web/
