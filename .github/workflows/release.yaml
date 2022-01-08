@@ -108,7 +108,7 @@ jobs:
           mkdir target/release/assets && cp -r assets target/release/assets
           mkdir target/release/credits && cp -r credits target/release/credits
       - name: Zip release
-        uses: papeloto/action-zip@v1
+        uses: vimtor/action-zip@v1
         with:
           files: target/release/assets/ target/release/${{ env.GAME_EXECUTABLE_NAME }}.exe
           dest: ${{ env.GAME_EXECUTABLE_NAME }}_windows.zip
@@ -147,7 +147,7 @@ jobs:
         run: |
           cargo make release
       - name: Zip release
-        uses: papeloto/action-zip@v1
+        uses: vimtor/action-zip@v1
         with:
           files: build/web/
           dest: ${{ env.GAME_EXECUTABLE_NAME }}_web.zip
