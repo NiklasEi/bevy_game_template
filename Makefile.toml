@@ -19,14 +19,11 @@ command = "wasm-bindgen"
 dependencies = ["cargo-build-web", "wasm-bindgen-cli"]
 
 [tasks.cargo-build-web]
-args = ["build", "--target", "wasm32-unknown-unknown", "--features", "web", "--release"]
+args = ["build", "--target", "wasm32-unknown-unknown", "--release"]
 command = "cargo"
 
-# Due to https://github.com/mrk-its/bevy_webgl2/issues/35 we need a specific version at the moment
 [tasks.wasm-bindgen-cli]
-#install_crate = {crate_name = "wasm-bindgen-cli", binary = "wasm-bindgen", test_arg="--help"}
-command = "cargo"
-args = ["install", "wasm-bindgen-cli", "--force", "--version", "0.2.69"]
+install_crate = {crate_name = "wasm-bindgen-cli", binary = "wasm-bindgen", test_arg="--help"}
 
 [tasks.basic-http-server]
 install_crate = {crate_name = "basic-http-server", binary = "basic-http-server", test_arg="--help"}

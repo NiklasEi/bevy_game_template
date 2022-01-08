@@ -3,7 +3,7 @@ name = "bevy_game" # ToDo
 version = "0.1.0"
 publish = false
 authors = ["Niklas Eicker <git@nikl.me>"] # ToDo: you are the author ;)
-edition = "2018"
+edition = "2021"
 
 [profile.dev.package."*"]
 opt-level = 3
@@ -17,33 +17,25 @@ codegen-units = 1
 
 [features]
 default = [
-    "bevy/bevy_gltf",
     "bevy/bevy_winit",
     "bevy/render",
     "bevy/png",
-    "game_plugin/default"
-]
-
-native = [
-    "bevy/bevy_wgpu",
-    "game_plugin/native"
-]
-
-web = [
-    "bevy_webgl2",
+    "bevy/x11",
+    "bevy_kira_audio/ogg"
 ]
 
 dev = [
     "bevy/dynamic",
-    "native",
 ]
 
 [dependencies]
-bevy = { version = "0.5.0", default-features = false }
-game_plugin = { path = "game_plugin" }
-winit = "0.24.0"
+bevy = { version = "0.6", default-features = false }
+bevy_kira_audio = { version = "0.8" }
+bevy_asset_loader = { version = "0.8" }
+rand = "0.8.3"
 
-bevy_webgl2 = { version = "0.5.0", optional = true }
+[target.'cfg(target_os = "linux")'.dependencies]
+winit = { version = "0.25", features=["x11"]}
 
 [build-dependencies]
 embed-resource = "1.4"

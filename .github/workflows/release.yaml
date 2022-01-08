@@ -30,7 +30,7 @@ jobs:
           rm build.rs
       - name: Build release
         run: |
-          cargo build --release --features native
+          cargo build --release
       - name: Create release
         run: |
           mkdir -p build/macos/src/Game.app/Contents/MacOS/assets
@@ -68,7 +68,7 @@ jobs:
         run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev
       - name: Build release
         run: |
-          cargo build --release --features native
+          cargo build --release
       - name: Prepare release
         run: |
           strip target/release/${{ env.GAME_EXECUTABLE_NAME }}
@@ -102,13 +102,13 @@ jobs:
           override: true
       - name: Build release
         run: |
-          cargo build --release --features native
+          cargo build --release
       - name: Prepare release
         run: |
           mkdir target/release/assets && cp -r assets target/release/assets
           mkdir target/release/credits && cp -r credits target/release/credits
       - name: Zip release
-        uses: papeloto/action-zip@v1
+        uses: vimtor/action-zip@v1
         with:
           files: target/release/assets/ target/release/${{ env.GAME_EXECUTABLE_NAME }}.exe
           dest: ${{ env.GAME_EXECUTABLE_NAME }}_windows.zip
@@ -147,7 +147,7 @@ jobs:
         run: |
           cargo make release
       - name: Zip release
-        uses: papeloto/action-zip@v1
+        uses: vimtor/action-zip@v1
         with:
           files: build/web/
           dest: ${{ env.GAME_EXECUTABLE_NAME }}_web.zip
