@@ -5,8 +5,9 @@ Template for a Game using the awesome [Bevy engine][bevy] featuring out of the b
 _Since Bevy is in heavy development, there regularly are unpublished new features or bug fixes. If you like living on the edge, you can use the branch `bevy_main` of this template to be close to the current state of Bevys main branch_
  
 # What does this template give you?
-* basic setup with an executable crate on the root level and your game as a Bevy plugin in a library
+* basic setup with a slim main function and your game as a Bevy plugin in the library
 * small example game (*warning: biased; e.g. split into a lot of plugins and using `bevy_kira_audio` for sound*)
+* easy setup for running the web (`cargo run --target wasm32-unknown-unknown`) and the native version (`cargo run`)
 * workflow for GitHub actions creating releases for Windows, Linux, macOS and Web (WASM) ready for distribution
     * push a tag in the form of `v[0-9]+.[0-9]+.[0-9]+*` (e.g. `v1.1.42`) to trigger the flow
 
@@ -19,6 +20,7 @@ _Since Bevy is in heavy development, there regularly are unpublished new feature
     * Start the web build: `cargo run --target wasm32-unknown-unknown`
        * requires [`wasm-server-runner`](https://github.com/jakobhellermann/wasm-server-runner): `cargo install wasm-server-runner`
        * requires `wasm32-unknown-unknown` target: `rustup target add wasm32-unknown-unknown`
+       * this will serve your app on a random free port
 
 You should keep the `credits` directory up to date. The release workflow automatically includes the directory in every build.
  
@@ -28,7 +30,7 @@ You should keep the `credits` directory up to date. The release workflow automat
 
 # Getting started with Bevy
 
-You should check out the Bevy website for [links to resources][bevy-learn] and the [Bevy Cheat Book] for a bunch of helpful documentation and guides. I can also recommend the [official Discord server][bevy-discord] as a place to keep up to date with the development and get feedback + help from other Bevy users. 
+You should check out the Bevy website for [links to resources][bevy-learn] and the [Bevy Cheat Book] for a bunch of helpful documentation and examples. I can also recommend the [official Bevy Discord server][bevy-discord] to keep up to date with the development and get feedback + help from other Bevy users.
 
 # Known issues
 
