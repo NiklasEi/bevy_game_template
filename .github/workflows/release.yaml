@@ -146,6 +146,11 @@ jobs:
       - name: Build Release
         run: |
           cargo make release
+      - name: optimize WASM
+        uses: NiklasEi/wasm-opt@v1
+        with:
+          file: build/web/target/wasm_bg.wasm
+          output: build/web/target/wasm_bg.wasm
       - name: Zip release
         uses: vimtor/action-zip@v1
         with:

@@ -32,7 +32,6 @@ mkdir ${target}
 
 cp ${windows}/icon.ico ${web}/favicon.ico
 
-cp ${TARGET_DIR}${CARGO_MAKE_CRATE_NAME}.wasm ${target}/${CARGO_MAKE_CRATE_NAME}.wasm
 cp ${TARGET_DIR}wasm.js ${target}/wasm.js
 cp ${TARGET_DIR}wasm_bg.wasm ${target}/wasm_bg.wasm
 cp ./index.html ${web}/index.html
