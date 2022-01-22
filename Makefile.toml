@@ -17,7 +17,7 @@ args = ["build", "--target", "wasm32-unknown-unknown", "--release"]
 command = "cargo"
 
 [tasks.wasm-bindgen-cli]
-install_crate = {crate_name = "wasm-bindgen-cli", binary = "wasm-bindgen", test_arg="--help"}
+install_crate = { crate_name = "wasm-bindgen-cli", binary = "wasm-bindgen", test_arg="--help", version="0.2.78" }
 
 [tasks.copy-files-for-release]
 script_runner = "@duckscript"
