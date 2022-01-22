@@ -1,6 +1,6 @@
 # A Bevy game template
 
-Template for a Game using the awesome [Bevy engine][bevy] featuring out of the box builds for Windows, Linux, macOS, and Web (WASM).
+Template for a Game using the awesome [Bevy engine][bevy] featuring out of the box builds for Windows, Linux, macOS, and Web (Wasm).
 
 _Since Bevy is in heavy development, there regularly are unpublished new features or bug fixes. If you like living on the edge, you can use the branch `bevy_main` of this template to be close to the current state of Bevy's main branch_
  
@@ -8,7 +8,7 @@ _Since Bevy is in heavy development, there regularly are unpublished new feature
 * basic setup with a slim main function and your game as a Bevy plugin in a library
 * small example game (*warning: biased; e.g., split into a lot of plugins and using `bevy_kira_audio` for sound*)
 * easy setup for running the web (`cargo run --target wasm32-unknown-unknown`) and the native version (`cargo run`)
-* workflow for GitHub actions creating releases for Windows, Linux, macOS, and Web (WASM) ready for distribution
+* workflow for GitHub actions creating releases for Windows, Linux, macOS, and Web (Wasm) ready for distribution
     * push a tag in the form of `v[0-9]+.[0-9]+.[0-9]+*` (e.g. `v1.1.42`) to trigger the flow
 
 # How to use this template?
