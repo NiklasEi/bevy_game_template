@@ -51,7 +51,7 @@ jobs:
           overwrite: true
 
   build-linux:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Get tag
@@ -137,20 +137,20 @@ jobs:
           override: true
       - name: Install Dependencies
         run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev
-      - name: Install cargo-make
+      - name: Install trunk
         run: |
-          cargo install cargo-make
+          cargo install --locked trunk
       - name: Add wasm target
         run: |
           rustup target add wasm32-unknown-unknown
       - name: Build Release
         run: |
-          cargo make release
-      - name: optimize Wasm
-        uses: NiklasEi/wasm-opt@v1
-        with:
-          file: build/web/target/wasm_bg.wasm
-          output: build/web/target/wasm_bg.wasm
+          trunk build --release
+#      - name: optimize Wasm
+#        uses: NiklasEi/wasm-opt@v1
+#        with:
+#          file: build/web/target/wasm_bg.wasm
+#          output: build/web/target/wasm_bg.wasm
       - name: Zip release
         uses: vimtor/action-zip@v1
         with:
