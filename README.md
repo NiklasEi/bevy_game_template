@@ -5,9 +5,9 @@ Template for a Game using the awesome [Bevy engine][bevy] featuring out of the b
 _Since Bevy is in heavy development, there regularly are unpublished new features or bug fixes. If you like living on the edge, you can use the branch `bevy_main` of this template to be close to the current state of Bevy's main branch_
  
 # What does this template give you?
-* basic setup with a slim main function and your game as a Bevy plugin in a library
 * small example game (*warning: biased; e.g., split into a lot of plugins and using `bevy_kira_audio` for sound*)
-* easy setup for running the web (`cargo run --target wasm32-unknown-unknown`) and the native version (`cargo run`)
+* easy setup for running the web build using [trunk] (`trunk serve`) 
+* run the native version with `cargo run`
 * workflow for GitHub actions creating releases for Windows, Linux, macOS, and Web (Wasm) ready for distribution
     * push a tag in the form of `v[0-9]+.[0-9]+.[0-9]+*` (e.g. `v1.1.42`) to trigger the flow
 
@@ -17,10 +17,10 @@ _Since Bevy is in heavy development, there regularly are unpublished new feature
  3. [Update the icons as described below](#updating-the-icons)
  4. Start coding :tada:
     * Start the native app: `cargo run`
-    * Start the web build: `cargo run --target wasm32-unknown-unknown`
-       * requires [`wasm-server-runner`]: `cargo install wasm-server-runner`
+    * Start the web build: `trunk serve`
+       * requires [trunk]: `cargo install --locked trunk`
        * requires `wasm32-unknown-unknown` target: `rustup target add wasm32-unknown-unknown`
-       * this will serve your app on a free port
+       * this will serve your app on `8080` and automatically rebuild + reload it after code changes
 
 You should keep the `credits` directory up to date. The release workflow automatically includes the directory in every build.
 
@@ -47,3 +47,4 @@ This project is licensed under [CC0 1.0 Universal](LICENSE) except some content 
 [firefox-sound-issue]: https://github.com/NiklasEi/bevy_kira_audio/issues/9
 [Bevy Cheat Book]: https://bevy-cheatbook.github.io/introduction.html
 [`wasm-server-runner`]: https://github.com/jakobhellermann/wasm-server-runner
+[trunk]: https://trunkrs.dev/

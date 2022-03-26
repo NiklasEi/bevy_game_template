@@ -2,4 +2,4 @@ target/
 .idea/
 .DS_Store
 
-build/web/
+dist/
