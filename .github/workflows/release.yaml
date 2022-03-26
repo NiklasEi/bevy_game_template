@@ -149,11 +149,11 @@ jobs:
       - name: optimize Wasm
         uses: NiklasEi/wasm-opt@v2
         with:
-          file: build/web/target/*.wasm
+          file: dist/*.wasm
       - name: Zip release
         uses: vimtor/action-zip@v1
         with:
-          files: build/web/
+          files: dist/
           dest: ${{ env.GAME_EXECUTABLE_NAME }}_web.zip
       - name: Upload release
         uses: svenstaro/upload-release-action@v2
