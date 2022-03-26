@@ -14,10 +14,10 @@ impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
         app.add_system_set(
             SystemSet::on_enter(GameState::Playing)
-                .with_system(spawn_player.system())
-                .with_system(spawn_camera.system()),
+                .with_system(spawn_player)
+                .with_system(spawn_camera),
         )
-        .add_system_set(SystemSet::on_update(GameState::Playing).with_system(move_player.system()));
+        .add_system_set(SystemSet::on_update(GameState::Playing).with_system(move_player));
     }
 }
 

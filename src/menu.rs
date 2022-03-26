@@ -9,9 +9,9 @@ pub struct MenuPlugin;
 impl Plugin for MenuPlugin {
     fn build(&self, app: &mut App) {
         app.init_resource::<ButtonColors>()
-            .add_system_set(SystemSet::on_enter(GameState::Menu).with_system(setup_menu.system()))
+            .add_system_set(SystemSet::on_enter(GameState::Menu).with_system(setup_menu))
             .add_system_set(
-                SystemSet::on_update(GameState::Menu).with_system(click_play_button.system()),
+                SystemSet::on_update(GameState::Menu).with_system(click_play_button),
             );
     }
 }
