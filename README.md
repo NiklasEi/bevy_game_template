@@ -34,7 +34,7 @@ You should check out the Bevy website for [links to resources][bevy-learn] and t
 
 # Known issues
 
-Audio in web-builds can have issues in some browsers. This seems to be a general performance issue and not due ot the audio itself (see [bevy_kira_audio/#9][firefox-sound-issue]).
+Audio in web-builds can have issues in some browsers. This seems to be a general performance issue and not due to the audio itself (see [bevy_kira_audio/#9][firefox-sound-issue]).
 
 # License
 
