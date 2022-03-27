@@ -5,7 +5,7 @@ Template for a Game using the awesome [Bevy engine][bevy] featuring out of the b
 _Since Bevy is in heavy development, there regularly are unpublished new features or bug fixes. If you like living on the edge, you can use the branch `bevy_main` of this template to be close to the current state of Bevy's main branch_
  
 # What does this template give you?
-* small example game (*warning: biased; e.g., split into a lot of plugins and using `bevy_kira_audio` for sound*)
+* small example ["game"](https://niklasei.github.io/bevy_game_template/) (*warning: biased; e.g., split into a lot of plugins and using `bevy_kira_audio` for sound*)
 * easy setup for running the web build using [trunk] (`trunk serve`) 
 * run the native version with `cargo run`
 * workflow for GitHub actions creating releases for Windows, Linux, macOS, and Web (Wasm) ready for distribution
