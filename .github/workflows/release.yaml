@@ -148,7 +148,7 @@ jobs:
         run: |
           trunk build --release
       - name: optimize Wasm
-        uses: NiklasEi/wasm-opt@v2
+        uses: NiklasEi/wasm-opt-action@v2
         with:
           file: dist/*.wasm
       - name: Zip release
