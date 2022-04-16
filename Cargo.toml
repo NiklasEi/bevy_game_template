@@ -29,9 +29,9 @@ dev = [
 ]
 
 [dependencies]
-bevy = { git = "https://github.com/bevyengine/bevy", rev = "28ba87e6c8f48a6b41b6743b748a72d41728523c", default-features = false }
-bevy_kira_audio = { git = "https://github.com/NiklasEi/bevy_kira_audio", rev = "5194572c736217d052f06dd4b5b7b150a5d68521" }
-bevy_asset_loader = { git = "https://github.com/NiklasEi/bevy_asset_loader", rev = "fed2fa7a1fe0ed2573694166ee3ee30b773a5cf7" }
+bevy = { version = "0.7", default-features = false }
+bevy_kira_audio = { version = "0.9" }
+bevy_asset_loader = { version = "0.10" }
 rand = "0.8.3"
 
 [target.'cfg(target_os = "linux")'.dependencies]
