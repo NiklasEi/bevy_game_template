@@ -5,7 +5,7 @@ Template for a Game using the awesome [Bevy engine][bevy] featuring out of the b
 _Since Bevy is in heavy development, there regularly are unpublished new features or bug fixes. If you like living on the edge, you can use the branch `bevy_main` of this template to be close to the current state of Bevy's main branch_
  
 # What does this template give you?
-* small example game (*warning: biased; e.g., split into a lot of plugins and using `bevy_kira_audio` for sound*)
+* small example ["game"](https://niklasei.github.io/bevy_game_template/) (*warning: biased; e.g., split into a lot of plugins and using `bevy_kira_audio` for sound*)
 * easy setup for running the web build using [trunk] (`trunk serve`) 
 * run the native version with `cargo run`
 * workflow for GitHub actions creating releases for Windows, Linux, macOS, and Web (Wasm) ready for distribution
@@ -27,6 +27,12 @@ You should keep the `credits` directory up to date. The release workflow automat
 ### Updating the icons
  1. Replace `build/windows/icon.ico` (used for windows executable and as favicon for the web-builds)
  2. Replace `build/macos/icon_1024x1024.png` with a `1024` times `1024` pixel png icon and run `create_icns.sh` (make sure to run the script inside the `macos` directory) - _Warning: sadly this seems to require a mac..._
+
+### Deploy web build to GitHub pages
+ 1. Activate [GitHub pages](https://pages.github.com/) for your repository
+    1. Source from the `gh-pages` branch
+ 2. Trigger the `deploy-github-page` workflow
+ 3. After a few minutes your game is live at `http://username.github.io/repository`
 
 # Getting started with Bevy
 
