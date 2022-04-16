@@ -29,9 +29,9 @@ dev = [
 ]
 
 [dependencies]
-bevy = { version = "0.6", default-features = false }
-bevy_kira_audio = { version = "0.8" }
-bevy_asset_loader = { version = "0.9" }
+bevy = { version = "0.7", default-features = false }
+bevy_kira_audio = { version = "0.9" }
+bevy_asset_loader = { version = "0.10" }
 rand = "0.8.3"
 
 [target.'cfg(target_os = "linux")'.dependencies]
