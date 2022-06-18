@@ -164,6 +164,9 @@ jobs:
         uses: NiklasEi/wasm-opt-action@v2
         with:
           file: dist/*.wasm
+      - name: Make paths relative
+        run: |
+          sed -i 's/\/index/.\/index/g' dist/index.html
       - name: Zip release
         uses: vimtor/action-zip@v1
         with:
