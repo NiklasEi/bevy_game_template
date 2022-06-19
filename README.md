@@ -30,10 +30,12 @@ You should keep the `credits` directory up to date. The release workflow automat
  2. Replace `build/macos/icon_1024x1024.png` with a `1024` times `1024` pixel png icon and run `create_icns.sh` (make sure to run the script inside the `macos` directory) - _Warning: sadly this seems to require a mac..._
 
 ### Deploy web build to GitHub pages
- 1. Activate [GitHub pages](https://pages.github.com/) for your repository
-    1. Source from the `gh-pages` branch
- 2. Trigger the `deploy-github-page` workflow
+ 1. Trigger the `deploy-github-page` workflow
+ 2. Activate [GitHub pages](https://pages.github.com/) for your repository
+     1. Source from the `gh-pages` branch (created by the just executed action)
  3. After a few minutes your game is live at `http://username.github.io/repository`
+
+To deploy newer versions, just run the `deploy-github-page` workflow again.
 
 # Getting started with Bevy
 
