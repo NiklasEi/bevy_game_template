@@ -25,7 +25,11 @@ dev = [
 bevy = { version = "0.8", default-features = false, features = ["bevy_asset", "bevy_winit", "render", "png", "x11"] }
 bevy_kira_audio = { version = "0.11" }
 bevy_asset_loader = { version = "0.12" }
-rand = "0.8.3"
+rand = { version = "0.8.3" }
+
+# keep the following in sync with Bevy's dependencies
+winit = { version = "0.26.0", default-features = false }
+image = { version = "0.24", default-features = false }
 
 [build-dependencies]
 embed-resource = "1.4"
