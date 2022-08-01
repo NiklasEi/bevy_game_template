@@ -41,7 +41,7 @@ fn move_player(
         actions.player_movement.unwrap().y * speed * time.delta_seconds(),
         0.,
     );
-    for mut player_transform in player_query.iter_mut() {
+    for mut player_transform in &mut player_query {
         player_transform.translation += movement;
     }
 }

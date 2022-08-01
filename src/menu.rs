@@ -10,7 +10,8 @@ impl Plugin for MenuPlugin {
     fn build(&self, app: &mut App) {
         app.init_resource::<ButtonColors>()
             .add_system_set(SystemSet::on_enter(GameState::Menu).with_system(setup_menu))
-            .add_system_set(SystemSet::on_update(GameState::Menu).with_system(click_play_button));
+            .add_system_set(SystemSet::on_update(GameState::Menu).with_system(click_play_button))
+            .add_system_set(SystemSet::on_exit(GameState::Menu).with_system(cleanup_menu));
     }
 }
 
@@ -65,18 +66,16 @@ fn setup_menu(
 }
 
 fn click_play_button(
-    mut commands: Commands,
     button_colors: Res<ButtonColors>,
     mut state: ResMut<State<GameState>>,
     mut interaction_query: Query<
-        (Entity, &Interaction, &mut UiColor),
+        (&Interaction, &mut UiColor),
         (Changed<Interaction>, With<Button>),
     >,
 ) {
-    for (button, interaction, mut color) in interaction_query.iter_mut() {
+    for (interaction, mut color) in &mut interaction_query {
         match *interaction {
             Interaction::Clicked => {
-                commands.entity(button).despawn_recursive();
                 state.set(GameState::Playing).unwrap();
             }
             Interaction::Hovered => {
@@ -87,4 +86,8 @@ fn click_play_button(
             }
         }
     }
+}
+
+fn cleanup_menu(mut commands: Commands, button: Query<Entity, With<Button>>) {
+    commands.entity(button.single()).despawn_recursive();
 }
