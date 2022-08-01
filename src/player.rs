@@ -12,17 +12,9 @@ pub struct Player;
 /// Player logic is only active during the State `GameState::Playing`
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
-        app.add_system_set(
-            SystemSet::on_enter(GameState::Playing)
-                .with_system(spawn_player)
-                .with_system(spawn_camera),
-        )
-        .add_system_set(SystemSet::on_update(GameState::Playing).with_system(move_player));
+        app.add_system_set(SystemSet::on_enter(GameState::Playing).with_system(spawn_player))
+            .add_system_set(SystemSet::on_update(GameState::Playing).with_system(move_player));
     }
-}
-
-fn spawn_camera(mut commands: Commands) {
-    commands.spawn_bundle(OrthographicCameraBundle::new_2d());
 }
 
 fn spawn_player(mut commands: Commands, textures: Res<TextureAssets>) {
@@ -49,7 +41,7 @@ fn move_player(
         actions.player_movement.unwrap().y * speed * time.delta_seconds(),
         0.,
     );
-    for mut player_transform in player_query.iter_mut() {
+    for mut player_transform in &mut player_query {
         player_transform.translation += movement;
     }
 }
