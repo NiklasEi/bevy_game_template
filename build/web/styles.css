@@ -1,3 +1,7 @@
+body, html {
+    height: 100%;
+}
+
 body {
     background: linear-gradient(
             135deg,
@@ -11,6 +15,17 @@ body {
     background-size: 20px 20px;
     margin: 0;
 }
-canvas {
+
+.game-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#bevy {
     background-color: white;
+    width: 800px;
+    height: 600px;
 }
