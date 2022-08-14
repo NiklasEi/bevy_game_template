@@ -5,7 +5,11 @@
         
         
         <link rel="icon" href="icon.ico">
-        <style type="text/css">body {
+        <style type="text/css">body, html {
+    height: 100%;
+}
+
+body {
     background: linear-gradient(
             135deg,
             white 0%,
@@ -18,13 +22,24 @@
     background-size: 20px 20px;
     margin: 0;
 }
-canvas {
+
+.game-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#bevy {
     background-color: white;
+    width: 800px;
+    height: 600px;
 }
 </style>
     
-<link rel="preload" href="/bevy_game_template/bevy_game-57d2833d1932439_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/bevy_game_template/bevy_game-57d2833d1932439.js"></head>
+<link rel="preload" href="/bevy_game_template/bevy_game-3e510a4f2d3b840c_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/bevy_game_template/bevy_game-3e510a4f2d3b840c.js"></head>
     <body>
         <script>// Insert hack to make sound autoplay on Chrome as soon as the user interacts with the tab:
 // https://developers.google.com/web/updates/2018/11/web-audio-autoplay#moving-forward
@@ -89,6 +104,11 @@ canvas {
     });
 })();
 </script>
+        <div class="game-container">
+            <canvas id="bevy">
+                Javascript and support for canvas is required
+            </canvas>
+        </div>
     
 
-<script type="module">import init from '/bevy_game_template/bevy_game-57d2833d1932439.js';init('/bevy_game_template/bevy_game-57d2833d1932439_bg.wasm');</script></body></html>
+<script type="module">import init from '/bevy_game_template/bevy_game-3e510a4f2d3b840c.js';init('/bevy_game_template/bevy_game-3e510a4f2d3b840c_bg.wasm');</script></body></html>
