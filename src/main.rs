@@ -6,6 +6,7 @@ use bevy::window::WindowId;
 use bevy::winit::WinitWindows;
 use bevy::DefaultPlugins;
 use bevy_game::GamePlugin;
+use std::io::Cursor;
 use winit::window::Icon;
 
 fn main() {
@@ -28,7 +29,9 @@ fn main() {
 // Sets the icon on windows and X11
 fn set_window_icon(windows: NonSend<WinitWindows>) {
     let primary = windows.get_window(WindowId::primary()).unwrap();
-    if let Ok(image) = image::open("assets/textures/bevy.png").map(|image| image.into_rgba8()) {
+    let icon_buf = Cursor::new(include_bytes!("../assets/textures/bevy.png"));
+    if let Ok(image) = image::load(icon_buf, image::ImageFormat::Png) {
+        let image = image.into_rgba8();
         let (width, height) = image.dimensions();
         let rgba = image.into_raw();
         let icon = Icon::from_rgba(rgba, width, height).unwrap();

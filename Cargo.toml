@@ -23,7 +23,7 @@ dev = [
 
 [dependencies]
 bevy = { version = "0.8", default-features = false, features = ["bevy_asset", "bevy_winit", "render", "png", "x11"] }
-bevy_kira_audio = { version = "0.11" }
+bevy_kira_audio = { version = "0.12" }
 bevy_asset_loader = { version = "0.12" }
 rand = { version = "0.8.3" }
 

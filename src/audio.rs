@@ -2,7 +2,7 @@ use crate::actions::Actions;
 use crate::loading::AudioAssets;
 use crate::GameState;
 use bevy::prelude::*;
-use bevy_kira_audio::{Audio, AudioPlugin};
+use bevy_kira_audio::prelude::*;
 
 pub struct InternalAudioPlugin;
 
@@ -17,16 +17,36 @@ impl Plugin for InternalAudioPlugin {
     }
 }
 
-fn start_audio(audio_assets: Res<AudioAssets>, audio: Res<Audio>) {
-    audio.set_volume(0.3);
-    audio.play_looped(audio_assets.flying.clone());
+struct FlyingAudio(Handle<AudioInstance>);
+
+fn start_audio(mut commands: Commands, audio_assets: Res<AudioAssets>, audio: Res<Audio>) {
     audio.pause();
+    let handle = audio
+        .play(audio_assets.flying.clone())
+        .looped()
+        .with_volume(0.3)
+        .handle();
+    commands.insert_resource(FlyingAudio(handle));
 }
 
-fn control_flying_sound(actions: Res<Actions>, audio: Res<Audio>) {
-    if actions.player_movement.is_some() {
-        audio.resume();
-    } else {
-        audio.pause()
+fn control_flying_sound(
+    actions: Res<Actions>,
+    audio: Res<FlyingAudio>,
+    mut audio_instances: ResMut<Assets<AudioInstance>>,
+) {
+    if let Some(instance) = audio_instances.get_mut(&audio.0) {
+        match instance.state() {
+            PlaybackState::Paused { .. } => {
+                if actions.player_movement.is_some() {
+                    instance.resume(AudioTween::default());
+                }
+            }
+            PlaybackState::Playing { .. } => {
+                if actions.player_movement.is_none() {
+                    instance.pause(AudioTween::default());
+                }
+            }
+            _ => {}
+        }
     }
 }
