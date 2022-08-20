@@ -14,7 +14,7 @@ env:
 
 jobs:
   build-macOS:
-    runs-on: macOS-latest
+    runs-on: macos-latest
 
     steps:
       - name: Get tag
@@ -155,7 +155,7 @@ jobs:
       - name: Install trunk
         uses: jetli/trunk-action@v0.1.0
         with:
-          version: 'latest'
+          version: latest
       - name: Add wasm target
         run: |
           rustup target add wasm32-unknown-unknown
