@@ -167,7 +167,7 @@ jobs:
         with:
           file: dist/*.wasm
         # Trunk cannot import assets from relative paths (see e.g. https://github.com/thedodd/trunk/issues/395)
-        # On sites like itch.io, we don't know on wich base path the game gets served, so we need to rewrite all links to be relative
+        # On sites like itch.io, we don't know on which base path the game gets served, so we need to rewrite all links to be relative
       - name: Make paths relative
         run: |
           sed -i 's/\/index/.\/index/g' dist/index.html
