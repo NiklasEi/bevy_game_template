@@ -11,6 +11,7 @@ opt-level = 3
 
 [profile.dev]
 opt-level = 1
+debug-assertions = true  # false disables all #[cfg(debug_assertions)] annotations
 
 [profile.release]
 lto = true

@@ -1,4 +1,4 @@
-use crate::GameState;
+use crate::default::state::GameState;
 use bevy::prelude::*;
 
 pub struct ActionsPlugin;
