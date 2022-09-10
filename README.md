@@ -10,7 +10,7 @@ _Since Bevy is in heavy development, there regularly are unpublished new feature
 * run the native version with `cargo run`
 * workflow for GitHub actions creating releases for Windows, Linux, macOS, and Web (Wasm) ready for distribution
     * push a tag in the form of `v[0-9]+.[0-9]+.[0-9]+*` (e.g. `v1.1.42`) to trigger the flow
-    * WARNING: if you work in a private repository, please be aware that macOS and Windows runners cost more build minutes. You might want to consider running the workflow less often or removing some builds from it. **For public repositories the builds are free!**
+    * WARNING: if you work in a private repository, please be aware that macOS and Windows runners cost more build minutes. You might want to consider running the workflow less often or removing some builds from _it. **For public repositories the builds are free!**
 
 # How to use this template?
  1. Click "Use this template" on the repository's page
@@ -21,7 +21,7 @@ _Since Bevy is in heavy development, there regularly are unpublished new feature
     * Start the web build: `trunk serve`
        * requires [trunk]: `cargo install --locked trunk`
        * requires `wasm32-unknown-unknown` target: `rustup target add wasm32-unknown-unknown`
-       * this will serve your app on `8080` and automatically rebuild + reload it after code changes
+       * this will serve your app on `8080` and automatically rebuild + reload _it after code changes
 
 You should keep the `credits` directory up to date. The release workflow automatically includes the directory in every build.
 
