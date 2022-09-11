@@ -1,4 +1,6 @@
-mod default;
+mod default;  // provided by the starter template
+
+mod core;
 mod ui;
 mod maps;
 

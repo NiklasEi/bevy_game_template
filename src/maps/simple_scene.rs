@@ -8,13 +8,17 @@ use bevy::transform::components::Transform;
 use bevy::core_pipeline::core_3d::Camera3dBundle;
 use bevy::math::Vec3;
 use bevy::app::{Plugin, App};
+use crate::core::controller::PlayerControllerPlugin;
 
 pub struct SimpleScene;
 
 impl Plugin for SimpleScene {
     fn build(&self, app: &mut App) {
         app
-            .add_startup_system(create_simple_scene);
+            .add_startup_system(create_simple_scene)
+
+            // Spawn the player (i.e. camera) in the map
+            .add_plugin(PlayerControllerPlugin);
     }
 }
 
@@ -47,12 +51,6 @@ fn create_simple_scene(
             ..default()
         },
         transform: Transform::from_xyz(4.0, 8.0, 4.0),
-        ..default()
-    });
-
-    // camera
-    commands.spawn_bundle(Camera3dBundle {
-        transform: Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
         ..default()
     });
 }
