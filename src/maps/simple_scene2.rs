@@ -13,9 +13,9 @@ use bevy::utils::default;
 
 use crate::core::controller::{EnterLevel, LevelName, PlayerControllerPlugin, UnloadOnLevelChange};
 
-pub struct SimpleScene;
+pub struct SimpleScene2;
 
-impl Plugin for SimpleScene {
+impl Plugin for SimpleScene2 {
     fn build(&self, app: &mut App) {
         app
             .add_system(spawn_assets);
@@ -31,20 +31,20 @@ fn spawn_assets(
 ) {
     enter_level.iter().for_each(|it| {
         match it.0 {
-            LevelName::SimpleScene1 => {
-                warn!("*** Entering Simplescene1...");
+            LevelName::SimpleScene2 => {
+                warn!("*** Loading Simplescene2...");
 
                 // plane
                 commands.spawn_bundle(PbrBundle {
                     mesh: meshes.add(Mesh::from(shape::Plane { size: 5.0 })),
-                    material: materials.add(Color::rgb(0.3, 0.5, 0.3).into()),
+                    material: materials.add(Color::AQUAMARINE.into()),
                     ..default()
                 }).insert(UnloadOnLevelChange);
 
                 // cube
                 commands.spawn_bundle(PbrBundle {
-                    mesh: meshes.add(Mesh::from(shape::Cube { size: 0.6 })),
-                    material: materials.add(Color::rgb(0.8, 0.7, 0.6).into()),
+                    mesh: meshes.add(Mesh::from(shape::Cube { size: 1.3 })),
+                    material: materials.add(Color::MIDNIGHT_BLUE.into()),
                     transform: Transform::from_xyz(0.0, 0.5, 0.0),
                     ..default()
                 }).insert(UnloadOnLevelChange);
