@@ -1,19 +1,31 @@
 mod default;
-mod editor;
+mod ui;
+mod maps;
 
-use bevy::app::App;
+use bevy::app::{App, Plugin};
 #[cfg(debug_assertions)]
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
-use bevy::prelude::*;
+
 use crate::default::state::GameState;
-use crate::editor::plugin::EditorPlugin;
+use crate::ui::gameplay::plugin::UIGameplayPlugin;
+use crate::maps::simple_scene::SimpleScene;
 
 pub struct GamePlugin;
 
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
-        app.add_state(GameState::Loading)
-            .add_plugin(EditorPlugin);
+        app
+            // Register the "default" GameState
+            .add_state(GameState::Loading)
+
+            // Load the default level: a simple scene
+            .add_plugin(SimpleScene)
+
+            // Init and render the Gameplay UI
+            .add_plugin(UIGameplayPlugin)
+
+            // Exit the application when the Escape button is pressed
+            .add_system(bevy::window::close_on_esc);
 
         #[cfg(debug_assertions)]
         {

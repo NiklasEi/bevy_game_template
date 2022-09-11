@@ -7,9 +7,19 @@ use bevy::utils::default;
 use bevy::transform::components::Transform;
 use bevy::core_pipeline::core_3d::Camera3dBundle;
 use bevy::math::Vec3;
+use bevy::app::{Plugin, App};
 
-/// set up a simple 3D scene
-pub fn create_simple_scene(
+pub struct SimpleScene;
+
+impl Plugin for SimpleScene {
+    fn build(&self, app: &mut App) {
+        app
+            .add_startup_system(create_simple_scene);
+    }
+}
+
+/// Set up a simple 3D scene
+fn create_simple_scene(
     mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<StandardMaterial>>,

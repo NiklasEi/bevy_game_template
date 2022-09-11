@@ -7,7 +7,12 @@ use bevy_game::GamePlugin;
 
 fn main() {
     App::new()
+        // Initialize the standard Bevy engine's default features
         .add_plugins(DefaultPlugins)
+
+        // Initialize our app's logic
         .add_plugin(GamePlugin)
+
+        // Run the application
         .run();
 }
