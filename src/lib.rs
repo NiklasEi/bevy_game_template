@@ -3,10 +3,12 @@ use bevy::app::{App, Plugin};
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
 
 use crate::core::controller::PlayerControllerPlugin;
-use crate::default::state::GameState;
-use crate::maps::simple_scene2::SimpleScene2;
-use crate::maps::simple_scene::SimpleScene;
+use crate::maps::main_menu::MainMenuScenePlugin;
+use crate::maps::simple_scene2::SimpleScene2Plugin;
+use crate::maps::simple_scene::SimpleScenePlugin;
 use crate::ui::gameplay::plugin::UIGameplayPlugin;
+use crate::ui::main_menu::main_menu::UIMainMenuPlugin;
+use crate::ui::todomvc::todo::TodoUIPlugin;
 
 mod default;  // provided by the starter template
 
@@ -19,18 +21,18 @@ pub struct GamePlugin;
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
         app
-            // Register the "default" GameState
-            .add_state(GameState::Loading)
-
             // Init the level asset loaders
-            .add_plugin(SimpleScene)
-            .add_plugin(SimpleScene2)
+            .add_plugin(SimpleScenePlugin)
+            .add_plugin(SimpleScene2Plugin)
+            .add_plugin(MainMenuScenePlugin)
+            .add_plugin(TodoUIPlugin)
 
             // Spawn the player (i.e. camera) in the map
             .add_plugin(PlayerControllerPlugin)
 
             // Init and render the Gameplay UI
-            .add_plugin(UIGameplayPlugin)
+            // .add_plugin(UIGameplayPlugin)
+            // .add_plugin(UIMainMenuPlugin)
 
             // Exit the application when the Escape button is pressed
             .add_system(bevy::window::close_on_esc);

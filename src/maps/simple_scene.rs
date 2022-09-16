@@ -2,6 +2,7 @@ use bevy::app::{App, Plugin};
 use bevy::asset::Assets;
 use bevy::core_pipeline::core_3d::Camera3dBundle;
 use bevy::ecs::event::EventReader;
+use bevy::ecs::schedule::State;
 use bevy::ecs::system::{Commands, ResMut};
 use bevy::log::warn;
 use bevy::math::Vec3;
@@ -11,11 +12,11 @@ use bevy::render::mesh::{Mesh, shape};
 use bevy::transform::components::Transform;
 use bevy::utils::default;
 
-use crate::core::controller::{EnterLevel, LevelName, PlayerControllerPlugin, UnloadOnLevelChange};
+use crate::core::level_manager::{EnterLevel, LevelName, UnloadOnLevelChange};
 
-pub struct SimpleScene;
+pub struct SimpleScenePlugin;
 
-impl Plugin for SimpleScene {
+impl Plugin for SimpleScenePlugin {
     fn build(&self, app: &mut App) {
         app
             .add_system(spawn_assets);
@@ -27,12 +28,12 @@ fn spawn_assets(
     mut enter_level: EventReader<EnterLevel>,
     mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<StandardMaterial>>,
+    mut materials: ResMut<Assets<StandardMaterial>>
 ) {
     enter_level.iter().for_each(|it| {
         match it.0 {
             LevelName::SimpleScene1 => {
-                warn!("*** Entering Simplescene1...");
+                warn!("Entering Simplescene1...");
 
                 // plane
                 commands.spawn_bundle(PbrBundle {
