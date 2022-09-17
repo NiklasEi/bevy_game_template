@@ -26,10 +26,11 @@ use crate::ui::counter::ui::init_ui;
 pub struct CounterUIPlugin;
 
 impl Plugin for CounterUIPlugin {
+
     fn build(&self, app: &mut App) {
         app
             // (Store) the State of this UI widget
-            .insert_resource(CounterStore(0))
+            .insert_resource(CounterStore::new(0))
 
             // (Actions) Declare Actions
             .add_event::<CounterActionIncrement>()
@@ -49,4 +50,5 @@ impl Plugin for CounterUIPlugin {
             // Initialize UI
             .add_startup_system(init_ui);
     }
+
 }
