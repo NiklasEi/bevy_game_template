@@ -6,9 +6,9 @@ use crate::core::controller::PlayerControllerPlugin;
 use crate::maps::main_menu::MainMenuScenePlugin;
 use crate::maps::simple_scene2::SimpleScene2Plugin;
 use crate::maps::simple_scene::SimpleScenePlugin;
+use crate::ui::counter::plugin::CounterUIPlugin;
 use crate::ui::gameplay::plugin::UIGameplayPlugin;
 use crate::ui::main_menu::main_menu::UIMainMenuPlugin;
-use crate::ui::todomvc::todo::TodoUIPlugin;
 
 mod default;  // provided by the starter template
 
@@ -25,7 +25,7 @@ impl Plugin for GamePlugin {
             .add_plugin(SimpleScenePlugin)
             .add_plugin(SimpleScene2Plugin)
             .add_plugin(MainMenuScenePlugin)
-            .add_plugin(TodoUIPlugin)
+            .add_plugin(CounterUIPlugin)
 
             // Spawn the player (i.e. camera) in the map
             .add_plugin(PlayerControllerPlugin)
