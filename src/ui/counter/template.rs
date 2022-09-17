@@ -15,5 +15,6 @@ pub fn render_todo_text(
     state: Res<CounterStore>,
     mut render_text: Query<&mut Text, With<CounterStateRenderText>>,
 ) {
-    render_text.get_single_mut().and_then(|mut text| { text.sections[0].value = format!("Value: {}", state.0); Ok(())});
+    render_text.get_single_mut()
+        .and_then(|mut it| Ok(it.sections[0].value = format!("Value: {}", state.0)));
 }

@@ -1,8 +1,8 @@
 use bevy::render::color::Color;
+use bevy::ui::{Size, Style, UiRect, Val};
 use bevy::ui::entity::ButtonBundle;
-use bevy::ui::{Style, Size, Val, UiRect};
 
-use crate::ui::style::{NORMAL_BUTTON, get_standard_padding };
+use crate::ui::style::{get_standard_padding, NORMAL_BUTTON};
 
 /// Provide a standard button Bundle
 pub fn get_standard_button() -> ButtonBundle {

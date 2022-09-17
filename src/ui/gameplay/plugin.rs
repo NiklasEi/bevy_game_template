@@ -1,7 +1,7 @@
 use bevy::app::{App, Plugin};
 
+use crate::ui::gameplay::interaction::handle_ui_interaction;
 use crate::ui::gameplay::widgets::init_gameplay_ui;
-use crate::ui::interaction::handle_ui_interaction;
 
 pub struct UIGameplayPlugin;
 

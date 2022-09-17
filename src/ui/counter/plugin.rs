@@ -43,7 +43,7 @@ impl Plugin for CounterUIPlugin {
             .add_system(reduce_increment)
             .add_system(reduce_decrement)
 
-            // (Template) Update the front-end render
+            // (Template) Render front-end variables
             .add_system(render_todo_text)
 
             // Initialize UI

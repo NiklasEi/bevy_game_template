@@ -10,6 +10,7 @@ use bevy::ui::entity::{ButtonBundle, NodeBundle, TextBundle};
 use crate::ui::counter::actions::{CounterActionDecrement, CounterActionIncrement};
 use crate::ui::counter::template::CounterStateRenderText;
 
+/// Insert the UI widget.
 pub fn init_ui(
     mut commands: Commands,
     mut asset_server: ResMut<AssetServer>
@@ -20,7 +21,8 @@ pub fn init_ui(
 struct CounterUI;
 
 impl CounterUI {
-    /// Initialize the CounterUI
+
+    /// Initialize the CounterUI.
     pub fn init(&self, mut commands: Commands, mut server: ResMut<AssetServer>) {
         commands
             .spawn_bundle(NodeBundle {
@@ -82,4 +84,5 @@ impl CounterUI {
                     .insert(CounterActionDecrement);
             });
     }
+
 }
