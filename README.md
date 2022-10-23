@@ -42,9 +42,11 @@ You should keep the `credits` directory up to date. The release workflow automat
 
 To deploy newer versions, just run the `deploy-github-page` workflow again.
 
+Note that this does a `cargo build` and thus does not work with local dependencies. Consider pushing your "custom Bevy fork" to GitHub and using it as a git dependency.
+
 # Getting started with Bevy
 
-You should check out the Bevy website for [links to resources][bevy-learn] and the [Bevy Cheat Book] for a bunch of helpful documentation and examples. I can also recommend the [official Bevy Discord server][bevy-discord] to keep up to date with the development and get feedback + help from other Bevy users.
+You should check out the Bevy website for [links to resources][bevy-learn] and the [Bevy Cheat Book] for a bunch of helpful documentation and examples. I can also recommend the [official Bevy Discord server][bevy-discord] for keeping up to date with the development and getting help from other Bevy users.
 
 # Known issues
 
