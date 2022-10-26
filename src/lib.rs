@@ -1,6 +1,5 @@
 mod actions;
 mod audio;
-mod game_control;
 mod loading;
 mod menu;
 mod player;

@@ -1,6 +1,9 @@
-use crate::game_control::{get_movement, GameControl};
-use crate::GameState;
 use bevy::prelude::*;
+
+use crate::actions::game_control::{get_movement, GameControl};
+use crate::GameState;
+
+mod game_control;
 
 pub struct ActionsPlugin;
 
