@@ -26,7 +26,7 @@ impl GameControl {
     }
 }
 
-pub fn is_pressed(control: GameControl, input: &Res<Input<KeyCode>>) -> f32 {
+pub fn get_movement(control: GameControl, input: &Res<Input<KeyCode>>) -> f32 {
     if control.pressed(input) {
         1.0
     } else {
