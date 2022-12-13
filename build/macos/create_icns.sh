@@ -12,7 +12,6 @@ sips -z 256 256   icon_1024x1024.png --out AppIcon.iconset/icon_256x256.png
 sips -z 512 512   icon_1024x1024.png --out AppIcon.iconset/icon_256x256@2x.png
 sips -z 512 512   icon_1024x1024.png --out AppIcon.iconset/icon_512x512.png
 cp icon_1024x1024.png AppIcon.iconset/icon_512x512@2x.png
-cp AppIcon.iconset/icon_256x256.png ../../assets/textures/app_icon.png
 iconutil -c icns AppIcon.iconset
 mkdir -p src/Game.app/Contents/Resources
 mv AppIcon.icns src/Game.app/Contents/Resources/

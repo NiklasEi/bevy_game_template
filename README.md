@@ -26,7 +26,7 @@ _Since Bevy is in heavy development, there regularly are unpublished new feature
 You should keep the `credits` directory up to date. The release workflow automatically includes the directory in every build.
 
 ### Updating the icons
- 1. Replace `build/macos/icon_1024x1024.png` with a `1024` times `1024` pixel png icon and run `create_icns.sh` (make sure to run the script inside the `build/macos` directory) - _Warning: sadly this seems to require a mac..._
+ 1. Replace `build/macos/icon_1024x1024.png` with a `1024` times `1024` pixel png icon and run `create_icns.sh` (make sure to run the script inside the `build/macos` directory) - _Note: this requires a mac_
  2. Replace `build/windows/icon.ico` (used for windows executable and as favicon for the web-builds)
     * You can create an `.ico` file for windows by following these steps:
        1. Open `macos/AppIcon.iconset/icon_256x256.png` in [Gimp](https://www.gimp.org/downloads/)
