@@ -15,16 +15,17 @@ impl Plugin for MenuPlugin {
     }
 }
 
+#[derive(Resource)]
 struct ButtonColors {
-    normal: UiColor,
-    hovered: UiColor,
+    normal: Color,
+    hovered: Color,
 }
 
 impl Default for ButtonColors {
     fn default() -> Self {
         ButtonColors {
-            normal: Color::rgb(0.15, 0.15, 0.15).into(),
-            hovered: Color::rgb(0.25, 0.25, 0.25).into(),
+            normal: Color::rgb(0.15, 0.15, 0.15),
+            hovered: Color::rgb(0.25, 0.25, 0.25),
         }
     }
 }
@@ -34,9 +35,9 @@ fn setup_menu(
     font_assets: Res<FontAssets>,
     button_colors: Res<ButtonColors>,
 ) {
-    commands.spawn_bundle(Camera2dBundle::default());
+    commands.spawn(Camera2dBundle::default());
     commands
-        .spawn_bundle(ButtonBundle {
+        .spawn(ButtonBundle {
             style: Style {
                 size: Size::new(Val::Px(120.0), Val::Px(50.0)),
                 margin: UiRect::all(Val::Auto),
@@ -44,11 +45,11 @@ fn setup_menu(
                 align_items: AlignItems::Center,
                 ..Default::default()
             },
-            color: button_colors.normal,
+            background_color: button_colors.normal.into(),
             ..Default::default()
         })
         .with_children(|parent| {
-            parent.spawn_bundle(TextBundle {
+            parent.spawn(TextBundle {
                 text: Text {
                     sections: vec![TextSection {
                         value: "Play".to_string(),
@@ -69,7 +70,7 @@ fn click_play_button(
     button_colors: Res<ButtonColors>,
     mut state: ResMut<State<GameState>>,
     mut interaction_query: Query<
-        (&Interaction, &mut UiColor),
+        (&Interaction, &mut BackgroundColor),
         (Changed<Interaction>, With<Button>),
     >,
 ) {
@@ -79,10 +80,10 @@ fn click_play_button(
                 state.set(GameState::Playing).unwrap();
             }
             Interaction::Hovered => {
-                *color = button_colors.hovered;
+                *color = button_colors.hovered.into();
             }
             Interaction::None => {
-                *color = button_colors.normal;
+                *color = button_colors.normal.into();
             }
         }
     }
