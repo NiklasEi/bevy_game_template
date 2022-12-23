@@ -5,13 +5,13 @@ on:
     tags:
       - "v[0-9]+.[0-9]+.[0-9]+*"
 
-# ToDo: adapt names
 env:
-  # heads-up: this value is used as a pattern in an sed command as a workaround for a trunk issue
+  # heads-up: this value is used as a pattern in a sed command as a workaround for a trunk issue
   #   if you use special characters, take a look at the 'Make paths relative' step in the 'build-web' job
-  GAME_EXECUTABLE_NAME: bevy_game
-  GAME_OSX_APP_NAME: BevyGame
+  GAME_EXECUTABLE_NAME: {{project-name}}
+  GAME_OSX_APP_NAME: {{macos_pkg}}
 
+{% raw %}
 jobs:
   build-macOS:
     runs-on: macos-latest
@@ -185,3 +185,4 @@ jobs:
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ steps.tag.outputs.tag }}_web.zip
           tag: ${{ github.ref }}
           overwrite: true
+{% endraw %}

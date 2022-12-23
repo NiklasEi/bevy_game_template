@@ -1,0 +1,6 @@
+[hooks]
+pre = ["pre-script.rhai"]
+
+[placeholders]
+domain = { type = "string", prompt = "What is your domain (for MacOS builds)", default = "your.domain", regex = ".+(\\..+)*" }
+

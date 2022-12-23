@@ -1,8 +1,8 @@
 [package]
-name = "bevy_game" # ToDo
+name = "{{project-name}}"
 version = "0.1.0"
 publish = false
-authors = ["Niklas Eicker <git@nikl.me>"] # ToDo: you are the author ;)
+authors = ["{{authors}}"]
 edition = "2021"
 exclude = ["dist", "build", "assets", "credits"]
 
@@ -33,3 +33,4 @@ image = { version = "0.24", default-features = false }
 
 [build-dependencies]
 embed-resource = "1.4"
+

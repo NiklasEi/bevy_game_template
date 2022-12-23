@@ -13,10 +13,14 @@ _Since Bevy is in heavy development, there regularly are unpublished new feature
     * WARNING: if you work in a private repository, please be aware that macOS and Windows runners cost more build minutes. You might want to consider running the workflow less often or removing some builds from it. **For public repositories the builds are free!**
 
 # How to use this template?
- 1. Click "Use this template" on the repository's page
- 2. Look for `ToDo` to use your own game name everywhere
- 3. [Update the icons as described below](#updating-the-icons)
- 4. Start coding :tada:
+ 1. Generate your game using [cargo generate](https://crates.io/crates/cargo-generate/0.10.3)
+
+    [//]: # (TODO: Correct repository path)
+    ```commandline
+    cargo generate --git https://github.com/Stedders/bevy_game_template --branch feature/convert-to-cargo-generate
+    ```
+ 2. [Update the icons as described below](#updating-the-icons)
+ 3. Start coding :tada:
     * Start the native app: `cargo run`
     * Start the web build: `trunk serve`
        * requires [trunk]: `cargo install --locked trunk`
