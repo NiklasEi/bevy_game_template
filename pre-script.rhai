@@ -13,5 +13,10 @@ for (component, count) in project_components {
 }
 let macos_pkg = game_name;
 macos_pkg.replace(" ", "");
+
+let project_package = project_name;
+project_package.replace("-", "_");
+
 variable::set("game_name", game_name);
 variable::set("macos_pkg", macos_pkg);
+variable::set("project_package", project_package);

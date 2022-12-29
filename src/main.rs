@@ -5,7 +5,7 @@ use bevy::prelude::*;
 use bevy::window::WindowId;
 use bevy::winit::WinitWindows;
 use bevy::DefaultPlugins;
-use bevy_game::GamePlugin;
+use {{project_package}}::GamePlugin;
 use std::io::Cursor;
 use winit::window::Icon;
 
