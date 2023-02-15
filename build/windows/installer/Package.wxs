@@ -1,0 +1,51 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+    <!-- ToDo use your own keys for Name and Manufacturer, as well as a new UUID for UpgradeCode -->
+    <Package
+        Name="BevyGame"
+        Manufacturer="My Name"
+        UpgradeCode="132bb59d-de4f-4893-a535-93dfd0597731"
+        Version="0.1.0"
+
+        Scope="perUserOrMachine">
+        <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+
+        <Media Id="1" Cabinet="myapplication.cab" EmbedCab="yes" />
+
+        <Property Id="ApplicationFolderName" Value="!(bind.Property.ProductName)" />
+
+        <!-- Installer Icon -->
+        <Icon Id="icon.ico" SourceFile="..\icon.ico"/>
+        <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+
+        <!-- Sets the default installation folder -->
+        <StandardDirectory Id="ProgramFiles6432Folder">
+            <Directory Id="INSTALLFOLDER" Name="!(bind.Property.ProductName)" />
+        </StandardDirectory>
+
+         <!-- Shows a UI that allows customizing the install location -->
+        <ui:WixUI Id="WixUI_CustomInstallDir" InstallDirectory="INSTALLFOLDER" />
+
+        <Feature Id="Main">
+            <ComponentGroupRef Id="MainComponent" />
+            <ComponentRef Id="StartMenuShortcut" />
+            <ComponentGroupRef Id="AssetsDirectory" />
+            <ComponentGroupRef Id="CreditsDirectory" />
+        </Feature>
+
+        <!-- Installs the actual files -->
+        <ComponentGroup Id="MainComponent" Directory="INSTALLFOLDER">
+            <Component>
+                <File Id="Executable" Source="..\..\..\target\release\bevy_game.exe" Vital="true" />  <!-- ToDo this should point to your executable -->
+            </Component>
+        </ComponentGroup>
+
+        <!-- Start menu shortcut -->
+        <!-- Source: https://wixtoolset.org/docs/v3/howtos/files_and_registry/create_start_menu_shortcut/ -->
+        <StandardDirectory Id="ProgramMenuFolder">
+            <Component Id="StartMenuShortcut" Guid="*">
+                <Shortcut Id="ApplicationStartMenuShortcut" Name="!(bind.Property.ProductName)" Target="[!Executable]" WorkingDirectory="INSTALLFOLDER" />
+                <RegistryValue Root="HKCU" Key="Software\!(bind.Property.ProductName)" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+          </Component>
+      </StandardDirectory>
+  </Package>
+</Wix>
