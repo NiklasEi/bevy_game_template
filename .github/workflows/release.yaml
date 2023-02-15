@@ -18,7 +18,9 @@ permissions:
 jobs:
   build-macOS:
     runs-on: macos-latest
-
+    
+    env: 
+      MACOSX_DEPLOYMENT_TARGET: 11.0
     steps:
       - name: Get tag
         id: tag
@@ -36,7 +38,7 @@ jobs:
           override: true
       - name: Build release for Apple Silicon
         run: |
-          SDKROOT=$(xcrun -sdk macosx --show-sdk-path) MACOSX_DEPLOYMENT_TARGET=$(xcrun -sdk macosx --show-sdk-platform-version) cargo build --release --target=aarch64-apple-darwin
+          SDKROOT=$(xcrun -sdk macosx --show-sdk-path) cargo build --release --target=aarch64-apple-darwin
       - name: Install rust toolchain for Apple x86
         uses: actions-rs/toolchain@v1
         with:
@@ -45,7 +47,7 @@ jobs:
           override: true
       - name: Build release for x86 Apple
         run: |
-          SDKROOT=$(xcrun -sdk macosx --show-sdk-path) MACOSX_DEPLOYMENT_TARGET=$(xcrun -sdk macosx --show-sdk-platform-version) cargo build --release --target=x86_64-apple-darwin
+          SDKROOT=$(xcrun -sdk macosx --show-sdk-path) cargo build --release --target=x86_64-apple-darwin
       - name: Create Universal Binary
         run: |
           lipo -create -output target/release/${{ env.GAME_EXECUTABLE_NAME }} target/aarch64-apple-darwin/release/${{ env.GAME_EXECUTABLE_NAME }} target/x86_64-apple-darwin/release/${{ env.GAME_EXECUTABLE_NAME }}
