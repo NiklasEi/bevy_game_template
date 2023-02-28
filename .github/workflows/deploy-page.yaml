@@ -3,6 +3,9 @@ name: deploy-github-page
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-web:
     runs-on: ubuntu-latest
