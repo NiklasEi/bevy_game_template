@@ -10,16 +10,13 @@
 }
 
 body {
-    background: linear-gradient(
-            135deg,
-            white 0%,
-            white 49%,
-            black 49%,
-            black 51%,
-            white 51%,
-            white 100%
-    ) repeat;
-    background-size: 20px 20px;
+    background: repeating-linear-gradient(
+        135deg,
+        black 0,
+        black 2px,
+        white 2px,
+        white 20px
+    );
     margin: 0;
 }
 
@@ -38,8 +35,8 @@ body {
 }
 </style>
     
-<link rel="preload" href="/bevy_game_template/bevy_game-e90de3f07148398c_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/bevy_game_template/bevy_game-e90de3f07148398c.js"></head>
+<link rel="preload" href="/bevy_game_template/bevy_game-6edbcecd7365830a_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/bevy_game_template/bevy_game-6edbcecd7365830a.js"></head>
     <body>
         <script>// Insert hack to make sound autoplay on Chrome as soon as the user interacts with the tab:
 // https://developers.google.com/web/updates/2018/11/web-audio-autoplay#moving-forward
@@ -111,4 +108,4 @@ body {
         </div>
     
 
-<script type="module">import init from '/bevy_game_template/bevy_game-e90de3f07148398c.js';init('/bevy_game_template/bevy_game-e90de3f07148398c_bg.wasm');</script></body></html>
+<script type="module">import init from '/bevy_game_template/bevy_game-6edbcecd7365830a.js';init('/bevy_game_template/bevy_game-6edbcecd7365830a_bg.wasm');</script></body></html>
