@@ -16,19 +16,47 @@ opt-level = 1
 lto = true
 codegen-units = 1
 
+# The profile that 'cargo dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
+
 [features]
 dev = [
-    "bevy/dynamic",
+    "bevy/bevy_dylib",
+]
+
+# Bevy defaults minus audio and some other not needed things
+# see https://github.com/bevyengine/bevy/blob/main/Cargo.toml#L31-L54
+default = [
+    "bevy/animation",
+    "bevy/bevy_asset",
+    "bevy/bevy_scene",
+    "bevy/bevy_winit",
+    "bevy/bevy_core_pipeline",
+    "bevy/bevy_pbr",
+    "bevy/bevy_gltf",
+    "bevy/bevy_render",
+    "bevy/bevy_sprite",
+    "bevy/bevy_text",
+    "bevy/bevy_ui",
+    "bevy/png",
+    "bevy/hdr",
+    "bevy/zstd",
+    "bevy/x11",
+    "bevy/ktx2",
+    "bevy/filesystem_watcher",
+    "bevy/tonemapping_luts"
 ]
 
 [dependencies]
-bevy = { version = "0.9", default-features = false, features = ["bevy_asset", "bevy_winit", "render", "png", "x11"] }
-bevy_kira_audio = { version = "0.13" }
-bevy_asset_loader = { version = "0.14" }
+bevy = { version = "0.10", default-features = false }
+bevy_kira_audio = { version = "0.15" }
+bevy_asset_loader = { version = "0.15" }
 rand = { version = "0.8.3" }
 
 # keep the following in sync with Bevy's dependencies
-winit = { version = "0.27", default-features = false }
+winit = { version = "0.28", default-features = false }
 image = { version = "0.24", default-features = false }
 
 [build-dependencies]
