@@ -50,9 +50,9 @@ default = [
 ]
 
 [dependencies]
-bevy = { git = "https://github.com/bevyengine/bevy", default-features = false }
-bevy_kira_audio = { git = "https://github.com/NiklasEi/bevy_kira_audio", branch = "bevy_main" }
-bevy_asset_loader = { git = "https://github.com/NiklasEi/bevy_asset_loader", branch = "bevy_main" }
+bevy = { version = "0.10", default-features = false }
+bevy_kira_audio = { version = "0.15" }
+bevy_asset_loader = { version = "0.15" }
 rand = { version = "0.8.3" }
 
 # keep the following in sync with Bevy's dependencies
