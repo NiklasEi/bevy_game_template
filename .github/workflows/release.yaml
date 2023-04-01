@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Get tag
         id: tag
-        uses: dawidd6/action-get-tag@v1
+        run: echo "tag=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
     outputs:
       version: ${{ inputs.version || steps.tag.outputs.tag }}
 
