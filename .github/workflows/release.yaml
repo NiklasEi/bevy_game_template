@@ -29,12 +29,12 @@ jobs:
         id: tag
         uses: dawidd6/action-get-tag@v1
     outputs:
-      version: ${{ inputs.version || env.VERSION }}
+      version: ${{ inputs.version || steps.tag.outputs.tag }}
 
   build-macOS:
     runs-on: macos-latest
     needs: get-version
-    env: 
+    env:
       # macOS 11.0 Big Sur is the first version to support universal binaries
       MACOSX_DEPLOYMENT_TARGET: 11.0
       VERSION: ${{needs.get-version.outputs.version}}
@@ -121,7 +121,7 @@ jobs:
 
   build-windows:
     runs-on: windows-latest
-    needs: get-
+    needs: get-version
     env:
       VERSION: ${{needs.get-version.outputs.version}}
     steps:
