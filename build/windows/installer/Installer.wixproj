@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="WixToolset.Sdk/4.0.0-rc.2">
+    <PropertyGroup>
+        <DebugType>none</DebugType>
+        <OutputName>installer</OutputName>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="WixToolset.UI.wixext" Version="4.0.0-rc.2" />
+        <PackageReference Include="WixToolset.Heat" Version="4.0.0-rc.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <HarvestDirectory Include="..\..\..\assets">
+              <ComponentGroupName>AssetsDirectory</ComponentGroupName>
+              <DirectoryRefId>INSTALLFOLDER</DirectoryRefId>
+              <SuppressRootDirectory>false</SuppressRootDirectory>
+        </HarvestDirectory>
+        <BindPath Include="..\..\..\assets" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <HarvestDirectory Include="..\..\..\credits">
+              <ComponentGroupName>CreditsDirectory</ComponentGroupName>
+              <DirectoryRefId>INSTALLFOLDER</DirectoryRefId>
+              <SuppressRootDirectory>false</SuppressRootDirectory>
+        </HarvestDirectory>
+        <BindPath Include="..\..\..\credits" />
+    </ItemGroup>
+</Project>
