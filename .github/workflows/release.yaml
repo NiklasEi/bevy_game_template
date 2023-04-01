@@ -121,6 +121,10 @@ jobs:
         with:
           toolchain: stable
           override: true
+      - name: Install dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          global-json-file: build/windows/installer/global.json
       - name: Build release
         run: |
           cargo build --release
@@ -133,6 +137,8 @@ jobs:
         with:
           files: target/release/assets/ target/release/credits/ target/release/${{ env.GAME_EXECUTABLE_NAME }}.exe
           dest: ${{ env.GAME_EXECUTABLE_NAME }}_windows.zip
+      - name: Create Installer
+        run: dotnet build -c Release build/windows/installer/Installer.wixproj --output installer
       - name: Upload release
         uses: svenstaro/upload-release-action@v2
         with:
@@ -141,6 +147,14 @@ jobs:
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ steps.tag.outputs.tag }}_windows.zip
           tag: ${{ github.ref }}
           overwrite: true
+      - name: Upload installer
+        uses: svenstaro/upload-release-action@v2
+        with:
+         repo_token: ${{ secrets.GITHUB_TOKEN }}
+         file: installer/en-US/installer.msi
+         asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ steps.tag.outputs.tag }}_windows.msi
+         tag: ${{ github.ref }}
+         overwrite: true
 
   build-web:
     runs-on: ubuntu-latest
@@ -168,7 +182,7 @@ jobs:
       - name: Build Release
         run: |
           trunk build --release
-      - name: optimize Wasm
+      - name: Optimize Wasm
         uses: NiklasEi/wasm-opt-action@v2
         with:
           file: dist/*.wasm
