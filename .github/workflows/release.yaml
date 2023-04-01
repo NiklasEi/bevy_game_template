@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version'
+        description: 'Version - in the form of v1.2.3'
         required: true
         type: string
 
@@ -81,7 +81,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ env.GAME_EXECUTABLE_NAME }}.dmg
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_macOS.dmg
-          tag: ${{ github.ref }}
+          release_name: ${{ env.VERSION }}
           overwrite: true
 
   build-linux:
@@ -116,7 +116,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ env.GAME_EXECUTABLE_NAME }}_linux.tar.gz
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_linux.tar.gz
-          tag: ${{ github.ref }}
+          release_name: ${{ env.VERSION }}
           overwrite: true
 
   build-windows:
@@ -164,7 +164,7 @@ jobs:
          repo_token: ${{ secrets.GITHUB_TOKEN }}
          file: installer/en-US/installer.msi
          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ steps.tag.outputs.tag }}_windows.msi
-         tag: ${{ github.ref }}
+         release_name: ${{ env.VERSION }}
          overwrite: true
 
   build-web:
@@ -213,5 +213,5 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ env.GAME_EXECUTABLE_NAME }}_web.zip
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_web.zip
-          tag: ${{ github.ref }}
+          release_name: ${{ env.VERSION }}
           overwrite: true
