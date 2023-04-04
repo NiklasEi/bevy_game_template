@@ -49,6 +49,9 @@ default = [
     "bevy/tonemapping_luts"
 ]
 
+[target.'cfg(target_os = "android")'.dependencies]
+oboe = { version = "0.5", features = ["shared-stdcxx"] }
+
 [dependencies]
 bevy = { version = "0.10", default-features = false }
 bevy_kira_audio = { version = "0.15" }
