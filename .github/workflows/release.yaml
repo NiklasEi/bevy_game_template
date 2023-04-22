@@ -45,20 +45,18 @@ jobs:
         run: |
           rm build.rs
       - name: Install rust toolchain for Apple Silicon
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
-          target: aarch64-apple-darwin
-          override: true
+          targets: aarch64-apple-darwin
       - name: Build release for Apple Silicon
         run: |
           SDKROOT=$(xcrun -sdk macosx --show-sdk-path) cargo build --release --target=aarch64-apple-darwin
       - name: Install rust toolchain for Apple x86
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
-          target: x86_64-apple-darwin
-          override: true
+          targets: x86_64-apple-darwin
       - name: Build release for x86 Apple
         run: |
           SDKROOT=$(xcrun -sdk macosx --show-sdk-path) cargo build --release --target=x86_64-apple-darwin
@@ -93,10 +91,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Install rust toolchain
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
-          override: true
       - name: Install Dependencies
         run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev
       - name: Build release
@@ -129,10 +126,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Install rust toolchain
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
-          override: true
       - name: Install dotnet
         if: ${{ env.BUILD_INSTALLER }}
         uses: actions/setup-dotnet@v3
@@ -180,10 +176,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Install rust toolchain
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
-          override: true
       - name: Install Dependencies
         run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev
       - name: Install trunk
