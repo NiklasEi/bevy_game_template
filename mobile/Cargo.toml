@@ -1,0 +1,28 @@
+[package]
+name = "bevy_game_mobile"  # ToDo
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+name = "bevy_game_mobile"  # ToDo
+crate-type = ["staticlib", "cdylib"]
+
+[dependencies]
+bevy_game = { path = ".." } # ToDo
+bevy = { version = "0.10", default-features = false }
+
+[package.metadata.android]
+package = "me.nikl.bevygame"  # ToDo
+apk_name = "bevygame"  # ToDo
+assets = "../assets"
+strip = "strip"
+resources = "../assets/res"
+build_targets = ["aarch64-linux-android", "armv7-linux-androideabi"]
+
+[package.metadata.android.sdk]
+target_sdk_version = 31
+
+[package.metadata.android.application]
+icon = "@mipmap/ic_launcher"
+label = "Bevy Game" # ToDo
