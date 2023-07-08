@@ -50,8 +50,8 @@ bevy = { version = "0.10", default-features = false, features = [
     "filesystem_watcher",
     "tonemapping_luts"
 ] }
-bevy_kira_audio = { path = "../bevy_kira_audio" }
-bevy_asset_loader = { version = "0.15" }
+bevy_kira_audio = { version = "0.15" }
+bevy_asset_loader = { version = "0.16" }
 rand = { version = "0.8.3" }
 
 # keep the following in sync with Bevy's dependencies
