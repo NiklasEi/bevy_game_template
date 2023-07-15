@@ -26,33 +26,29 @@ dev = [
     "bevy/bevy_dylib",
 ]
 
-# Bevy defaults minus audio and some other not needed things
-# see https://github.com/bevyengine/bevy/blob/main/Cargo.toml#L31-L54
-default = [
-    "bevy/animation",
-    "bevy/bevy_asset",
-    "bevy/bevy_scene",
-    "bevy/bevy_winit",
-    "bevy/bevy_core_pipeline",
-    "bevy/bevy_pbr",
-    "bevy/bevy_gltf",
-    "bevy/bevy_render",
-    "bevy/bevy_sprite",
-    "bevy/bevy_text",
-    "bevy/bevy_ui",
-    "bevy/png",
-    "bevy/hdr",
-    "bevy/zstd",
-    "bevy/x11",
-    "bevy/ktx2",
-    "bevy/filesystem_watcher",
-    "bevy/tonemapping_luts"
-]
-
 [dependencies]
-bevy = { version = "0.10", default-features = false }
-bevy_kira_audio = { version = "0.15" }
-bevy_asset_loader = { version = "0.15" }
+bevy = { version = "0.11", default-features = false, features = [
+    "animation",
+    "bevy_asset",
+    "bevy_scene",
+    "bevy_winit",
+    "bevy_core_pipeline",
+    "bevy_pbr",
+    "bevy_gltf",
+    "bevy_render",
+    "bevy_sprite",
+    "bevy_text",
+    "bevy_ui",
+    "png",
+    "hdr",
+    "zstd",
+    "x11",
+    "ktx2",
+    "filesystem_watcher",
+    "tonemapping_luts"
+] }
+bevy_kira_audio = { version = "0.16" }
+bevy_asset_loader = { version = "0.17" }
 rand = { version = "0.8.3" }
 
 # keep the following in sync with Bevy's dependencies
