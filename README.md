@@ -22,7 +22,7 @@ _Since Bevy is in heavy development, there regularly are unpublished new feature
        * requires [trunk]: `cargo install --locked trunk`
        * requires `wasm32-unknown-unknown` target: `rustup target add wasm32-unknown-unknown`
        * this will serve your app on `8080` and automatically rebuild + reload it after code changes
-    * Start the android app: `apk run -p bevy_game_mobile` (update the library name if you changed it)
+    * Start the android app: `cargo apk run -p bevy_game_mobile` (update the library name if you changed it)
        * check the [bevy example readme for android setup instructions][android-instructions]
 
 You should keep the `credits` directory up to date. The release workflow automatically includes the directory in every build.
