@@ -1,3 +1,5 @@
+#![allow(clippy::type_complexity)]
+
 mod actions;
 mod audio;
 mod loading;
@@ -33,17 +35,17 @@ pub struct GamePlugin;
 
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
-        app.add_state::<GameState>()
-            .add_plugin(LoadingPlugin)
-            .add_plugin(MenuPlugin)
-            .add_plugin(ActionsPlugin)
-            .add_plugin(InternalAudioPlugin)
-            .add_plugin(PlayerPlugin);
+        app.add_state::<GameState>().add_plugins((
+            LoadingPlugin,
+            MenuPlugin,
+            ActionsPlugin,
+            InternalAudioPlugin,
+            PlayerPlugin,
+        ));
 
         #[cfg(debug_assertions)]
         {
-            app.add_plugin(FrameTimeDiagnosticsPlugin::default())
-                .add_plugin(LogDiagnosticsPlugin::default());
+            app.add_plugins((FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin::default()));
         }
     }
 }
