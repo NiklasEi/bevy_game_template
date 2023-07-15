@@ -45,7 +45,8 @@ bevy = { version = "0.11", default-features = false, features = [
     "x11",
     "ktx2",
     "filesystem_watcher",
-    "tonemapping_luts"
+    "tonemapping_luts",
+    "webgl2"
 ] }
 bevy_kira_audio = { version = "0.16" }
 bevy_asset_loader = { version = "0.17" }
