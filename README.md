@@ -1,6 +1,6 @@
 # A Bevy game template
 
-Template for a Game using the awesome [Bevy engine][bevy] featuring out of the box builds for Windows, Linux, macOS, and Web (Wasm).
+Template for a Game using the awesome [Bevy engine][bevy] featuring out of the box builds for Windows, Linux, macOS, and Web (Wasm). It also includes the setup for android support.
 
 _Since Bevy is in heavy development, there regularly are unpublished new features or bug fixes. If you like living on the edge, you can use the branch `bevy_main` of this template to be close to the current state of Bevy's main branch_
  
@@ -22,6 +22,8 @@ _Since Bevy is in heavy development, there regularly are unpublished new feature
        * requires [trunk]: `cargo install --locked trunk`
        * requires `wasm32-unknown-unknown` target: `rustup target add wasm32-unknown-unknown`
        * this will serve your app on `8080` and automatically rebuild + reload it after code changes
+    * Start the android app: `apk run -p bevy_game_mobile` (update the library name if you changed it)
+       * check the [bevy example readme for android setup instructions][android-instructions]
 
 You should keep the `credits` directory up to date. The release workflow automatically includes the directory in every build.
 
@@ -65,3 +67,4 @@ This project is licensed under [CC0 1.0 Universal](LICENSE) except some content 
 [Bevy Cheat Book]: https://bevy-cheatbook.github.io/introduction.html
 [`wasm-server-runner`]: https://github.com/jakobhellermann/wasm-server-runner
 [trunk]: https://trunkrs.dev/
+[android-instructions]: https://github.com/bevyengine/bevy/blob/latest/examples/README.md#setup
