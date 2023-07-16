@@ -36,6 +36,6 @@ pub struct AudioAssets {
 
 #[derive(AssetCollection, Resource)]
 pub struct TextureAssets {
-    #[asset(path = "res/mipmap-mdpi/bevy.png")]
+    #[asset(path = "textures/bevy.png")]
     pub texture_bevy: Handle<Image>,
 }
