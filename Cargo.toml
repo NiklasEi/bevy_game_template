@@ -6,6 +6,9 @@ authors = ["Niklas Eicker <git@nikl.me>"] # ToDo: you are the author ;)
 edition = "2021"
 exclude = ["dist", "build", "assets", "credits"]
 
+[workspace]
+members = ["mobile"]
+
 [profile.dev.package."*"]
 opt-level = 3
 
