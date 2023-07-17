@@ -22,7 +22,7 @@ _Since Bevy is in heavy development, there regularly are unpublished new feature
        * requires [trunk]: `cargo install --locked trunk`
        * requires `wasm32-unknown-unknown` target: `rustup target add wasm32-unknown-unknown`
        * this will serve your app on `8080` and automatically rebuild + reload it after code changes
-    * Start the android app: `cargo apk run -p bevy_game_mobile` (update the library name if you changed it)
+    * Start the android app: `cargo apk run -p mobile` (update the library name if you changed it)
        * check the [bevy example readme for android setup instructions][android-instructions]
 
 You should keep the `credits` directory up to date. The release workflow automatically includes the directory in every build.
@@ -35,6 +35,7 @@ You should keep the `credits` directory up to date. The release workflow automat
        2. Select the `File > Export As` menu item.
        3. Change the file extension to `.ico` (or click `Select File Type (By Extension)` and select `Microsoft Windows Icon`)
        4. Save as `build/windows/icon.ico`
+ 3. Replace `build/android/res/mipmap-mdpi/icon.png` with `macos/AppIcon.iconset/icon_256x256.png`, but rename it to `icon.png`
 
 ### Deploy web build to GitHub pages
  1. Trigger the `deploy-github-page` workflow
@@ -45,6 +46,11 @@ You should keep the `credits` directory up to date. The release workflow automat
 To deploy newer versions, just run the `deploy-github-page` workflow again.
 
 Note that this does a `cargo build` and thus does not work with local dependencies. Consider pushing your "custom Bevy fork" to GitHub and using it as a git dependency.
+
+# Removing mobile platforms
+
+If you don't want to target Android or iOS, you can just delete the `/mobile`, `/build/android`, and `/build/ios` directories.
+Then delete the `[workspace]` section from `Cargo.toml`.
 
 # Getting started with Bevy
 

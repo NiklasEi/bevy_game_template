@@ -524,7 +524,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "bevy_game_mobile"
+name = "mobile"
 version = "0.1.0"
 dependencies = [
  "bevy",

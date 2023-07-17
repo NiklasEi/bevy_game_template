@@ -1,11 +1,11 @@
 [package]
-name = "bevy_game_mobile"  # ToDo
+name = "mobile"
 version = "0.1.0"
 edition = "2021"
 publish = false
 
 [lib]
-name = "bevy_game_mobile"  # ToDo
+name = "mobile"
 crate-type = ["staticlib", "cdylib"]
 
 [dependencies]
@@ -30,5 +30,5 @@ build_targets = ["aarch64-linux-android"]
 target_sdk_version = 31
 
 [package.metadata.android.application]
-icon = "@mipmap/bevy"
+icon = "@mipmap/icon"
 label = "Bevy Game" # ToDo
