@@ -12,3 +12,4 @@ ios:
     cf_bundle_display_name: "Bevy game"
     cf_bundle_identifier: "me.nikl.bevygame"
     cf_bundle_name: "bevygame"
+    cf_bundle_executable: "libbevy_game_mobile.so"
