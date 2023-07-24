@@ -23,7 +23,7 @@ package = "me.nikl.bevygame"  # ToDo
 apk_name = "BevyGame"  # ToDo same as GAME_OSX_APP_NAME in release workflow
 assets = "../assets"
 strip = "strip"
-resources = "../assets/res"
+resources = "../build/android/res"
 build_targets = ["aarch64-linux-android"]
 
 [package.metadata.android.sdk]
