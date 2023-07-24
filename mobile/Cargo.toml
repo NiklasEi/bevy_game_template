@@ -20,7 +20,7 @@ features = ["oboe-shared-stdcxx"]
 
 [package.metadata.android]
 package = "me.nikl.bevygame"  # ToDo
-apk_name = "bevygame"  # ToDo
+apk_name = "BevyGame"  # ToDo same as GAME_OSX_APP_NAME in release workflow
 assets = "../assets"
 strip = "strip"
 resources = "../assets/res"
