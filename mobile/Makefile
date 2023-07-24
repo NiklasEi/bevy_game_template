@@ -24,6 +24,9 @@ xcodebuild-iphone:
 xcodebuild-iphone-release:
 	IOS_TARGETS=aarch64-apple-ios xcodebuild -scheme mobile -configuration Release -derivedDataPath build -arch arm64
 
+xcodebuild-archive-release:
+	IOS_TARGETS=aarch64-apple-ios xcodebuild -scheme mobile clean archive -archivePath "Actions" -configuration Release -arch arm64
+
 clean:
 	rm -r build
 	cargo clean
