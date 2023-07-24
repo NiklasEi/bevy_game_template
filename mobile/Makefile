@@ -21,6 +21,9 @@ xcodebuild-simulator:
 xcodebuild-iphone:
 	IOS_TARGETS=aarch64-apple-ios xcodebuild -scheme mobile -configuration Debug -derivedDataPath build -arch arm64
 
+xcodebuild-iphone-release:
+	IOS_TARGETS=aarch64-apple-ios xcodebuild -scheme mobile -configuration Release -derivedDataPath build -arch arm64
+
 clean:
 	rm -r build
 	cargo clean

@@ -229,9 +229,9 @@ jobs:
       - name: Build app for iOS
         run: |
           cd mobile
-          make xcodebuild-iphone
+          make xcodebuild-iphone-release
           mkdir Payload
-          mv build/Build/Products/Debug-iphoneos/*.app Payload
+          mv build/Build/Products/Release-iphoneos/*.app Payload
           zip -r ${{ env.GAME_EXECUTABLE_NAME }}.zip Payload
           mv ${{ env.GAME_EXECUTABLE_NAME }}.zip ${{ env.GAME_EXECUTABLE_NAME }}.ipa
       - name: Upload release
