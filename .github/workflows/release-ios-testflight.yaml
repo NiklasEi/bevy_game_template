@@ -81,7 +81,7 @@ jobs:
         run: |
           EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
           echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
-          xcodebuild -exportArchive -archivePath mobile/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath $RUNNER_TEMP/export
+          xcodebuild PROVISIONING_PROFILE=build_pp -exportArchive -archivePath mobile/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath $RUNNER_TEMP/export
       - name: Upload ipa
         uses: actions/upload-artifact@v3
         with:
