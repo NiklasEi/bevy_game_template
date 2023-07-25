@@ -80,6 +80,7 @@ jobs:
           file: ${{ env.GAME_EXECUTABLE_NAME }}.dmg
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_macOS.dmg
           release_name: ${{ env.VERSION }}
+          tag: ${{ env.VERSION }}
           overwrite: true
 
   build-linux:
@@ -114,6 +115,7 @@ jobs:
           file: ${{ env.GAME_EXECUTABLE_NAME }}_linux.tar.gz
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_linux.tar.gz
           release_name: ${{ env.VERSION }}
+          tag: ${{ env.VERSION }}
           overwrite: true
 
   build-windows:
@@ -161,11 +163,12 @@ jobs:
         if: ${{ env.BUILD_INSTALLER }}
         uses: svenstaro/upload-release-action@v2
         with:
-         repo_token: ${{ secrets.GITHUB_TOKEN }}
-         file: installer/en-US/installer.msi
-         asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ steps.tag.outputs.tag }}_windows.msi
-         release_name: ${{ env.VERSION }}
-         overwrite: true
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: installer/en-US/installer.msi
+          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ steps.tag.outputs.tag }}_windows.msi
+          release_name: ${{ env.VERSION }}
+          tag: ${{ env.VERSION }}
+          overwrite: true
 
   build-web:
     runs-on: ubuntu-latest
@@ -213,6 +216,7 @@ jobs:
           file: ${{ env.GAME_EXECUTABLE_NAME }}_web.zip
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_web.zip
           release_name: ${{ env.VERSION }}
+          tag: ${{ env.VERSION }}
           overwrite: true
 
   build-for-iOS:
@@ -241,6 +245,7 @@ jobs:
           file: mobile/${{ env.GAME_EXECUTABLE_NAME }}.ipa
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_ios.ipa
           release_name: ${{ env.VERSION }}
+          tag: ${{ env.VERSION }}
           overwrite: true
 
   build-for-Android:
@@ -269,4 +274,5 @@ jobs:
           file: target/debug/apk/${{ env.GAME_OSX_APP_NAME }}.apk
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_android.apk
           release_name: ${{ env.VERSION }}
+          tag: ${{ env.VERSION }}
           overwrite: true
