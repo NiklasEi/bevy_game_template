@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		134866208A035F8615C99114 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A1E5B62F48B379829E8A0D /* Metal.framework */; };
+		2469A4292A6F9AC200ACF4EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2469A4282A6F9AC200ACF4EF /* Assets.xcassets */; };
 		2604C99FAB5A8322EDCABB9F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE71FBCAA714DB4F42459106 /* UIKit.framework */; };
 		442540D056ADB9AE61A0A590 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1B41978FA53999AA836D0F /* Security.framework */; };
 		55892F1396056740E1AF9685 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7DE91055EBD05ED77E57F9 /* main.m */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		160DB77300A3F1806F024D47 /* bindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bindings.h; sourceTree = "<group>"; };
+		2469A4282A6F9AC200ACF4EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ios-src/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		55EAC02897847195D2F44C15 /* mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57CD6305253C7A940098CD4A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		57CD630A253C7F5F0098CD4A /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../assets; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 		4F1D6F28B8A5D1927AB0ADED /* ios-src */ = {
 			isa = PBXGroup;
 			children = (
+				2469A4282A6F9AC200ACF4EF /* Assets.xcassets */,
 				57CD630A253C7F5F0098CD4A /* assets */,
 				160DB77300A3F1806F024D47 /* bindings.h */,
 				8EE7F1E3B0303533925D7E33 /* Info.plist */,
@@ -164,6 +167,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2469A4292A6F9AC200ACF4EF /* Assets.xcassets in Resources */,
 				57CD630E253C80EC0098CD4A /* assets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,7 +298,7 @@
 					"-lmobile",
 					"-lc++abi",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "me.nikl.bevygame"; /* Todo */
+				PRODUCT_BUNDLE_IDENTIFIER = me.nikl.bevygame /* Todo */;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -402,7 +406,7 @@
 					"-lmobile",
 					"-lc++abi",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "me.nikl.bevygame"; /* Todo */
+				PRODUCT_BUNDLE_IDENTIFIER = me.nikl.bevygame /* Todo */;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
