@@ -1,12 +1,13 @@
 use bevy::math::Vec3Swizzles;
 use bevy::prelude::*;
-use bevy::window::PrimaryWindow;
 
 use crate::actions::game_control::{get_movement, GameControl};
 use crate::player::Player;
 use crate::GameState;
 
 mod game_control;
+
+pub const FOLLOW_EPSILON: f32 = 5.;
 
 pub struct ActionsPlugin;
 
@@ -31,7 +32,7 @@ pub fn set_movement_actions(
     keyboard_input: Res<Input<KeyCode>>,
     touch_input: Res<Touches>,
     player: Query<&Transform, With<Player>>,
-    window: Query<&Window, With<PrimaryWindow>>,
+    camera: Query<(&Camera, &GlobalTransform), With<Camera2d>>,
 ) {
     let mut player_movement = Vec2::new(
         get_movement(GameControl::Right, &keyboard_input)
@@ -40,18 +41,15 @@ pub fn set_movement_actions(
             - get_movement(GameControl::Down, &keyboard_input),
     );
 
-    // Todo: simplify! This also produces wrong touch positions (may be related to https://github.com/bevyengine/bevy/issues/7528)
     if let Some(touch_position) = touch_input.first_pressed_position() {
-        let resolution = &window.single().resolution;
-        let dimensions = Vec2::new(-resolution.width(), resolution.height());
-        let diff = Vec2::new(touch_position.x, -touch_position.y)
-            - player.single().translation.xy()
-            + dimensions
-                / (2.
-                    * resolution
-                        .scale_factor_override()
-                        .unwrap_or(resolution.scale_factor()) as f32);
-        player_movement = diff.normalize();
+        let (camera, camera_transform) = camera.single();
+        if let Some(touch_position) = camera.viewport_to_world_2d(camera_transform, touch_position)
+        {
+            let diff = touch_position - player.single().translation.xy();
+            if diff.length() > FOLLOW_EPSILON {
+                player_movement = diff.normalize();
+            }
+        }
     }
 
     if player_movement != Vec2::ZERO {
