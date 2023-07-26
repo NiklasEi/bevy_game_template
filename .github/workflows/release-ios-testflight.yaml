@@ -50,9 +50,9 @@ jobs:
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
         run: |
           # create variables
-          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
-          PP_PATH=$RUNNER_TEMP/profile.mobileprovision
-          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          CERTIFICATE_PATH=${{ runner.temp }}/build_certificate.p12
+          PP_PATH=${{ runner.temp }}/profile.mobileprovision
+          KEYCHAIN_PATH=${{ runner.temp }}/app-signing.keychain-db
 
           # import certificate and provisioning profile from secrets
           echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
@@ -70,7 +70,6 @@ jobs:
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-          echo "$(ls ~/Library/MobileDevice/Provisioning\ Profiles)"
       - name: Build app for iOS
         run: |
           cd mobile
@@ -79,26 +78,26 @@ jobs:
         env:
           EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION }}
         run: |
-          echo "$(cat ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision)"
-          EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
+          EXPORT_PLIST_PATH=${{ runner.temp }}/ExportOptions.plist
           echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
-          xcodebuild PROVISIONING_PROFILE=Bevy-game-distribution -exportArchive -archivePath mobile/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath $RUNNER_TEMP/export
+          xcodebuild PROVISIONING_PROFILE=Bevy-game-distribution -exportArchive -archivePath mobile/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath ${{ runner.temp }}/export
       - name: Upload ipa
         uses: actions/upload-artifact@v3
         with:
-          path: $RUNNER_TEMP/export/
+          path: ${{ runner.temp }}/export/
       - name: decode API key
         env:
           API_KEY_BASE64: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
         run: |
+          mkdir -p ~/private_keys
           ls ~/private_keys
           echo -n "$API_KEY_BASE64" | base64 --decode --output ~/private_keys/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8
           echo "after saving:"
           ls ~/private_keys
       - name: Upload to testflight
         run: |
-          xcrun altool --validate-app -f $RUNNER_TEMP/export/Production.ipa -t ios --apiKey ${{ secrets.APPSTORE_API_KEY_ID }} --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }}
-          xcrun altool --upload-app -f $RUNNER_TEMP/export/Production.ipa -t ios --apiKey ${{ secrets.APPSTORE_API_KEY_ID }} --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }}
+          xcrun altool --validate-app -f ${{ runner.temp }}/export/Production.ipa -t ios --apiKey ${{ secrets.APPSTORE_API_KEY_ID }} --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }}
+          xcrun altool --upload-app -f ${{ runner.temp }}/export/Production.ipa -t ios --apiKey ${{ secrets.APPSTORE_API_KEY_ID }} --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }}
       - name: Upload release
         uses: svenstaro/upload-release-action@v2
         with:
