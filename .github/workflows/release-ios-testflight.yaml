@@ -51,7 +51,7 @@ jobs:
         run: |
           # create variables
           CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
-          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+          PP_PATH=$RUNNER_TEMP/profile.mobileprovision
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
           # import certificate and provisioning profile from secrets
@@ -70,18 +70,18 @@ jobs:
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+          echo "$(ls ~/Library/MobileDevice/Provisioning\ Profiles)"
       - name: Build app for iOS
         run: |
           cd mobile
           make xcodebuild-archive-release
-          ls
       - name: export ipa
         env:
           EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION }}
         run: |
           EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
           echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
-          xcodebuild PROVISIONING_PROFILE=build_pp -exportArchive -archivePath mobile/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath $RUNNER_TEMP/export
+          xcodebuild PROVISIONING_PROFILE=profile -exportArchive -archivePath mobile/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath $RUNNER_TEMP/export
       - name: Upload ipa
         uses: actions/upload-artifact@v3
         with:
