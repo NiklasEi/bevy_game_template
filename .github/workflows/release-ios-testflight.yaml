@@ -78,6 +78,11 @@ jobs:
         run: |
           cd mobile
           make xcodebuild-archive-release
+      - name: Upload archive
+        uses: actions/upload-artifact@v3
+        with:
+          path: mobile/Actions.xcarchive
+          name: ${{ env.GAME_EXECUTABLE_NAME }}_archive_${{ env.VERSION }}
       - name: export ipa
         env:
           EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION }}
@@ -104,7 +109,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: mobile/${{ env.GAME_EXECUTABLE_NAME }}.ipa
+          file: ${{ runner.temp }}/export/mobile.ipa
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_ios.ipa
           release_name: ${{ env.VERSION }}
           overwrite: true

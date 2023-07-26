@@ -243,7 +243,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: mobile/${{ env.GAME_EXECUTABLE_NAME }}.ipa
-          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_ios.ipa
+          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_unsigned_ios.ipa
           release_name: ${{ env.VERSION }}
           tag: ${{ env.VERSION }}
           overwrite: true
