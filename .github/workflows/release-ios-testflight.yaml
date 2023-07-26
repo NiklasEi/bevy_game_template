@@ -84,7 +84,8 @@ jobs:
       - name: Upload ipa
         uses: actions/upload-artifact@v3
         with:
-          path: ${{ runner.temp }}/export/
+          path: ${{ runner.temp }}/export/mobile.ipa
+          name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_ios
       - name: decode API key
         env:
           API_KEY_BASE64: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
