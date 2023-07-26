@@ -1,15 +1,12 @@
 name: release-ios-testflight
 
 # This workflow builds, archives, exports, validates and uploads your ios app.
-# The version from tag or input is only used for artifact names.
+# The version from input is only used for artifact names and as the release to upload the final ipa to.
 # Bump the versions in `mobile/ios-src/Info.plist` to change the version of your app bundle.
 
 # Special setup and Apple Developer Program membership (99$/year) is required for this workflow! (docs are in work; Todo)
 
 on:
-  push:
-    tags:
-      - "v[0-9]+.[0-9]+.[0-9]+*"
   workflow_dispatch:
     inputs:
       version:
@@ -26,26 +23,14 @@ permissions:
   contents: write
 
 jobs:
-  get-version:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get tag
-        id: tag
-        run: echo "tag=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
-    outputs:
-      version: ${{ inputs.version || steps.tag.outputs.tag }}
-
   build-for-iOS:
     runs-on: macos-latest
     timeout-minutes: 40
-    needs: get-version
-    env:
-      VERSION: ${{needs.get-version.outputs.version}}
     steps:
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@stable
       - name: Add iOS targets
-        run: rustup target add aarch64-apple-ios x86_64-apple-ios
+        run: rustup target add aarch64-apple-ios
       - name: Install the Apple certificate and provisioning profile
         id: profile
         env:
@@ -81,11 +66,6 @@ jobs:
         run: |
           cd mobile
           xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -scheme mobile clean archive -archivePath "Actions" -configuration Release -arch arm64
-      - name: Upload archive
-        uses: actions/upload-artifact@v3
-        with:
-          path: mobile/Actions.xcarchive
-          name: ${{ env.GAME_EXECUTABLE_NAME }}_archive_${{ env.VERSION }}
       - name: export ipa
         env:
           EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION }}
@@ -93,11 +73,6 @@ jobs:
           EXPORT_PLIST_PATH=${{ runner.temp }}/ExportOptions.plist
           echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
           xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -exportArchive -archivePath mobile/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath ${{ runner.temp }}/export
-      - name: Upload ipa
-        uses: actions/upload-artifact@v3
-        with:
-          path: ${{ runner.temp }}/export/
-          name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_ios
       - name: decode API key
         env:
           API_KEY_BASE64: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
@@ -113,6 +88,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ runner.temp }}/export/mobile.ipa
-          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_ios.ipa
-          release_name: ${{ env.VERSION }}
+          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ inputs.version }}_ios.ipa
+          release_name: ${{ inputs.version }}
           overwrite: true
