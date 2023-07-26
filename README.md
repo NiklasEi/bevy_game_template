@@ -19,11 +19,16 @@ _Since Bevy is in heavy development, there regularly are unpublished new feature
  4. Start coding :tada:
     * Start the native app: `cargo run`
     * Start the web build: `trunk serve`
-       * requires [trunk]: `cargo install --locked trunk`
-       * requires `wasm32-unknown-unknown` target: `rustup target add wasm32-unknown-unknown`
-       * this will serve your app on `8080` and automatically rebuild + reload it after code changes
+        * requires [trunk]: `cargo install --locked trunk`
+        * requires `wasm32-unknown-unknown` target: `rustup target add wasm32-unknown-unknown`
+        * this will serve your app on `8080` and automatically rebuild + reload it after code changes
     * Start the android app: `cargo apk run -p mobile` (update the library name if you changed it)
-       * check the [bevy example readme for android setup instructions][android-instructions]
+        * requires following the instructions in the [bevy example readme for android setup instructions][android-instructions]
+    * Start the iOS app
+        * Install Xcode through the app store
+        * Launch Xcode and install the iOS simulator (check the box upon first start, or install it through `Preferences > Platforms` later)
+        * Install the iOS and iOS simulator Rust targets with `rustup target add aarch64-apple-ios x86_64-apple-ios aarch64-apple-ios-sim` (see the [bevy example readme for ios setup instructions][ios-instructions])
+        * run `make run` inside the `/mobile` directory
 
 You should keep the `credits` directory up to date. The release workflow automatically includes the directory in every build.
 
@@ -74,3 +79,4 @@ This project is licensed under [CC0 1.0 Universal](LICENSE) except some content 
 [`wasm-server-runner`]: https://github.com/jakobhellermann/wasm-server-runner
 [trunk]: https://trunkrs.dev/
 [android-instructions]: https://github.com/bevyengine/bevy/blob/latest/examples/README.md#setup
+[ios-instructions]: https://github.com/bevyengine/bevy/blob/latest/examples/README.md#setup-1

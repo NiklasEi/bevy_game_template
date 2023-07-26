@@ -3,7 +3,7 @@
     <Package
         Name="BevyGame"
         Manufacturer="My Name"
-        UpgradeCode="132bb59d-de4f-4893-a535-93dfd0597731"
+        UpgradeCode="12345678-de4f-4893-a535-93dfd0597731"
         Version="0.1.0"
 
         Scope="perUserOrMachine">

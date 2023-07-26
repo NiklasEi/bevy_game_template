@@ -1,0 +1,93 @@
+name: release-ios-testflight
+
+# This workflow builds, archives, exports, validates and uploads your ios app.
+# The version from input is only used for artifact names and as the release to upload the final ipa to.
+# Bump the versions in `mobile/ios-src/Info.plist` to change the version of your app bundle.
+
+# Special setup and Apple Developer Program membership (99$/year) is required for this workflow! (docs are in work; Todo)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version - in the form of v1.2.3'
+        required: true
+        type: string
+
+# ToDo: adapt names
+env:
+  GAME_EXECUTABLE_NAME: bevy_game
+  GAME_OSX_APP_NAME: BevyGame
+
+permissions:
+  contents: write
+
+jobs:
+  build-for-iOS:
+    runs-on: macos-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Add iOS targets
+        run: rustup target add aarch64-apple-ios
+      - name: Install the Apple certificate and provisioning profile
+        id: profile
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          # create variables
+          CERTIFICATE_PATH=${{ runner.temp }}/build_certificate.p12
+          PP_PATH=${{ runner.temp }}/profile.mobileprovision
+          KEYCHAIN_PATH=${{ runner.temp }}/app-signing.keychain-db
+
+          # import certificate and provisioning profile from secrets
+          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
+          uuid=`grep UUID -A1 -a $PP_PATH | grep -io "[-A-F0-9]\{36\}"`
+          echo "uuid=$uuid" >> $GITHUB_OUTPUT
+          
+          # create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+          # import certificate to keychain
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+
+          # apply provisioning profile
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles/$uuid.mobileprovision
+      - name: Build app for iOS
+        run: |
+          cd mobile
+          xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -scheme mobile clean archive -archivePath "Actions" -configuration Release -arch arm64
+      - name: export ipa
+        env:
+          EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION }}
+        run: |
+          EXPORT_PLIST_PATH=${{ runner.temp }}/ExportOptions.plist
+          echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
+          xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -exportArchive -archivePath mobile/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath ${{ runner.temp }}/export
+      - name: decode API key
+        env:
+          API_KEY_BASE64: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/private_keys
+          echo -n "$API_KEY_BASE64" | base64 --decode --output ~/private_keys/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8
+      - name: Upload to testflight
+        run: |
+          xcrun altool --validate-app -f ${{ runner.temp }}/export/mobile.ipa -t ios --apiKey ${{ secrets.APPSTORE_API_KEY_ID }} --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }}
+          xcrun altool --upload-app -f ${{ runner.temp }}/export/mobile.ipa -t ios --apiKey ${{ secrets.APPSTORE_API_KEY_ID }} --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }}
+      - name: Upload release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ runner.temp }}/export/mobile.ipa
+          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ inputs.version }}_ios.ipa
+          release_name: ${{ inputs.version }}
+          overwrite: true
