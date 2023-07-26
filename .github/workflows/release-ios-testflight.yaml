@@ -1,5 +1,11 @@
 name: release-ios-testflight
 
+# This workflow builds, archives, exports, validates and uploads your ios app.
+# The version from tag or input is only used for artifact names.
+# Bump the versions in `mobile/ios-src/Info.plist` to change the version of your app bundle.
+
+# Special setup and Apple Developer Program membership (99$/year) is required for this workflow! (docs are in work; Todo)
+
 on:
   push:
     tags:
@@ -13,8 +19,6 @@ on:
 
 # ToDo: adapt names
 env:
-  # heads-up: this value is used as a pattern in an sed command as a workaround for a trunk issue
-  #   if you use special characters, take a look at the 'Make paths relative' step in the 'build-web' job
   GAME_EXECUTABLE_NAME: bevy_game
   GAME_OSX_APP_NAME: BevyGame
 
@@ -84,7 +88,7 @@ jobs:
       - name: Upload ipa
         uses: actions/upload-artifact@v3
         with:
-          path: ${{ runner.temp }}/export/mobile.ipa
+          path: ${{ runner.temp }}/export/
           name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_ios
       - name: decode API key
         env:
