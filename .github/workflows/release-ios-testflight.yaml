@@ -77,7 +77,7 @@ jobs:
       - name: Build app for iOS
         run: |
           cd mobile
-          make xcodebuild-archive-release
+          xcodebuild PROVISIONING_PROFILE=Bevy-game-distribution -scheme mobile clean archive -archivePath "Actions" -configuration Release -arch arm64
       - name: Upload archive
         uses: actions/upload-artifact@v3
         with:
@@ -89,7 +89,7 @@ jobs:
         run: |
           EXPORT_PLIST_PATH=${{ runner.temp }}/ExportOptions.plist
           echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
-          xcodebuild PROVISIONING_PROFILE=Bevy-game-distribution -exportArchive -archivePath mobile/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath ${{ runner.temp }}/export
+          xcodebuild PROVISIONING_PROFILE=Bevy-game-distribution -exportArchive -archivePath mobile/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath ${{ runner.temp }}/export -exportProvisioningProfile "Bevy-game-distribution"
       - name: Upload ipa
         uses: actions/upload-artifact@v3
         with:
