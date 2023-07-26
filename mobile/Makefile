@@ -2,7 +2,7 @@
 
 DEVICE = ${DEVICE_ID}
 ifndef DEVICE_ID
-	DEVICE=$(shell xcrun simctl list devices 'iOS' | grep -v 'unavailable' | grep -v '^--' | grep -v '==' | head -n 1 | cut -d ' ' -f 7 | sed 's/[()]//g')
+	DEVICE=$(shell xcrun simctl list devices 'iOS' | grep -v 'unavailable' | grep -v '^--' | grep -v '==' | head -n 1 | grep -E -o -i "([0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})"
 endif
 
 run: install
@@ -23,9 +23,6 @@ xcodebuild-iphone:
 
 xcodebuild-iphone-release:
 	IOS_TARGETS=aarch64-apple-ios xcodebuild -scheme mobile -configuration Release -derivedDataPath build -arch arm64
-
-xcodebuild-archive-release:
-	IOS_TARGETS=aarch64-apple-ios xcodebuild -scheme mobile clean archive -archivePath "Actions" -configuration Release -arch arm64
 
 clean:
 	rm -r build
