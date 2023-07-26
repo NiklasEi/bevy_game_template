@@ -33,7 +33,7 @@ jobs:
 
   build-for-iOS:
     runs-on: macos-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     needs: get-version
     env:
       VERSION: ${{needs.get-version.outputs.version}}
@@ -81,7 +81,7 @@ jobs:
         run: |
           EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
           echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
-          xcodebuild PROVISIONING_PROFILE=profile -exportArchive -archivePath mobile/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath $RUNNER_TEMP/export
+          xcodebuild -exportArchive -archivePath mobile/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath $RUNNER_TEMP/export -exportProvisioningProfile "Bevy game distribution"
       - name: Upload ipa
         uses: actions/upload-artifact@v3
         with:
