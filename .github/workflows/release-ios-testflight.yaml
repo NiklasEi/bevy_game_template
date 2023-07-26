@@ -79,6 +79,7 @@ jobs:
         env:
           EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION }}
         run: |
+          echo "$(cat ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision)"
           EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
           echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
           xcodebuild PROVISIONING_PROFILE=Bevy-game-distribution -exportArchive -archivePath mobile/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath $RUNNER_TEMP/export
