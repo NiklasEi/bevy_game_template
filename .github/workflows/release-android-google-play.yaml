@@ -44,6 +44,8 @@ jobs:
           KEYSTORE_PATH=${{ runner.temp }}/upload-keystore.jks
           echo -n "${{ secrets.PLAYSTORE_KEYSTORE }}" | base64 --decode > $KEYSTORE_PATH
           cd ${{ env.BUNDLE_DIR }}
+          ls
+          jarsigner --help
           jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore $KEYSTORE_PATH -storepass ${{ secrets.PLAYSTORE_KEYSTORE_PASSWORD }} ${{ env.BUNDLE_NAME }} upload
       - name: Upload self-signed bundle to GitHub
         uses: svenstaro/upload-release-action@v2
