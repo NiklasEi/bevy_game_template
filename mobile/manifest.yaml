@@ -5,6 +5,7 @@ android:
   icon: "../build/android/res/mipmap-mdpi/icon.png"
   manifest:
     package: "me.nikl.bevygame"
+    version_code: 2
     application:
       label: "Bevy game"
 ios:
