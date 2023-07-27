@@ -90,4 +90,5 @@ jobs:
           file: ${{ runner.temp }}/export/mobile.ipa
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ inputs.version }}_ios.ipa
           release_name: ${{ inputs.version }}
+          tag: ${{ inputs.version }}
           overwrite: true
