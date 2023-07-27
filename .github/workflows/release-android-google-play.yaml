@@ -4,7 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Release (play console and GitHub)'
+        description: 'GitHub Release'
+        required: true
+        type: string
+      play_release:
+        description: 'Release name from google play console'
         required: true
         type: string
 
@@ -64,5 +68,6 @@ jobs:
         with:
           serviceAccountJson: ${{ runner.temp }}/service-account.json
           packageName: ${{ env.PACKAGE_NAME }}
-          releaseFiles: ${{ env.BUNDLE_PATH }}
+          releaseName: ${{ inputs.play_release }}
+          releaseFiles: ${{ env.BUNDLE_DIR }}/${{ env.BUNDLE_NAME }}
           track: ${{ env.TRACK }}
