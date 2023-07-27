@@ -56,7 +56,7 @@ jobs:
       - name: upload bundle to Google play store
         uses: r0adkll/upload-google-play@v1
         with:
-          serviceAccountJson: ${{ SERVICE_ACCOUNT_JSON }}
+          serviceAccountJson: ${{ runner.temp }}/service-account.json
           packageName: ${{ env.PACKAGE_NAME }}
           releaseFiles: ${{ env.BUNDLE_PATH }}
           track: ${{ env.TRACK }}
