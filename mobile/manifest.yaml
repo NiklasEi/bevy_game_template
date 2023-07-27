@@ -1,4 +1,5 @@
 android:
+  gradle: true
   assets:
     - "../assets/*"
   icon: "../build/android/res/mipmap-mdpi/icon.png"
