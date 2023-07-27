@@ -58,6 +58,7 @@ jobs:
           file: ${{ env.BUNDLE_DIR }}/${{ env.BUNDLE_NAME }}
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ inputs.version }}_android.aab
           release_name: ${{ inputs.version }}
+          tag: ${{ inputs.version }}
           overwrite: true
       - name: prepare Google play store secrets
         run: |
