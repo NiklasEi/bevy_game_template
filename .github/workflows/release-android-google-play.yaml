@@ -16,8 +16,7 @@ on:
 env:
   # used for uploading the app to a GitHub release
   GAME_EXECUTABLE_NAME: bevy_game
-  BUNDLE_DIR: "target/x/release/android/"
-  BUNDLE_NAME: "mobile.aab"
+  BUNDLE_PATH: "target/x/release/android/mobile.aab"
   PACKAGE_NAME: "me.nikl.bevygame"
   # release track; you can promote a build to "higher" tracks in the play console
   TRACK: internal
@@ -47,15 +46,12 @@ jobs:
         run: |
           KEYSTORE_PATH=${{ runner.temp }}/upload-keystore.jks
           echo -n "${{ secrets.PLAYSTORE_KEYSTORE }}" | base64 --decode > $KEYSTORE_PATH
-          cd ${{ env.BUNDLE_DIR }}
-          ls
-          jarsigner --help
-          jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore $KEYSTORE_PATH -storepass "${{ secrets.PLAYSTORE_KEYSTORE_PASSWORD }}" ${{ env.BUNDLE_NAME }} upload
+          jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore $KEYSTORE_PATH -storepass "${{ secrets.PLAYSTORE_KEYSTORE_PASSWORD }}" ${{ env.BUNDLE_PATH }} upload
       - name: Upload self-signed bundle to GitHub
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ env.BUNDLE_DIR }}/${{ env.BUNDLE_NAME }}
+          file: ${{ env.BUNDLE_PATH }}
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ inputs.version }}_android.aab
           release_name: ${{ inputs.version }}
           tag: ${{ inputs.version }}
@@ -70,5 +66,5 @@ jobs:
           serviceAccountJson: ${{ runner.temp }}/service-account.json
           packageName: ${{ env.PACKAGE_NAME }}
           releaseName: ${{ inputs.play_release }}
-          releaseFiles: ${{ env.BUNDLE_DIR }}/${{ env.BUNDLE_NAME }}
+          releaseFiles: ${{ env.BUNDLE_PATH }}
           track: ${{ env.TRACK }}
