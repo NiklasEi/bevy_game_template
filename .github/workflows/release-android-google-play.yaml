@@ -25,6 +25,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
+      - name: Install LLVM and Clang
+        uses: KyleMayes/install-llvm-action@v1
+        with:
+          version: "3"
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@stable
       - name: Add Android targets
