@@ -35,8 +35,10 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
       - name: Add Android targets
         run: rustup target add aarch64-linux-android armv7-linux-androideabi
+      - name: Install cargo-binstall
+        run: curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
       - name: Install xbuild
-        run: cargo install --git https://github.com/NiklasEi/xbuild
+        run: cargo binstall --git https://github.com/NiklasEi/xbuild --bin-dir x xbuild -y
       - name: Build app bundle
         run: |
           cd mobile
