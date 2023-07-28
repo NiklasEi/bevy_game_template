@@ -4,14 +4,22 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version - in the form of v1.2.3'
+        description: 'GitHub Release'
+        required: true
+        type: string
+      play_release:
+        description: 'Release name from google play console'
         required: true
         type: string
 
 # ToDo: adapt names
 env:
+  # used for uploading the app to a GitHub release
   GAME_EXECUTABLE_NAME: bevy_game
-  GAME_OSX_APP_NAME: BevyGame
+  BUNDLE_PATH: "target/x/release/android/mobile.aab"
+  PACKAGE_NAME: "me.nikl.bevygame"
+  # release track; you can promote a build to "higher" tracks in the play console
+  TRACK: internal
 
 permissions:
   contents: write
@@ -21,7 +29,44 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
+      - name: Install Dependencies
+        run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev lld llvm
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@stable
       - name: Add Android targets
-        run: rustup target add aarch64-linux-android
+        run: rustup target add aarch64-linux-android armv7-linux-androideabi
+      - name: Install cargo-binstall
+        run: curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+      - name: Install xbuild
+        run: cargo binstall --git https://github.com/NiklasEi/xbuild --bin-dir x xbuild -y
+      - name: Build app bundle
+        run: |
+          cd mobile
+          x doctor
+          x build --release --platform android --store play
+      - name: sign app bundle
+        run: |
+          KEYSTORE_PATH=${{ runner.temp }}/upload-keystore.jks
+          echo -n "${{ secrets.PLAYSTORE_KEYSTORE }}" | base64 --decode > $KEYSTORE_PATH
+          jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore $KEYSTORE_PATH -storepass "${{ secrets.PLAYSTORE_KEYSTORE_PASSWORD }}" ${{ env.BUNDLE_PATH }} upload
+      - name: Upload self-signed bundle to GitHub
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.BUNDLE_PATH }}
+          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ inputs.version }}_android.aab
+          release_name: ${{ inputs.version }}
+          tag: ${{ inputs.version }}
+          overwrite: true
+      - name: prepare Google play store secrets
+        run: |
+          SERVICE_ACCOUNT=${{ runner.temp }}/service-account.json
+          echo -n "${{ secrets.PLAYSTORE_SERVICE_ACCOUNT }}" | base64 --decode > $SERVICE_ACCOUNT
+      - name: upload bundle to Google play store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJson: ${{ runner.temp }}/service-account.json
+          packageName: ${{ env.PACKAGE_NAME }}
+          releaseName: ${{ inputs.play_release }}
+          releaseFiles: ${{ env.BUNDLE_PATH }}
+          track: ${{ env.TRACK }}

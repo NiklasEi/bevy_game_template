@@ -2,13 +2,14 @@ android:
   gradle: true
   assets:
     - "../assets/*"
-  icon: "../build/android/res/mipmap-mdpi/icon.png"
+  icon: "ios-src/Assets.xcassets/AppIcon.appiconset/icon_1024x1024.png"
   manifest:
     package: "me.nikl.bevygame"
+    version_code: 3
     application:
       label: "Bevy game"
 ios:
-  icon: "../build/android/res/mipmap-mdpi/icon.png"
+  icon: "ios-src/Assets.xcassets/AppIcon.appiconset/icon_1024x1024.png"
   info:
     cf_bundle_display_name: "Bevy game"
     cf_bundle_identifier: "me.nikl.bevygame"
