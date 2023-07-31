@@ -1,18 +1,11 @@
 android:
   gradle: true
-  assets:
-    - "../assets/*"
+  # this assets configuration is currently only used without gradle!
+  #assets:
+  #  - "../assets/*"
   icon: "ios-src/Assets.xcassets/AppIcon.appiconset/icon_1024x1024.png"
   manifest:
     package: "me.nikl.bevygame" # Todo
     version_code: 3 # Todo you should start at 1
     application:
       label: "Bevy game" # Todo
-ios:
-  icon: "ios-src/Assets.xcassets/AppIcon.appiconset/icon_1024x1024.png"
-  info:
-    cf_bundle_display_name: "Bevy game"
-    cf_bundle_identifier: "me.nikl.bevygame"
-    cf_bundle_name: "bevygame"
-#    cf_bundle_executable: "libbevy_game_mobile.so"
-    dt_xcode: "mobile.xcodeproj"

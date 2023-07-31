@@ -21,6 +21,7 @@ env:
   # release track; you can promote a build to "higher" tracks in the play console or publish to a different track directly
   # see track at https://github.com/r0adkll/upload-google-play#inputs for more options
   TRACK: internal
+  MOBILE_DIRECTORY: mobile
 
 permissions:
   contents: write
@@ -42,7 +43,7 @@ jobs:
         run: cargo binstall --git https://github.com/NiklasEi/xbuild --bin-dir x xbuild -y
       - name: Build app bundle
         run: |
-          cd mobile
+          cd ${{ env.MOBILE_DIRECTORY }}
           x doctor
           x build --release --platform android --store play
       - name: sign app bundle
