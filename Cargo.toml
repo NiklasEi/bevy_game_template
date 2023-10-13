@@ -29,10 +29,13 @@ dev = [
     "bevy/bevy_dylib",
 ]
 
+# All of Bevy's default features exept for the audio related ones, since they clash with bevy_kira_audio
+#   and android_shared_stdcxx, since that is covered in `mobile`
 [dependencies]
 bevy = { version = "0.11", default-features = false, features = [
     "animation",
     "bevy_asset",
+    "bevy_gilrs",
     "bevy_scene",
     "bevy_winit",
     "bevy_core_pipeline",
@@ -42,14 +45,16 @@ bevy = { version = "0.11", default-features = false, features = [
     "bevy_sprite",
     "bevy_text",
     "bevy_ui",
+    "multi-threaded",
     "png",
     "hdr",
+    "ktx2",
     "zstd",
     "x11",
-    "ktx2",
-    "filesystem_watcher",
+    "bevy_gizmos",
     "tonemapping_luts",
-    "webgl2"
+    "default_font",
+    "webgl2",
 ] }
 bevy_kira_audio = { version = "0.16" }
 bevy_asset_loader = { version = "0.17" }

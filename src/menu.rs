@@ -1,4 +1,3 @@
-use crate::loading::FontAssets;
 use crate::GameState;
 use bevy::prelude::*;
 
@@ -30,11 +29,7 @@ impl Default for ButtonColors {
     }
 }
 
-fn setup_menu(
-    mut commands: Commands,
-    font_assets: Res<FontAssets>,
-    button_colors: Res<ButtonColors>,
-) {
+fn setup_menu(mut commands: Commands, button_colors: Res<ButtonColors>) {
     commands.spawn(Camera2dBundle::default());
     commands
         .spawn(ButtonBundle {
@@ -44,7 +39,7 @@ fn setup_menu(
                 margin: UiRect::all(Val::Auto),
                 justify_content: JustifyContent::Center,
                 align_items: AlignItems::Center,
-                ..Default::default()
+                ..default()
             },
             background_color: button_colors.normal.into(),
             ..Default::default()
@@ -53,9 +48,9 @@ fn setup_menu(
             parent.spawn(TextBundle::from_section(
                 "Play",
                 TextStyle {
-                    font: font_assets.fira_sans.clone(),
                     font_size: 40.0,
                     color: Color::rgb(0.9, 0.9, 0.9),
+                    ..default()
                 },
             ));
         });
