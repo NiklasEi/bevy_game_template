@@ -1,4 +1,4 @@
-use crate::loading::{FontAssets, TextureAssets};
+use crate::loading::TextureAssets;
 use crate::GameState;
 use bevy::prelude::*;
 
@@ -32,7 +32,7 @@ impl Default for ButtonColors {
 #[derive(Component)]
 struct Menu;
 
-fn setup_menu(mut commands: Commands, font_assets: Res<FontAssets>, textures: Res<TextureAssets>) {
+fn setup_menu(mut commands: Commands, textures: Res<TextureAssets>) {
     commands.spawn(Camera2dBundle::default());
     commands
         .spawn((
@@ -50,6 +50,7 @@ fn setup_menu(mut commands: Commands, font_assets: Res<FontAssets>, textures: Re
             Menu,
         ))
         .with_children(|children| {
+            let button_colors = ButtonColors::default();
             children
                 .spawn((
                     ButtonBundle {
@@ -60,37 +61,49 @@ fn setup_menu(mut commands: Commands, font_assets: Res<FontAssets>, textures: Re
                             align_items: AlignItems::Center,
                             ..Default::default()
                         },
-                        background_color: Color::rgb(0.15, 0.15, 0.15).into(),
+                        background_color: button_colors.normal.into(),
                         ..Default::default()
                     },
-                    ButtonColors {
-                        normal: Color::rgb(0.15, 0.15, 0.15),
-                        hovered: Color::rgb(0.25, 0.25, 0.25),
-                    },
+                    button_colors,
                     ChangeState(GameState::Playing),
                 ))
                 .with_children(|parent| {
                     parent.spawn(TextBundle::from_section(
                         "Play",
                         TextStyle {
-                            font: font_assets.fira_sans.clone(),
                             font_size: 40.0,
                             color: Color::rgb(0.9, 0.9, 0.9),
+                            ..default()
                         },
                     ));
                 });
+        });
+    commands
+        .spawn((
+            NodeBundle {
+                style: Style {
+                    flex_direction: FlexDirection::Row,
+                    align_items: AlignItems::Center,
+                    justify_content: JustifyContent::SpaceAround,
+                    bottom: Val::Px(5.),
+                    width: Val::Percent(100.),
+                    position_type: PositionType::Absolute,
+                    ..default()
+                },
+                ..default()
+            },
+            Menu,
+        ))
+        .with_children(|children| {
             children
                 .spawn((
                     ButtonBundle {
                         style: Style {
-                            width: Val::Px(140.0),
+                            width: Val::Px(170.0),
                             height: Val::Px(50.0),
                             justify_content: JustifyContent::SpaceAround,
                             align_items: AlignItems::Center,
-                            margin: UiRect {
-                                top: Val::Px(25.),
-                                ..default()
-                            },
+                            padding: UiRect::all(Val::Px(5.)),
                             ..Default::default()
                         },
                         background_color: Color::NONE.into(),
@@ -98,7 +111,7 @@ fn setup_menu(mut commands: Commands, font_assets: Res<FontAssets>, textures: Re
                     },
                     ButtonColors {
                         normal: Color::NONE,
-                        hovered: Color::rgb(0.25, 0.25, 0.25),
+                        ..default()
                     },
                     OpenLink("https://bevyengine.org"),
                 ))
@@ -106,13 +119,17 @@ fn setup_menu(mut commands: Commands, font_assets: Res<FontAssets>, textures: Re
                     parent.spawn(TextBundle::from_section(
                         "Made with Bevy",
                         TextStyle {
-                            font: font_assets.fira_sans.clone(),
-                            font_size: 20.0,
+                            font_size: 15.0,
                             color: Color::rgb(0.9, 0.9, 0.9),
+                            ..default()
                         },
                     ));
                     parent.spawn(ImageBundle {
-                        image: textures.bevy_small.clone().into(),
+                        image: textures.bevy.clone().into(),
+                        style: Style {
+                            width: Val::Px(32.),
+                            ..default()
+                        },
                         ..default()
                     });
                 });
@@ -120,15 +137,12 @@ fn setup_menu(mut commands: Commands, font_assets: Res<FontAssets>, textures: Re
                 .spawn((
                     ButtonBundle {
                         style: Style {
-                            width: Val::Px(140.0),
+                            width: Val::Px(170.0),
                             height: Val::Px(50.0),
                             justify_content: JustifyContent::SpaceAround,
                             align_items: AlignItems::Center,
-                            margin: UiRect {
-                                top: Val::Px(5.),
-                                ..default()
-                            },
-                            ..Default::default()
+                            padding: UiRect::all(Val::Px(5.)),
+                            ..default()
                         },
                         background_color: Color::NONE.into(),
                         ..Default::default()
@@ -143,13 +157,17 @@ fn setup_menu(mut commands: Commands, font_assets: Res<FontAssets>, textures: Re
                     parent.spawn(TextBundle::from_section(
                         "Open source",
                         TextStyle {
-                            font: font_assets.fira_sans.clone(),
-                            font_size: 20.0,
+                            font_size: 15.0,
                             color: Color::rgb(0.9, 0.9, 0.9),
+                            ..default()
                         },
                     ));
                     parent.spawn(ImageBundle {
-                        image: textures.bevy_small.clone().into(),
+                        image: textures.github.clone().into(),
+                        style: Style {
+                            width: Val::Px(32.),
+                            ..default()
+                        },
                         ..default()
                     });
                 });
@@ -197,5 +215,7 @@ fn click_play_button(
 }
 
 fn cleanup_menu(mut commands: Commands, menu: Query<Entity, With<Menu>>) {
-    commands.entity(menu.single()).despawn_recursive();
+    for entity in menu.iter() {
+        commands.entity(entity).despawn_recursive();
+    }
 }
