@@ -59,6 +59,7 @@ bevy = { version = "0.11", default-features = false, features = [
 bevy_kira_audio = { version = "0.16" }
 bevy_asset_loader = { version = "0.17" }
 rand = { version = "0.8.3" }
+webbrowser = { version = "0.8", features = ["hardened"] }
 
 # keep the following in sync with Bevy's dependencies
 winit = { version = "0.28", default-features = false }
