@@ -3,26 +3,53 @@ body, html {
 }
 
 body {
-    background: repeating-linear-gradient(
-        135deg,
-        black 0,
-        black 2px,
-        white 2px,
-        white 20px
-    );
+    background-color: lightgray;
     margin: 0;
-}
-
-.game-container {
-    width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#bevy {
-    background-color: white;
+.game-container {
     width: 800px;
     height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#bevy {
+    width: 0;
+    height: 0;
+    z-index: 2;
 }
