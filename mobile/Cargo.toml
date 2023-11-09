@@ -10,7 +10,7 @@ crate-type = ["staticlib", "cdylib"]
 
 [dependencies]
 bevy_game = { path = ".." } # ToDo
-bevy = { version = "0.11", default-features = false }
+bevy = { version = "0.12", default-features = false }
 
 # As long as Kira doesn't expose a feature for this, we need to enable it our self
 # See https://github.com/tesselode/kira/pull/51
