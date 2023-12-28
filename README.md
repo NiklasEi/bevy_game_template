@@ -1,16 +1,15 @@
 # A Bevy game template
 
-Template for a Game using the awesome [Bevy engine][bevy] featuring out of the box builds for Windows, Linux, macOS, and Web (Wasm). It also includes the setup for android support.
+Template for a Game using the awesome [Bevy engine][bevy] featuring out of the box builds for Windows, Linux, macOS, Web (Wasm), Android, and iOS.
 
-_Since Bevy is in heavy development, there regularly are unpublished new features or bug fixes. If you like living on the edge, you can use the branch `bevy_main` of this template to be close to the current state of Bevy's main branch_
- 
 # What does this template give you?
-* small example ["game"](https://niklasei.github.io/bevy_game_template/) (*warning: biased; e.g., split into a lot of plugins and using `bevy_kira_audio` for sound*)
+* small example ["game"](https://niklasei.github.io/bevy_game_template/)
 * easy setup for running the web build using [trunk] (`trunk serve`) 
 * run the native version with `cargo run`
 * workflow for GitHub actions creating releases for Windows, Linux, macOS, and Web (Wasm) ready for distribution
+    * the same workflow creates development builds for the mobile platforms (two separate workflows can push to the stores after [some setup](#deploy-mobile-platforms))
     * push a tag in the form of `v[0-9]+.[0-9]+.[0-9]+*` (e.g. `v1.1.42`) to trigger the flow
-    * WARNING: if you work in a private repository, please be aware that macOS and Windows runners cost more build minutes. You might want to consider running the workflow less often or removing some builds from it. **For public repositories the builds are free!**
+    * WARNING: if you work in a private repository, please be aware that macOS and Windows runners cost more build minutes. **For public repositories the builds are free!**
 
 # How to use this template?
  1. Click "Use this template" on the repository's page
@@ -22,7 +21,7 @@ _Since Bevy is in heavy development, there regularly are unpublished new feature
         * requires [trunk]: `cargo install --locked trunk`
         * requires `wasm32-unknown-unknown` target: `rustup target add wasm32-unknown-unknown`
         * this will serve your app on `8080` and automatically rebuild + reload it after code changes
-    * Start the android app: `cargo apk run -p mobile` (update the library name if you changed it)
+    * Start the android app: `cargo apk run -p mobile`
         * requires following the instructions in the [bevy example readme for android setup][android-instructions]
     * Start the iOS app (see the [bevy example readme for ios setup instructions][ios-instructions])
         * Install Xcode through the app store
@@ -43,6 +42,7 @@ You should keep the `credits` directory up to date. The release workflow automat
  3. Replace `build/android/res/mipmap-mdpi/icon.png` with `macos/AppIcon.iconset/icon_256x256.png`, but rename it to `icon.png`
 
 ### Deploy web build to GitHub pages
+
  1. Trigger the `deploy-github-page` workflow
  2. Activate [GitHub pages](https://pages.github.com/) for your repository
      1. Source from the `gh-pages` branch (created by the just executed action)
@@ -50,7 +50,21 @@ You should keep the `credits` directory up to date. The release workflow automat
 
 To deploy newer versions, just run the `deploy-github-page` workflow again.
 
-Note that this does a `cargo build` and thus does not work with local dependencies. Consider pushing your "custom Bevy fork" to GitHub and using it as a git dependency.
+# Deploy mobile platforms
+
+For general info on mobile support, you can take a look at [one of my blog posts about mobile development with Bevy][mobile_dev_with_bevy_2] which is relevant to the current setup.
+
+## Android
+
+Currently, `cargo-apk` is used to run the development app. But APKs can no longer be published in the store and `cargo-apk` cannot produce the required AAB. This is why there is setup for two android related tools. In [`mobile/Cargo.toml`](./mobile/Cargo.toml), the `package.metadata.android` section configures `cargo-apk` while [`mobile/manifest.yaml`](./mobile/manifest.yaml) configures a custom fork of `xbuild` which is used in the `release-android-google-play` workflow to create an AAB.
+
+There is a [post about how to set up the android release workflow][workflow_bevy_android] on my blog.
+
+## iOS
+
+The setup is pretty much what Bevy does for the mobile example.
+
+There is a [post about how to set up the iOS release workflow][workflow_bevy_ios] on my blog.
 
 # Removing mobile platforms
 
@@ -76,7 +90,9 @@ This project is licensed under [CC0 1.0 Universal](LICENSE) except some content 
 [nikl-mastodon]: https://mastodon.online/@nikl_me
 [firefox-sound-issue]: https://github.com/NiklasEi/bevy_kira_audio/issues/9
 [Bevy Cheat Book]: https://bevy-cheatbook.github.io/introduction.html
-[`wasm-server-runner`]: https://github.com/jakobhellermann/wasm-server-runner
 [trunk]: https://trunkrs.dev/
 [android-instructions]: https://github.com/bevyengine/bevy/blob/latest/examples/README.md#setup
 [ios-instructions]: https://github.com/bevyengine/bevy/blob/latest/examples/README.md#setup-1
+[mobile_dev_with_bevy_2]: https://www.nikl.me/blog/2023/notes_on_mobile_development_with_bevy_2/
+[workflow_bevy_android]: https://www.nikl.me/blog/2023/github_workflow_to_publish_android_app/
+[workflow_bevy_ios]: https://www.nikl.me/blog/2023/github_workflow_to_publish_ios_app/
