@@ -15,14 +15,21 @@ opt-level = 3
 [profile.dev]
 opt-level = 1
 
+# This is used by trunk as it doesn't support custom profiles: https://github.com/trunk-rs/trunk/issues/605
+# xbuild also uses this profile for building android AABs because I couldn't find a configuration for it
 [profile.release]
+opt-level = "s"
 lto = true
 codegen-units = 1
+strip = true
 
-# The profile that 'cargo dist' will build with
+# Profile for distribution
 [profile.dist]
 inherits = "release"
-lto = "thin"
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
 
 [features]
 dev = [
