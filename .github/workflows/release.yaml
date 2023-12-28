@@ -51,7 +51,7 @@ jobs:
           targets: aarch64-apple-darwin
       - name: Build release for Apple Silicon
         run: |
-          SDKROOT=$(xcrun -sdk macosx --show-sdk-path) cargo build --release --target=aarch64-apple-darwin
+          SDKROOT=$(xcrun -sdk macosx --show-sdk-path) cargo build --profile dist --target=aarch64-apple-darwin
       - name: Install rust toolchain for Apple x86
         uses: dtolnay/rust-toolchain@master
         with:
@@ -59,7 +59,7 @@ jobs:
           targets: x86_64-apple-darwin
       - name: Build release for x86 Apple
         run: |
-          SDKROOT=$(xcrun -sdk macosx --show-sdk-path) cargo build --release --target=x86_64-apple-darwin
+          SDKROOT=$(xcrun -sdk macosx --show-sdk-path) cargo build --profile dist --target=x86_64-apple-darwin
       - name: Create Universal Binary
         run: |
           lipo -create -output target/release/${{ env.GAME_EXECUTABLE_NAME }} target/aarch64-apple-darwin/release/${{ env.GAME_EXECUTABLE_NAME }} target/x86_64-apple-darwin/release/${{ env.GAME_EXECUTABLE_NAME }}
@@ -69,7 +69,6 @@ jobs:
           cp -r assets/ build/macos/src/Game.app/Contents/MacOS/assets
           cp -r credits/ build/macos/src/Game.app/Contents/MacOS/credits
           cp target/release/${{ env.GAME_EXECUTABLE_NAME }} build/macos/src/Game.app/Contents/MacOS/
-          strip build/macos/src/Game.app/Contents/MacOS/${{ env.GAME_EXECUTABLE_NAME }}
           mv build/macos/src/Game.app build/macos/src/${{ env.GAME_OSX_APP_NAME }}.app
           ln -s /Applications build/macos/src/
           hdiutil create -fs HFS+ -volname "${{ env.GAME_OSX_APP_NAME }}" -srcfolder build/macos/src ${{ env.GAME_EXECUTABLE_NAME }}.dmg
@@ -99,10 +98,9 @@ jobs:
         run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev
       - name: Build release
         run: |
-          cargo build --release
+          cargo build --profile dist
       - name: Prepare release
         run: |
-          strip target/release/${{ env.GAME_EXECUTABLE_NAME }}
           chmod +x target/release/${{ env.GAME_EXECUTABLE_NAME }}
           mv target/release/${{ env.GAME_EXECUTABLE_NAME }} .
       - name: Bundle release
@@ -138,7 +136,7 @@ jobs:
           global-json-file: build/windows/installer/global.json
       - name: Build release
         run: |
-          cargo build --release
+          cargo build --profile dist
       - name: Prepare release
         run: |
           mkdir target/release/assets && cp -r assets target/release/assets
@@ -263,10 +261,7 @@ jobs:
       - name: Install Cargo APK
         run: cargo install --force cargo-apk
       - name: Build app for Android
-        run: ANDROID_NDK_ROOT=$ANDROID_NDK_LATEST_HOME cargo apk build --package mobile
-        env:
-          # This will reduce the APK size from 1GB to ~200MB
-          CARGO_PROFILE_DEV_DEBUG: false
+        run: ANDROID_NDK_ROOT=$ANDROID_NDK_LATEST_HOME cargo apk build --profile dist --package mobile
       - name: Upload release
         uses: svenstaro/upload-release-action@v2
         with:
