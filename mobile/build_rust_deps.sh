@@ -8,7 +8,7 @@ PATH=$PATH:$HOME/.cargo/bin
 
 RELFLAG=
 if [[ "$CONFIGURATION" != "Debug" ]]; then
-    RELFLAG=--profile dist
+    RELFLAG="--profile dist"
 fi
 
 set -euvx
