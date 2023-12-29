@@ -1,3 +1,5 @@
+# For setup instructions regarding this workflow, see https://www.nikl.me/blog/2023/github_workflow_to_publish_android_app/
+
 name: release-android-google-play
 
 on:

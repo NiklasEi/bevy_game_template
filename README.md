@@ -3,6 +3,7 @@
 Template for a Game using the awesome [Bevy engine][bevy] featuring out of the box builds for Windows, Linux, macOS, Web (Wasm), Android, and iOS.
 
 # What does this template give you?
+
 * small example ["game"](https://niklasei.github.io/bevy_game_template/)
 * easy setup for running the web build using [trunk] (`trunk serve`) 
 * run the native version with `cargo run`
@@ -12,6 +13,7 @@ Template for a Game using the awesome [Bevy engine][bevy] featuring out of the b
     * WARNING: if you work in a private repository, please be aware that macOS and Windows runners cost more build minutes. **For public repositories the builds are free!**
 
 # How to use this template?
+
  1. Click "Use this template" on the repository's page
  2. Look for `ToDo` to use your own game name everywhere
  3. [Update the icons as described below](#updating-the-icons)

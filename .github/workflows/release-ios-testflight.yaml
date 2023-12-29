@@ -4,7 +4,9 @@ name: release-ios-testflight
 # The version from input is only used for artifact names and as the release to upload the final ipa to.
 # Bump the versions in `mobile/ios-src/Info.plist` to change the version of your app bundle.
 
-# Special setup and Apple Developer Program membership (99$/year) is required for this workflow! (docs are in work; Todo)
+# Special setup and Apple Developer Program membership (99$/year) is required for this workflow!
+
+# For setup instructions, see https://www.nikl.me/blog/2023/github_workflow_to_publish_ios_app/
 
 on:
   workflow_dispatch:
