@@ -62,13 +62,13 @@ jobs:
           SDKROOT=$(xcrun -sdk macosx --show-sdk-path) cargo build --profile dist --target=x86_64-apple-darwin
       - name: Create Universal Binary
         run: |
-          lipo -create -output target/release/${{ env.GAME_EXECUTABLE_NAME }} target/aarch64-apple-darwin/release/${{ env.GAME_EXECUTABLE_NAME }} target/x86_64-apple-darwin/release/${{ env.GAME_EXECUTABLE_NAME }}
+          lipo -create -output target/dist/${{ env.GAME_EXECUTABLE_NAME }} target/aarch64-apple-darwin/dist/${{ env.GAME_EXECUTABLE_NAME }} target/x86_64-apple-darwin/dist/${{ env.GAME_EXECUTABLE_NAME }}
       - name: Create release
         run: |
           mkdir -p build/macos/src/Game.app/Contents/MacOS/assets
           cp -r assets/ build/macos/src/Game.app/Contents/MacOS/assets
           cp -r credits/ build/macos/src/Game.app/Contents/MacOS/credits
-          cp target/release/${{ env.GAME_EXECUTABLE_NAME }} build/macos/src/Game.app/Contents/MacOS/
+          cp target/dist/${{ env.GAME_EXECUTABLE_NAME }} build/macos/src/Game.app/Contents/MacOS/
           mv build/macos/src/Game.app build/macos/src/${{ env.GAME_OSX_APP_NAME }}.app
           ln -s /Applications build/macos/src/
           hdiutil create -fs HFS+ -volname "${{ env.GAME_OSX_APP_NAME }}" -srcfolder build/macos/src ${{ env.GAME_EXECUTABLE_NAME }}.dmg
@@ -101,8 +101,8 @@ jobs:
           cargo build --profile dist
       - name: Prepare release
         run: |
-          chmod +x target/release/${{ env.GAME_EXECUTABLE_NAME }}
-          mv target/release/${{ env.GAME_EXECUTABLE_NAME }} .
+          chmod +x target/dist/${{ env.GAME_EXECUTABLE_NAME }}
+          mv target/dist/${{ env.GAME_EXECUTABLE_NAME }} .
       - name: Bundle release
         run: |
           tar -czf ${{ env.GAME_EXECUTABLE_NAME }}_linux.tar.gz ${{ env.GAME_EXECUTABLE_NAME }} assets credits
@@ -139,12 +139,12 @@ jobs:
           cargo build --profile dist
       - name: Prepare release
         run: |
-          mkdir target/release/assets && cp -r assets target/release/assets
-          mkdir target/release/credits && cp -r credits target/release/credits
+          mkdir target/dist/assets && cp -r assets target/dist/assets
+          mkdir target/dist/credits && cp -r credits target/dist/credits
       - name: Zip release
         uses: vimtor/action-zip@v1
         with:
-          files: target/release/assets/ target/release/credits/ target/release/${{ env.GAME_EXECUTABLE_NAME }}.exe
+          files: target/dist/assets/ target/dist/credits/ target/dist/${{ env.GAME_EXECUTABLE_NAME }}.exe
           dest: ${{ env.GAME_EXECUTABLE_NAME }}_windows.zip
       - name: Create Installer
         if: ${{ env.BUILD_INSTALLER }}
@@ -266,7 +266,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: target/debug/apk/${{ env.GAME_OSX_APP_NAME }}.apk
+          file: target/dist/apk/${{ env.GAME_OSX_APP_NAME }}.apk
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_android.apk
           release_name: ${{ env.VERSION }}
           tag: ${{ env.VERSION }}
