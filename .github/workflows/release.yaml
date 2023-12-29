@@ -261,12 +261,14 @@ jobs:
       - name: Install Cargo APK
         run: cargo install --force cargo-apk
       - name: Build app for Android
-        run: ANDROID_NDK_ROOT=$ANDROID_NDK_LATEST_HOME cargo apk build --profile dist --package mobile
+        # This uses a debug build, since release builds require keystore configuration
+        # For AAB builds that can be pushed to the Play store, see the release-android-google-play workflow.
+        run: ANDROID_NDK_ROOT=$ANDROID_NDK_LATEST_HOME cargo apk build --package mobile
       - name: Upload release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: target/dist/apk/${{ env.GAME_OSX_APP_NAME }}.apk
+          file: target/debug/apk/${{ env.GAME_OSX_APP_NAME }}.apk
           asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ env.VERSION }}_android.apk
           release_name: ${{ env.VERSION }}
           tag: ${{ env.VERSION }}

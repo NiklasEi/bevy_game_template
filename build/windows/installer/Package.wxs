@@ -35,7 +35,7 @@
         <!-- Installs the actual files -->
         <ComponentGroup Id="MainComponent" Directory="INSTALLFOLDER">
             <Component>
-                <File Id="Executable" Source="..\..\..\target\release\bevy_game.exe" Vital="true" />  <!-- ToDo this should point to your executable -->
+                <File Id="Executable" Source="..\..\..\target\dist\bevy_game.exe" Vital="true" />  <!-- ToDo this should point to your executable -->
             </Component>
         </ComponentGroup>
 

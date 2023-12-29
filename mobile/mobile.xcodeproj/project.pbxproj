@@ -287,15 +287,15 @@
 				);
 				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*][arch=arm64]" = (
 					"$(inherited)",
-					"../target/aarch64-apple-ios/release",
+					"../target/aarch64-apple-ios/dist",
 				);
 				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*][arch=arm64]" = (
 					"$(inherited)",
-					"../target/aarch64-apple-ios-sim/release",
+					"../target/aarch64-apple-ios-sim/dist",
 				);
 				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*][arch=x86_64]" = (
 					"$(inherited)",
-					"../target/x86_64-apple-ios/release",
+					"../target/x86_64-apple-ios/dist",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
