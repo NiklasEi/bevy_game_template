@@ -142,7 +142,7 @@ jobs:
           mkdir target/dist/assets && cp -r assets target/dist/assets
           mkdir target/dist/credits && cp -r credits target/dist/credits
       - name: Zip release
-        uses: vimtor/action-zip@v1
+        uses: vimtor/action-zip@v1.1
         with:
           files: target/dist/assets/ target/dist/credits/ target/dist/${{ env.GAME_EXECUTABLE_NAME }}.exe
           dest: ${{ env.GAME_EXECUTABLE_NAME }}_windows.zip
@@ -183,7 +183,7 @@ jobs:
       - name: Install Dependencies
         run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev
       - name: Install trunk
-        uses: jetli/trunk-action@v0.1.0
+        uses: jetli/trunk-action@v0.4.0
         with:
           version: latest
       - name: Add wasm target
@@ -203,7 +203,7 @@ jobs:
           sed -i 's/\/index/.\/index/g' dist/index.html
           sed -i 's/\/${{ env.GAME_EXECUTABLE_NAME }}/.\/${{ env.GAME_EXECUTABLE_NAME }}/g' dist/index.html
       - name: Zip release
-        uses: vimtor/action-zip@v1
+        uses: vimtor/action-zip@v1.1
         with:
           files: dist/
           dest: ${{ env.GAME_EXECUTABLE_NAME }}_web.zip
