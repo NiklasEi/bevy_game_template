@@ -13,8 +13,7 @@ on:
 
 # ToDo: adapt names
 env:
-  # heads-up: this value is used as a pattern in an sed command as a workaround for a trunk issue
-  #   if you use special characters, take a look at the 'Make paths relative' step in the 'build-web' job
+  # This variable is used to name release output files.
   GAME_EXECUTABLE_NAME: bevy_game
   GAME_OSX_APP_NAME: BevyGame
 
@@ -196,12 +195,6 @@ jobs:
         uses: NiklasEi/wasm-opt-action@v2
         with:
           file: dist/*.wasm
-        # Trunk cannot import assets from relative paths (see e.g. https://github.com/thedodd/trunk/issues/395)
-        # On sites like itch.io, we don't know on which base path the game gets served, so we need to rewrite all links to be relative
-      - name: Make paths relative
-        run: |
-          sed -i 's/\/index/.\/index/g' dist/index.html
-          sed -i 's/\/${{ env.GAME_EXECUTABLE_NAME }}/.\/${{ env.GAME_EXECUTABLE_NAME }}/g' dist/index.html
       - name: Zip release
         uses: vimtor/action-zip@v1.1
         with:
