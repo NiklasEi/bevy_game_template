@@ -147,7 +147,7 @@ jobs:
           dest: ${{ env.GAME_EXECUTABLE_NAME }}_windows.zip
       - name: Create Installer
         if: ${{ env.BUILD_INSTALLER }}
-        run: dotnet build -p:Version=1.2.3 -c Release build/windows/installer/Installer.wixproj --output installer
+        run: dotnet build -p:Version=${{ env.VERSION }} -c Release build/windows/installer/Installer.wixproj --output installer
       - name: Upload release
         uses: svenstaro/upload-release-action@v2
         with:
