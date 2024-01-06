@@ -120,7 +120,7 @@ jobs:
     needs: get-version
     env:
       VERSION: ${{needs.get-version.outputs.version}}
-      BUILD_INSTALLER: false
+      BUILD_INSTALLER: ${{ false }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
