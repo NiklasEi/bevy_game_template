@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env sh 
 
 rm -rf AppIcon.iconset/*
 mkdir -p AppIcon.iconset
