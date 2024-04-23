@@ -34,7 +34,6 @@ mkShell rec {
     cargo-udeps
     cargo-xbuild
     clang
-    clippy
     lld
     nixpkgs-fmt
     pkg-config
