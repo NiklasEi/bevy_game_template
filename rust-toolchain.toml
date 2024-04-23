@@ -1,7 +1,7 @@
 #:schema https://json.schemastore.org/rust-toolchain.json
 
 [toolchain]
-channel = "stable"
+channel = "nightly"
 # https://rust-lang.github.io/rustup/concepts/components.html
 components = [
 	  "rust-src", # for rust-analyzer
