@@ -39,7 +39,7 @@ jobs:
       VERSION: ${{needs.get-version.outputs.version}}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Remove build script
         run: |
           rm build.rs
@@ -88,7 +88,7 @@ jobs:
       VERSION: ${{needs.get-version.outputs.version}}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install rust toolchain
         uses: dtolnay/rust-toolchain@master
         with:
@@ -123,7 +123,7 @@ jobs:
       BUILD_INSTALLER: ${{ false }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install rust toolchain
         uses: dtolnay/rust-toolchain@master
         with:
@@ -174,7 +174,7 @@ jobs:
       VERSION: ${{needs.get-version.outputs.version}}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install rust toolchain
         uses: dtolnay/rust-toolchain@master
         with:
@@ -217,7 +217,7 @@ jobs:
     env:
       VERSION: ${{needs.get-version.outputs.version}}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
       - name: Add iOS targets
         run: rustup target add aarch64-apple-ios x86_64-apple-ios
@@ -246,7 +246,7 @@ jobs:
     env:
       VERSION: ${{needs.get-version.outputs.version}}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
       - name: Add Android targets
         # could add more targets like armv7-linux-androideabi here (then also add to cargo-apk config)
