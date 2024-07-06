@@ -23,8 +23,8 @@ struct ButtonColors {
 impl Default for ButtonColors {
     fn default() -> Self {
         ButtonColors {
-            normal: Color::rgb(0.15, 0.15, 0.15),
-            hovered: Color::rgb(0.25, 0.25, 0.25),
+            normal: Color::linear_rgb(0.15, 0.15, 0.15),
+            hovered: Color::linear_rgb(0.25, 0.25, 0.25),
         }
     }
 }
@@ -73,7 +73,7 @@ fn setup_menu(mut commands: Commands, textures: Res<TextureAssets>) {
                         "Play",
                         TextStyle {
                             font_size: 40.0,
-                            color: Color::rgb(0.9, 0.9, 0.9),
+                            color: Color::linear_rgb(0.9, 0.9, 0.9),
                             ..default()
                         },
                     ));
@@ -121,7 +121,7 @@ fn setup_menu(mut commands: Commands, textures: Res<TextureAssets>) {
                         "Made with Bevy",
                         TextStyle {
                             font_size: 15.0,
-                            color: Color::rgb(0.9, 0.9, 0.9),
+                            color: Color::linear_rgb(0.9, 0.9, 0.9),
                             ..default()
                         },
                     ));
@@ -150,7 +150,7 @@ fn setup_menu(mut commands: Commands, textures: Res<TextureAssets>) {
                     },
                     ButtonColors {
                         normal: Color::NONE,
-                        hovered: Color::rgb(0.25, 0.25, 0.25),
+                        hovered: Color::linear_rgb(0.25, 0.25, 0.25),
                     },
                     OpenLink("https://github.com/NiklasEi/bevy_game_template"),
                 ))
@@ -159,7 +159,7 @@ fn setup_menu(mut commands: Commands, textures: Res<TextureAssets>) {
                         "Open source",
                         TextStyle {
                             font_size: 15.0,
-                            color: Color::rgb(0.9, 0.9, 0.9),
+                            color: Color::linear_rgb(0.9, 0.9, 0.9),
                             ..default()
                         },
                     ));
