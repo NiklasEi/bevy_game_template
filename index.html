@@ -1,1 +1,150 @@
-<!doctype html><html lang=en><meta charset=utf-8><meta content="width=device-width,initial-scale=1,user-scalable=no" name=viewport><title>Bevy game</title><link href=icon.ico rel=icon><style>body,html{height:100%}body{background-color:#d3d3d3;justify-content:center;align-items:center;margin:0;display:flex}.game-container{justify-content:center;align-items:center;width:800px;height:600px;display:flex}.lds-dual-ring{width:80px;height:80px;margin:auto;display:inline-block;position:absolute;left:0;right:0}.lds-dual-ring:after{content:" ";border:6px solid #fff;border-color:#fff #0000;border-radius:50%;width:64px;height:64px;animation:1.2s linear infinite lds-dual-ring;display:block}@keyframes lds-dual-ring{0%{transform:rotate(0)}to{transform:rotate(360deg)}}#bevy{z-index:2}</style><link as=fetch crossorigin href=./bevy_game-b6f96b75a1bbf506_bg.wasm integrity=sha384-YELyvG0vTs1q7Agh3tIM7IHaJanoEgpURK3IwbsSOrQp5KQRaLlek7CvswJ65w-J rel=preload type=application/wasm><link crossorigin href=./bevy_game-b6f96b75a1bbf506.js integrity=sha384-O-FSgdEEcg_MMFiArApuu0dn6rQazQNtbfyxqzQIi3uKi4SJJaOEzV2qQgIj4gmP rel=modulepreload></head><body><script>(()=>{let d=0;var c=(e=>{let f=d;a.forEach(a=>{if(a.state!==`running`){a.resume()}else{f++}});if(f>d&&f===a.length){b.forEach(a=>{document.removeEventListener(a,c)})}});const a=[];const b=[`click`,`contextmenu`,`auxclick`,`dblclick`,`mousedown`,`mouseup`,`pointerup`,`touchend`,`keydown`,`keyup`];self.AudioContext=new Proxy(self.AudioContext,{construct(b,c){const d=new b(...c);a.push(d);return d}});b.forEach(a=>{document.addEventListener(a,c)})})()</script><div class=game-container><div class=lds-dual-ring></div><canvas id=bevy>Javascript and support for canvas is required</canvas></div><script type=module>import a,*as b from"./bevy_game-b6f96b75a1bbf506.js";a(`./bevy_game-b6f96b75a1bbf506_bg.wasm`);window.wasmBindings=b</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <title>Bevy game</title> <!-- ToDo -->
+        
+        
+        
+        <link rel="icon" href="icon.ico">
+        <style nonce="JR5hb2l8eNY6Pk9sP7Eudw==">body, html {
+    height: 100%;
+}
+
+body {
+    background-color: lightgray;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container {
+    width: 800px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#bevy {
+    z-index: 2;
+}
+</style>
+    
+<link rel="modulepreload" href="./bevy_game-a8c70765fd7d3f0d.js" crossorigin=anonymous integrity="sha384-TphDEWBW5ISgh2uu1PThXepzkttx5U8gO6Z8nFPYmib57tu5ZZc+uAjs1nqXKAx1">
+<link rel="preload" href="./bevy_game-a8c70765fd7d3f0d_bg.wasm" crossorigin=anonymous integrity="sha384-sQ6VLJ9R9b8w1suY/6nYmnFfCIPoalof+mMmHuwfRkX7EdV2SDu4o2bK2dKBnmVL" as="fetch" type="application/wasm"></head>
+    <body>
+        <script nonce="0F6C2WW2wUxGsjNpsWN1qA==">// Insert hack to make sound autoplay on Chrome as soon as the user interacts with the tab:
+// https://developers.google.com/web/updates/2018/11/web-audio-autoplay#moving-forward
+
+// the following function keeps track of all AudioContexts and resumes them on the first user
+// interaction with the page. If the function is called and all contexts are already running,
+// it will remove itself from all event listeners.
+(function () {
+    // An array of all contexts to resume on the page
+    const audioContextList = [];
+
+    // An array of various user interaction events we should listen for
+    const userInputEventNames = [
+        "click",
+        "contextmenu",
+        "auxclick",
+        "dblclick",
+        "mousedown",
+        "mouseup",
+        "pointerup",
+        "touchend",
+        "keydown",
+        "keyup",
+    ];
+
+    // A proxy object to intercept AudioContexts and
+    // add them to the array for tracking and resuming later
+    self.AudioContext = new Proxy(self.AudioContext, {
+        construct(target, args) {
+            const result = new target(...args);
+            audioContextList.push(result);
+            return result;
+        },
+    });
+
+    // To resume all AudioContexts being tracked
+    function resumeAllContexts(_event) {
+        let count = 0;
+
+        audioContextList.forEach((context) => {
+            if (context.state !== "running") {
+                context.resume();
+            } else {
+                count++;
+            }
+        });
+
+        // If all the AudioContexts have now resumed then we unbind all
+        // the event listeners from the page to prevent unnecessary resume attempts
+        // Checking count > 0 ensures that the user interaction happens AFTER the game started up
+        if (count > 0 && count === audioContextList.length) {
+            userInputEventNames.forEach((eventName) => {
+                document.removeEventListener(eventName, resumeAllContexts);
+            });
+        }
+    }
+
+    // We bind the resume function for each user interaction
+    // event on the page
+    userInputEventNames.forEach((eventName) => {
+        document.addEventListener(eventName, resumeAllContexts);
+    });
+})();
+</script>
+        <div class="game-container">
+            <div class="lds-dual-ring"></div>
+            <canvas id="bevy">
+                Javascript and support for canvas is required
+            </canvas>
+        </div>
+    
+<script type="module" nonce="gFRFo+0AereIqtfrjADNdA==">
+import init, * as bindings from './bevy_game-a8c70765fd7d3f0d.js';
+const wasm = await init('./bevy_game-a8c70765fd7d3f0d_bg.wasm');
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script></body>
+</html>
