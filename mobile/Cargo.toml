@@ -18,6 +18,11 @@ bevy = { version = "0.14", default-features = false }
 version = "0.15"
 features = ["oboe-shared-stdcxx"]
 
+[target.aarch64-apple-ios-sim.dependencies]
+bevy = { version = "0.14", default-features = false, features = [
+    "ios_simulator",
+] }
+
 [package.metadata.android]
 package = "me.nikl.bevygame"  # ToDo
 apk_name = "BevyGame"  # ToDo same as GAME_OSX_APP_NAME in release workflow
