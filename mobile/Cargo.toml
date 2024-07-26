@@ -18,6 +18,7 @@ bevy = { version = "0.14", default-features = false }
 version = "0.15"
 features = ["oboe-shared-stdcxx"]
 
+# See https://github.com/bevyengine/bevy/pull/12052
 [target.aarch64-apple-ios-sim.dependencies]
 bevy = { version = "0.14", default-features = false, features = [
     "ios_simulator",
