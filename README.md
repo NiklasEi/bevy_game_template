@@ -10,7 +10,10 @@ Template for a Game using the awesome [Bevy engine][bevy] featuring out of the b
 * workflow for GitHub actions creating releases for Windows, Linux, macOS, and Web (Wasm) ready for distribution
     * the same workflow creates development builds for the mobile platforms (two separate workflows can push to the stores after [some setup](#deploy-mobile-platforms))
     * push a tag in the form of `v[0-9]+.[0-9]+.[0-9]+*` (e.g. `v1.1.42`) to trigger the flow
-    * WARNING: if you work in a private repository, please be aware that macOS and Windows runners cost more build minutes. **For public repositories the builds are free!**
+* CI workflow that checks your application on all native platforms on every push
+
+WARNING: if you work in a private repository, please be aware that macOS and Windows runners cost more build minutes.
+**For public repositories the workflow runners are free!**
 
 # How to use this template?
 
