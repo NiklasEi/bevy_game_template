@@ -59,7 +59,7 @@ fn setup_menu(mut commands: Commands, textures: Res<TextureAssets>) {
                         align_items: AlignItems::Center,
                         ..Default::default()
                     },
-                    BackgroundColor(button_colors.normal.into()),
+                    BackgroundColor(button_colors.normal),
                     button_colors,
                     ChangeState(GameState::Playing),
                 ))
@@ -97,7 +97,7 @@ fn setup_menu(mut commands: Commands, textures: Res<TextureAssets>) {
                         padding: UiRect::all(Val::Px(5.)),
                         ..Default::default()
                     },
-                    BackgroundColor(Color::NONE.into()),
+                    BackgroundColor(Color::NONE),
                     ButtonColors {
                         normal: Color::NONE,
                         ..default()
@@ -115,7 +115,7 @@ fn setup_menu(mut commands: Commands, textures: Res<TextureAssets>) {
                     ));
                     parent.spawn((
                         ImageNode {
-                            image: textures.bevy.clone().into(),
+                            image: textures.bevy.clone(),
                             ..default()
                         },
                         Node {
@@ -135,7 +135,7 @@ fn setup_menu(mut commands: Commands, textures: Res<TextureAssets>) {
                         padding: UiRect::all(Val::Px(5.)),
                         ..default()
                     },
-                    BackgroundColor(Color::NONE.into()),
+                    BackgroundColor(Color::NONE),
                     ButtonColors {
                         normal: Color::NONE,
                         hovered: Color::linear_rgb(0.25, 0.25, 0.25),
@@ -152,7 +152,7 @@ fn setup_menu(mut commands: Commands, textures: Res<TextureAssets>) {
                         TextColor(Color::linear_rgb(0.9, 0.9, 0.9)),
                     ));
                     parent.spawn((
-                        ImageNode::new(textures.github.clone().into()),
+                        ImageNode::new(textures.github.clone()),
                         Node {
                             width: Val::Px(32.),
                             ..default()
