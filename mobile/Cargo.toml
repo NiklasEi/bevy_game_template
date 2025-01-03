@@ -10,7 +10,7 @@ crate-type = ["staticlib", "cdylib"]
 
 [dependencies]
 bevy_game = { path = ".." } # ToDo
-bevy = { version = "0.15", default-features = false }
+bevy = { version = "0.15", default-features = false, features = ["android-native-activity"] }
 
 # As long as Kira doesn't expose a feature for this, we need to enable it
 # See https://github.com/tesselode/kira/pull/51
