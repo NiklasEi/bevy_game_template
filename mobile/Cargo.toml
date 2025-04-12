@@ -10,18 +10,12 @@ crate-type = ["staticlib", "cdylib"]
 
 [dependencies]
 bevy_game = { path = ".." } # ToDo
-bevy = { version = "0.15", default-features = false, features = ["android-native-activity"] }
+bevy = { version = "0.16.0-rc.4", default-features = false, features = ["android-native-activity"] }
 
 [target."cfg(target_os = \"ios\")".dependencies]
 objc2-avf-audio = { version = "0.3.0", features = [
     "AVAudioSession",
     "AVAudioSessionTypes",
-] }
-
-# See https://github.com/bevyengine/bevy/pull/12052
-[target.aarch64-apple-ios-sim.dependencies]
-bevy = { version = "0.15", default-features = false, features = [
-    "ios_simulator",
 ] }
 
 [package.metadata.android]
