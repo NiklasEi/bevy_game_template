@@ -37,7 +37,7 @@ dev = ["bevy/dynamic_linking"]
 # All of Bevy's default features exept for the audio related ones (bevy_audio, vorbis), since they clash with bevy_kira_audio
 #   and android_shared_stdcxx/android-game-activity, since those are covered in `mobile`
 [dependencies]
-bevy = { version = "0.15", default-features = false, features = [
+bevy = { version = "0.16", default-features = false, features = [
     "animation",
     "bevy_asset",
     "bevy_color",
@@ -69,8 +69,8 @@ bevy = { version = "0.15", default-features = false, features = [
     "webgl2",
     "x11",
 ] }
-bevy_kira_audio = { version = "0.22.0", features = ["android_shared_stdcxx"] }
-bevy_asset_loader = { version = "0.22" }
+bevy_kira_audio = { version = "0.23.0", features = ["android_shared_stdcxx"] }
+bevy_asset_loader = { version = "0.23.0-rc.4" }
 rand = { version = "0.8.3" }
 webbrowser = { version = "1", features = ["hardened"] }
 
