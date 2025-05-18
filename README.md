@@ -76,6 +76,20 @@ There is a [post about how to set up the iOS release workflow][workflow_bevy_ios
 If you don't want to target Android or iOS, you can just delete the `/mobile`, `/build/android`, and `/build/ios` directories.
 Then delete the `[workspace]` section from `Cargo.toml`.
 
+# Development environments
+
+## Nix Support
+
+nixgl is only used on non-NixOS Linux systems;
+when running there we need to use the `--impure` flag:
+
+```
+nix develop --impure
+```
+
+If using nixgl, then .e.g. `gl cargo run`, other use
+`cargo` as usual.
+
 # Getting started with Bevy
 
 You should check out the Bevy website for [links to resources][bevy-learn] and the [Bevy Cheat Book] for a bunch of helpful documentation and examples. I can also recommend the [official Bevy Discord server][bevy-discord] for keeping up to date with the development and getting help from other Bevy users.
