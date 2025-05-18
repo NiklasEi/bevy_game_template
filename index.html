@@ -8,7 +8,7 @@
         
         
         <link rel="icon" href="icon.ico">
-        <style nonce="JR5hb2l8eNY6Pk9sP7Eudw==">body, html {
+        <style>body, html {
     height: 100%;
 }
 
@@ -62,11 +62,9 @@ body {
     z-index: 2;
 }
 </style>
-    
-<link rel="modulepreload" href="./bevy_game-a8c70765fd7d3f0d.js" crossorigin=anonymous integrity="sha384-TphDEWBW5ISgh2uu1PThXepzkttx5U8gO6Z8nFPYmib57tu5ZZc+uAjs1nqXKAx1">
-<link rel="preload" href="./bevy_game-a8c70765fd7d3f0d_bg.wasm" crossorigin=anonymous integrity="sha384-sQ6VLJ9R9b8w1suY/6nYmnFfCIPoalof+mMmHuwfRkX7EdV2SDu4o2bK2dKBnmVL" as="fetch" type="application/wasm"></head>
+    <link rel="modulepreload" href="./bevy_game-586558bf2fd35aa8.js" crossorigin="anonymous" integrity="sha384-y6PbWCENfoAQPdX3fSy25XHDTiyiiUVkRoy8hTwwDAKcYVzK9pYRo3KBAMZGHFGD"><link rel="preload" href="./bevy_game-586558bf2fd35aa8_bg.wasm" crossorigin="anonymous" integrity="sha384-Cm9Cx5jbtCvP+UEnZWCJQzBwKUL9uqrBZWJNepJ6dnz0jvPEl1tLdtITnQqJIerk" as="fetch" type="application/wasm"></head>
     <body>
-        <script nonce="0F6C2WW2wUxGsjNpsWN1qA==">// Insert hack to make sound autoplay on Chrome as soon as the user interacts with the tab:
+        <script>// Insert hack to make sound autoplay on Chrome as soon as the user interacts with the tab:
 // https://developers.google.com/web/updates/2018/11/web-audio-autoplay#moving-forward
 
 // the following function keeps track of all AudioContexts and resumes them on the first user
@@ -136,9 +134,9 @@ body {
             </canvas>
         </div>
     
-<script type="module" nonce="gFRFo+0AereIqtfrjADNdA==">
-import init, * as bindings from './bevy_game-a8c70765fd7d3f0d.js';
-const wasm = await init('./bevy_game-a8c70765fd7d3f0d_bg.wasm');
+<script type="module">
+import init, * as bindings from './bevy_game-586558bf2fd35aa8.js';
+const wasm = await init({ module_or_path: './bevy_game-586558bf2fd35aa8_bg.wasm' });
 
 
 window.wasmBindings = bindings;
