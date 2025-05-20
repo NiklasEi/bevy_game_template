@@ -17,6 +17,7 @@
 		57CD6306253C7A940098CD4A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57CD6305253C7A940098CD4A /* AudioToolbox.framework */; };
 		57CD630E253C80EC0098CD4A /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 57CD630A253C7F5F0098CD4A /* assets */; };
 		6ADF1AB92CCDA73A00AF5F8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ADF1AB82CCDA73A00AF5F8E /* QuartzCore.framework */; };
+		D4A53EFF2DDD2FF70035BC01 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A53EFE2DDD2FF70035BC01 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		9F1B41978FA53999AA836D0F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A39528EB2CCB182F5328223A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		AF7DE91055EBD05ED77E57F9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D4A53EFE2DDD2FF70035BC01 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FE71FBCAA714DB4F42459106 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -55,6 +57,7 @@
 				134866208A035F8615C99114 /* Metal.framework in Frameworks */,
 				2604C99FAB5A8322EDCABB9F /* UIKit.framework in Frameworks */,
 				55B7188F81C3C4183F81D3AE /* libc++.tbd in Frameworks */,
+				D4A53EFF2DDD2FF70035BC01 /* AVFoundation.framework in Frameworks */,
 				57CD6306253C7A940098CD4A /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +98,7 @@
 		EB028409C2D0655412DA6E44 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4A53EFE2DDD2FF70035BC01 /* AVFoundation.framework */,
 				6ADF1AB82CCDA73A00AF5F8E /* QuartzCore.framework */,
 				57CD6305253C7A940098CD4A /* AudioToolbox.framework */,
 				A39528EB2CCB182F5328223A /* libc++.tbd */,

@@ -3,7 +3,11 @@ use bevy::window::WindowMode;
 use bevy::winit::WinitSettings;
 use bevy_game::GamePlugin; // ToDo: Replace bevy_game with your new crate name.
 
-#[bevy_main]
+#[unsafe(no_mangle)]
+unsafe extern "C" fn main_rs() {
+    main();
+}
+
 fn main() {
     #[cfg(target_os = "ios")]
     unsafe {
