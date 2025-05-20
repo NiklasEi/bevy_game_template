@@ -8,6 +8,7 @@ unsafe extern "C" fn main_rs() {
     main();
 }
 
+#[bevy_main]
 fn main() {
     #[cfg(target_os = "ios")]
     unsafe {
