@@ -8,6 +8,8 @@ unsafe extern "C" fn main_rs() {
     main();
 }
 
+// this macro is a no-op on ios and only needed for anroid since bevy 0.16
+// see https://github.com/bevyengine/bevy/pull/14780
 #[bevy_main]
 fn main() {
     #[cfg(target_os = "ios")]
