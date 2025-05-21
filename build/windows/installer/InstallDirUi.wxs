@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+    xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
     <!-- Copied from https://github.com/wixtoolset/wix4/blob/6f2511f58f60e63a15357a2fe37f83343dea3090/src/ext/UI/wixlib/WixUI_InstallDir.wxs#L9
          but with the license dialog disabled.
          See: https://wixtoolset.org/docs/v3/wixui/wixui_customizations/#changing-the-ui-sequence-of-a-built-in-dialog-set. -->
     <Fragment>
+        <TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
+        <TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="12" />
+        <TextStyle Id="WixUI_Font_Title" FaceName="Tahoma" Size="9" Bold="yes" />
+
         <UI Id="WixUI_CustomInstallDir">
             <TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
             <TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="12" />
@@ -45,6 +50,18 @@
             <Publish Dialog="MaintenanceTypeDlg" Control="Back" Event="NewDialog" Value="MaintenanceWelcomeDlg" />
 
             <Property Id="ARPNOMODIFY" Value="1" />
+
+            <InstallUISequence>
+                <Show Dialog="FatalError" OnExit="error" />
+                <Show Dialog="UserExit" OnExit="cancel" />
+                <Show Dialog="ExitDialog" OnExit="success" />
+            </InstallUISequence>
+
+            <AdminUISequence>
+                <Show Dialog="FatalError" OnExit="error" />
+                <Show Dialog="UserExit" OnExit="cancel" />
+                <Show Dialog="ExitDialog" OnExit="success" />
+            </AdminUISequence>
         </UI>
 
         <UIRef Id="WixUI_Common" />
