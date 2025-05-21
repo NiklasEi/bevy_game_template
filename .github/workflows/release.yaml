@@ -120,6 +120,7 @@ jobs:
     needs: get-version
     env:
       VERSION: ${{needs.get-version.outputs.version}}
+      WIX_VERSION: ${{needs.get-version.outputs.version}}
       BUILD_INSTALLER: ${{ false }}
     steps:
       - name: Checkout repository
@@ -147,7 +148,9 @@ jobs:
           dest: ${{ env.GAME_EXECUTABLE_NAME }}_windows.zip
       - name: Create Installer
         if: ${{ env.BUILD_INSTALLER }}
-        run: dotnet build -p:Version=${{ env.VERSION }} -c Release build/windows/installer/Installer.wixproj --output installer
+        run: |
+          echo "VERSION=${${{ env.VERSION }}#v}" >> $WIX_VERSION
+          dotnet build -p:Version=$WIX_VERSION -c Release build/windows/installer/Installer.wixproj --output installer
       - name: Upload release
         uses: svenstaro/upload-release-action@v2
         with:
