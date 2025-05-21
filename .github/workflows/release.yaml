@@ -147,10 +147,11 @@ jobs:
           dest: ${{ env.GAME_EXECUTABLE_NAME }}_windows.zip
       - name: Create Installer
         if: ${{ env.BUILD_INSTALLER }}
+        shell: bash
         run: |
-          tag="v0.1.0-test.42"
-          echo "VERSION=${tag#v}" >> $WIX_VERSION
-          dotnet build -p:Version=$WIX_VERSION -c Release build/windows/installer/Installer.wixproj --output installer
+          tag=${{ env.VERSION }
+          version="${tag#v}"
+          dotnet build -p:Version=$version -c Release build/windows/installer/Installer.wixproj --output installer
       - name: Upload release
         uses: svenstaro/upload-release-action@v2
         with:
