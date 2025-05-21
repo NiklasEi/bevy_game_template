@@ -149,7 +149,7 @@ jobs:
         if: ${{ env.BUILD_INSTALLER }}
         shell: bash
         run: |
-          tag=${{ env.VERSION }
+          tag=${{ env.VERSION }}
           version="${tag#v}"
           dotnet build -p:Version=$version -c Release build/windows/installer/Installer.wixproj --output installer
       - name: Upload release
