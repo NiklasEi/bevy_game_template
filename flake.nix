@@ -108,11 +108,11 @@
           ] ++ platformPackages;
 
           RUSTC_VERSION = overrides.toolchain.channel;
-          
+          RUSTC_COMPONENTS = nixpkgs.lib.escapeShellArgs (nixpkgs.lib.concatMap (c: ["-c" c]) overrides.toolchain.components);
           LIBCLANG_PATH = pkgs.lib.makeLibraryPath [ pkgs.llvmPackages_latest.libclang.lib ];
           FORCED = forced;
           shellHook = ''
-            rustup toolchain install $RUSTC_VERSION
+            rustup toolchain install $RUSTC_VERSION $RUSTC_COMPONENTS
             export PATH=$PATH:''${CARGO_HOME:-~/.cargo}/bin
             export PATH=''${RUSTUP_HOME:-~/.rustup}/toolchains/$RUSTC_VERSION-x86_64-unknown-linux-gnu/bin/:$PATH
             ${platformShellHook}
