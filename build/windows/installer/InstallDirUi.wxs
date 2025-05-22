@@ -5,10 +5,6 @@
          but with the license dialog disabled.
          See: https://wixtoolset.org/docs/v3/wixui/wixui_customizations/#changing-the-ui-sequence-of-a-built-in-dialog-set. -->
     <Fragment>
-        <TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
-        <TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="12" />
-        <TextStyle Id="WixUI_Font_Title" FaceName="Tahoma" Size="9" Bold="yes" />
-
         <UI Id="WixUI_CustomInstallDir">
             <TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
             <TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="12" />
