@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="WixToolset.Sdk/4.0.6">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="WixToolset.Sdk/4.0.5">
     <PropertyGroup>
         <DebugType>none</DebugType>
         <OutputName>installer</OutputName>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="WixToolset.UI.wixext" Version="4.0.6" />
-        <PackageReference Include="WixToolset.Heat" Version="4.0.6" />
+        <PackageReference Include="WixToolset.UI.wixext" Version="4.0.5" />
+        <PackageReference Include="WixToolset.Heat" Version="4.0.5" />
     </ItemGroup>
 
     <ItemGroup>
