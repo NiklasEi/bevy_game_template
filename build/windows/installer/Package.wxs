@@ -24,7 +24,6 @@
 
          <!-- Shows a UI that allows customizing the install location -->
         <ui:WixUI Id="WixUI_CustomInstallDir" InstallDirectory="INSTALLFOLDER" />
-        <UIRef Id="WixUI_Common" />
 
         <Feature Id="Main">
             <ComponentGroupRef Id="MainComponent" />
@@ -39,12 +38,6 @@
                 <File Id="Executable" Source="..\..\..\target\dist\bevy_game.exe" Vital="true" />  <!-- ToDo this should point to your executable -->
             </Component>
         </ComponentGroup>
-        
-        <Binary Id="WixUI_Bmp_Banner" SourceFile="!(wix.WixUIDialogBmp)" />
-        <Binary Id="WixUI_Ico_Info" SourceFile="!(wix.WixUIIcoInfo)" />
-        <Binary Id="WixUI_Bmp_Up" SourceFile="!(wix.WixUIDialogBmpUp)" />
-        <Binary Id="WixUI_Bmp_New" SourceFile="!(wix.WixUIDialogBmpNew)" />
-        <Property Id="ErrorDialog" Value="ErrorDlg" />
 
         <!-- Start menu shortcut -->
         <!-- Source: https://wixtoolset.org/docs/v3/howtos/files_and_registry/create_start_menu_shortcut/ -->
