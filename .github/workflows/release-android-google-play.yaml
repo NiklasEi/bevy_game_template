@@ -34,7 +34,7 @@ jobs:
     timeout-minutes: 40
     steps:
       - name: Install Dependencies
-        run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev lld llvm
+        run: sudo apt-get update; sudo apt-get install g++ pkg-config libx11-dev libasound2-dev libudev-dev libxkbcommon-x11-0 libwayland-dev lld llvm
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
       - name: Add Android targets
