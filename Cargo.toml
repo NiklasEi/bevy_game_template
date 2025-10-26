@@ -39,47 +39,64 @@ dev = [
 # All of Bevy's default features exept for the audio related ones (bevy_audio, vorbis), since they clash with bevy_kira_audio
 #   and android_shared_stdcxx/android-game-activity, since those are covered in `mobile`
 [dependencies]
-bevy = { version = "0.16", default-features = false, features = [
+bevy = { version = "0.17.2", default-features = false, features = [
+    "std",
+    "async_executor",
     "animation",
     "bevy_asset",
     "bevy_color",
     "bevy_core_pipeline",
+    "bevy_post_process",
+    "bevy_anti_alias",
     "bevy_gilrs",
     "bevy_gizmos",
     "bevy_gltf",
+    "bevy_input_focus",
     "bevy_log",
     "bevy_mesh_picking_backend",
     "bevy_pbr",
     "bevy_picking",
     "bevy_render",
     "bevy_scene",
+    "bevy_image",
+    "bevy_mesh",
+    "bevy_camera",
+    "bevy_light",
+    "bevy_shader",
     "bevy_sprite",
     "bevy_sprite_picking_backend",
+    "bevy_sprite_render",
     "bevy_state",
     "bevy_text",
     "bevy_ui",
     "bevy_ui_picking_backend",
+    "bevy_ui_render",
     "bevy_window",
     "bevy_winit",
     "custom_cursor",
     "default_font",
     "hdr",
+    "ktx2",
     "multi_threaded",
     "png",
+    "reflect_auto_register",
     "smaa_luts",
     "sysinfo_plugin",
     "tonemapping_luts",
     "webgl2",
     "x11",
+    "wayland",
+    "debug",
+    "zstd_rust",
 ] }
-bevy_kira_audio = { version = "0.23.0", features = ["android_shared_stdcxx"] }
-bevy_asset_loader = { version = "0.23.0" }
+bevy_kira_audio = { version = "0.24", features = ["android_shared_stdcxx"] }
+bevy_asset_loader = { version = "0.24.0-rc.1" }
 rand = { version = "0.8.3" }
 webbrowser = { version = "1", features = ["hardened"] }
 
 # keep the following in sync with Bevy's dependencies
 winit = { version = "0.30", default-features = false }
-image = { version = "0.25", default-features = false }
+image = { version = "0.25.2", default-features = false }
 ## This greatly improves WGPU's performance due to its heavy use of trace! calls
 log = { version = "0.4", features = ["max_level_debug", "release_max_level_warn"] }
 
