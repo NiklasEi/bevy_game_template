@@ -1,9 +1,9 @@
 use bevy::math::Vec3Swizzles;
 use bevy::prelude::*;
 
-use crate::actions::game_control::{get_movement, GameControl};
-use crate::player::Player;
 use crate::GameState;
+use crate::actions::game_control::{GameControl, get_movement};
+use crate::player::Player;
 
 mod game_control;
 

@@ -1,5 +1,5 @@
-use crate::loading::TextureAssets;
 use crate::GameState;
+use crate::loading::TextureAssets;
 use bevy::prelude::*;
 
 pub struct MenuPlugin;
