@@ -41,20 +41,17 @@ pub fn set_movement_actions(
             - get_movement(GameControl::Down, &keyboard_input),
     );
 
-    if let Some(touch_position) = touch_input.first_pressed_position() {
-        if let Ok((camera, camera_transform)) = camera.single() {
-            if let Ok(touch_position) =
-                camera.viewport_to_world_2d(camera_transform, touch_position)
-            {
-                let diff = touch_position
-                    - player
-                        .single()
-                        .map(|transform| transform.translation.xy())
-                        .unwrap_or(touch_position);
-                if diff.length() > FOLLOW_EPSILON {
-                    player_movement = diff.normalize();
-                }
-            }
+    if let Some(touch_position) = touch_input.first_pressed_position()
+        && let Ok((camera, camera_transform)) = camera.single()
+        && let Ok(touch_position) = camera.viewport_to_world_2d(camera_transform, touch_position)
+    {
+        let diff = touch_position
+            - player
+                .single()
+                .map(|transform| transform.translation.xy())
+                .unwrap_or(touch_position);
+        if diff.length() > FOLLOW_EPSILON {
+            player_movement = diff.normalize();
         }
     }
 
