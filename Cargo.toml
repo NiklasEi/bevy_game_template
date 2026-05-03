@@ -69,5 +69,10 @@ image = { version = "0.25", default-features = false }
 ## This greatly improves WGPU's performance due to its heavy use of trace! calls
 log = { version = "0.4", features = ["max_level_debug", "release_max_level_warn"] }
 
+# Required to make `rand`/`getrandom` work on wasm.
+# Backend is selected via `.cargo/config.toml` rustflags for the wasm32-unknown-unknown target.
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+getrandom = { version = "0.3", features = ["wasm_js"] }
+
 [build-dependencies]
 embed-resource = "1"
