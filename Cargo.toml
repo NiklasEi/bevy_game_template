@@ -39,13 +39,13 @@ dev = [
 # Bevy's default features are `2d`, `3d`, `ui` and `audio`. We take all of them except for `audio`, since it clashes with bevy_kira_audio.
 # If your game doesn't need 3d (or 2d), dropping that collection here will cut down on compile times.
 [dependencies]
-bevy = { version = "0.19.0", default-features = false, features = [
+bevy = { version = "0.20.0", default-features = false, features = [
     "2d",
     "3d",
     "ui",
 ] }
-bevy_kira_audio = { version = "0.26" }
-bevy_asset_loader = { version = "0.27.0" }
+bevy_kira_audio = { version = "0.27" }
+bevy_asset_loader = { version = "0.28.0" }
 rand = { version = "0.9" }
 webbrowser = { version = "1", features = ["hardened"] }
 

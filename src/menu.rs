@@ -1,6 +1,8 @@
 use crate::loading::TextureAssets;
 use crate::{GameResult, GameState};
+use bevy::picking::hover::Hovered;
 use bevy::prelude::*;
+use bevy::ui_widgets::{Activate, Button};
 
 pub struct MenuPlugin;
 
@@ -9,7 +11,11 @@ pub struct MenuPlugin;
 impl Plugin for MenuPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(OnEnter(GameState::Menu), setup_menu)
-            .add_systems(Update, click_play_button.run_if(in_state(GameState::Menu)))
+            .add_systems(
+                Update,
+                update_button_colors.run_if(in_state(GameState::Menu)),
+            )
+            .add_observer(activate_button)
             .add_systems(OnExit(GameState::Menu), cleanup_menu);
     }
 }
@@ -73,6 +79,7 @@ fn setup_menu(
             children
                 .spawn((
                     Button,
+                    Hovered::default(),
                     Node {
                         width: Val::Px(140.0),
                         height: Val::Px(50.0),
@@ -110,6 +117,7 @@ fn setup_menu(
             children
                 .spawn((
                     Button,
+                    Hovered::default(),
                     Node {
                         width: Val::Px(180.0),
                         height: Val::Px(50.0),
@@ -148,6 +156,7 @@ fn setup_menu(
             children
                 .spawn((
                     Button,
+                    Hovered::default(),
                     Node {
                         width: Val::Px(170.0),
                         height: Val::Px(50.0),
@@ -189,37 +198,33 @@ struct ChangeState(GameState);
 #[derive(Component)]
 struct OpenLink(&'static str);
 
-fn click_play_button(
-    mut next_state: ResMut<NextState<GameState>>,
-    mut interaction_query: Query<
-        (
-            &Interaction,
-            &mut BackgroundColor,
-            &ButtonColors,
-            Option<&ChangeState>,
-            Option<&OpenLink>,
-        ),
-        (Changed<Interaction>, With<Button>),
-    >,
+fn update_button_colors(
+    mut buttons: Query<(&Hovered, &mut BackgroundColor, &ButtonColors), Changed<Hovered>>,
 ) {
-    for (interaction, mut color, button_colors, change_state, open_link) in &mut interaction_query {
-        match *interaction {
-            Interaction::Pressed => {
-                if let Some(state) = change_state {
-                    next_state.set(state.0.clone());
-                } else if let Some(link) = open_link
-                    && let Err(error) = webbrowser::open(link.0)
-                {
-                    warn!("Failed to open link {error:?}");
-                }
-            }
-            Interaction::Hovered => {
-                *color = button_colors.hovered.into();
-            }
-            Interaction::None => {
-                *color = button_colors.normal.into();
-            }
+    for (hovered, mut color, button_colors) in &mut buttons {
+        *color = if hovered.get() {
+            button_colors.hovered
+        } else {
+            button_colors.normal
         }
+        .into();
+    }
+}
+
+fn activate_button(
+    activate: On<Activate>,
+    mut next_state: ResMut<NextState<GameState>>,
+    buttons: Query<(Option<&ChangeState>, Option<&OpenLink>)>,
+) {
+    let Ok((change_state, open_link)) = buttons.get(activate.entity) else {
+        return;
+    };
+    if let Some(state) = change_state {
+        next_state.set(state.0.clone());
+    } else if let Some(link) = open_link
+        && let Err(error) = webbrowser::open(link.0)
+    {
+        warn!("Failed to open link {error:?}");
     }
 }
 
